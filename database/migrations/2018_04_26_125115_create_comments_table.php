@@ -15,6 +15,7 @@ class CreateCommentsTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->string('subject')->nullable();
             $table->mediumText('content');
+            $table->boolean('approved')->nullable()->default(false);
             $table->timestamps();
         });
     }
