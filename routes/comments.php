@@ -4,6 +4,8 @@ Route::get('/comments', 'App\Http\Controllers\CommentController@index')->name('c
 
 Route::get('/comments/{post}', 'App\Http\Controllers\CommentController@getFromPost')->name('comment.post');
 
+Route::get('/comments/{post}/approved', 'App\Http\Controllers\CommentController@getApprovedFromPost')->name('comment.approved.post');
+
 Route::group(['prefix' => 'comment', 'as' => 'comment.'], function() {
 
     Route::get('/{comment}', 'App\Http\Controllers\CommentController@get')->name('get');

@@ -13,7 +13,8 @@ class Comment extends Model
         'post_id',
         'parent_id',
         'subject',
-        'content'
+        'content',
+        'approved'
     ];
 
     public function author()
