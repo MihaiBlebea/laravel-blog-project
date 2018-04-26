@@ -18,6 +18,11 @@ class Post extends Model
         'content'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');
