@@ -15,3 +15,5 @@ Route::get('/test/{user}', function(User $user) {
 });
 
 Route::view('/admin', 'admin.users');
+
+Route::get('/blog/{category}', 'BlogController@index');

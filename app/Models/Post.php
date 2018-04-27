@@ -37,4 +37,9 @@ class Post extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function except()
+    {
+        return substr($this->content, 0, 200) . '...';
+    }
 }
