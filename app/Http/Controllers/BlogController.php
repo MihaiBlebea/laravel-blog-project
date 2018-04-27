@@ -13,4 +13,9 @@ class BlogController extends Controller
         $posts = $category->posts()->paginate(10);
         return view('layouts._blog')->with('posts', $posts);
     }
+
+    public function post(Category $category, Post $post)
+    {
+        return view('layouts._post')->with('post', $post);
+    }
 }

@@ -19,6 +19,13 @@ class CommentSeeder extends Seeder
             'parent_id' => 1,
             'subject'   => 'Hello',
             'content'   => 'How are you?'
+        ],
+        [
+            'user_id'   => 2,
+            'post_id'   => 1,
+            'parent_id' => 1,
+            'subject'   => 'Hello there',
+            'content'   => 'I am the number 2 replay'
         ]
     ];
 
