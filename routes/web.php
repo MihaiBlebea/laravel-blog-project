@@ -13,3 +13,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/test/{user}', function(User $user) {
     dd($user->role->permissions);
 });
+
+Route::view('/admin', 'admin.users');
