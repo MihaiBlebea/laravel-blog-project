@@ -16,6 +16,8 @@ Route::get('/test/{user}', function(User $user) {
 
 Route::view('/admin', 'admin.users');
 
-Route::get('/blog/{category}', 'BlogController@index')->name('blog.index');
+Route::get('/blog', 'BlogController@index')->name('blog.index');
+
+Route::get('/blog/{category}', 'BlogController@category')->name('blog.category');
 
 Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post');

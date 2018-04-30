@@ -10,6 +10,8 @@ class Category extends Model
     protected $fillable = [
         'slug',
         'name',
+        'description',
+        'cover_image'
     ];
 
     public function getRouteKeyName()
@@ -20,5 +22,10 @@ class Category extends Model
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function shortDescription()
+    {
+        return substr($this->description, 0, 150) . '...';
     }
 }

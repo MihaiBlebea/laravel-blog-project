@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use View;
+use Request;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,22 @@ class ViewComposerServiceProvider extends ServiceProvider
                     'route' => 'admin.comments',
                 ]
             ]);
+        });
+
+        View::composer(['layouts._post', 'layouts._category'], function($view) {
+            $params = explode('/', Request::path());
+            $breadcrumbs = [];
+            foreach($params as $index => $param)
+            {
+                if($index == 0)
+                {
+                    $breadcrumbs[$index]['url'] = '/' . $param;
+                } else {
+                    $breadcrumbs[$index]['url'] = $breadcrumbs[$index - 1]['url'] . '/' . $param;
+                }
+                $breadcrumbs[$index]['name'] = $param;
+            }
+            $view->with('breadcrumbs', $breadcrumbs);
         });
     }
 

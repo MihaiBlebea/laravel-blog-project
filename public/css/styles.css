@@ -19,8 +19,8 @@
 }
 
 .comment-user-image {
-    height: 100%;
-    width: 100%;
+    height: 64px;
+    width: 64px;
 }
 
 .comment-author-name-reply {
