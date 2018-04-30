@@ -2,7 +2,7 @@
 
 <div class="card mb-2">
     <div class="card-body">
-        <form action="" method="POST">
+        <form action="{{ route('comment.store') }}" method="POST">
             @csrf
 
             @include('forms._comment-reply-form')

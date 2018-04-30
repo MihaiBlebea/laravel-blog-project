@@ -32,10 +32,11 @@ class CommentController extends Controller
 
     public function store(CommentFormRequest $request)
     {
+        $parent_id = $request->input('parent_id');
         $comment = Comment::create([
             'user_id'   => Auth::user()->id,
             'post_id'   => $request->input('post_id'),
-            'parent_id' => $request->input('parent_id'),
+            'parent_id' => $parent_id,
             'subject'   => $request->input('subject'),
             'content'   => $request->input('content'),
             'approved'  => false,

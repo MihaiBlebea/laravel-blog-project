@@ -13,7 +13,7 @@
                         </a>
 
                         <div class="collapse mt-2" id="collapseExample">
-                            <form action="" method="POST">
+                            <form action="{{ route('comment.store') }}" method="POST">
                                 @csrf
 
                                 @include('forms._comment-reply-form')
