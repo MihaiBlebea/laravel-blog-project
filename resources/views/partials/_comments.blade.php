@@ -1,5 +1,15 @@
 <h3 class="mb-3 text-center">Let me know what you think about this</h3>
 
+<div class="card mb-2">
+    <div class="card-body">
+        <form action="" method="POST">
+            @csrf
+
+            @include('forms._comment-reply-form')
+        </form>
+    </div>
+</div>
+
 @foreach($post->comments->where('parent_id', null) as $index => $comment)
 
     <div class="mb-2">
