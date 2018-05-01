@@ -17,7 +17,8 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'profile_image'
+        'profile_image',
+        'social_login_token'
     ];
 
     protected $hidden = [
