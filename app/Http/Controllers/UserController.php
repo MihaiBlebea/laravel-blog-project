@@ -7,6 +7,7 @@ use App\Models\User;
 use Socialite;
 use GuzzleHttp\Client as Guzzle;
 use App\Services\RepoService;
+use Session;
 
 class UserController extends Controller
 {
@@ -34,14 +35,26 @@ class UserController extends Controller
 
     public function getRepos(User $user)
     {
-        $url = Socialite::driver('github')->userFromToken($user->social_login_token)->user['repos_url'];
-        $guzzle = new Guzzle();
-        $service = new RepoService($guzzle, $url);
-        $repos = $service->repos();
-        
+        // Check if user has github token
+        if(isset($user->social->github_token))
+        {
+            $url = Socialite::driver('github')->userFromToken($user->social->github_token)->user['repos_url'];
+            $guzzle = new Guzzle();
+            $service = new RepoService($guzzle, $url);
+            $repos = $service->repos();
+
+            return view('user.repos')->with([
+                'user'  => $user,
+                'repos' => $repos
+            ]);
+        }
+
+        Session::flash('alert-class', 'alert-danger');
+        Session::flash('message', 'Please link your GitHub account first. <a href="">Link GitHub</a>');
+
         return view('user.repos')->with([
-            'user'  => $user,
-            'repos' => $repos
+            'user'    => $user,
+            'repos'   => []
         ]);
     }
 }
