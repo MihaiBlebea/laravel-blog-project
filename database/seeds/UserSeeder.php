@@ -38,7 +38,7 @@ class UserSeeder extends Seeder
                 'first_name' => $user['first_name'],
                 'last_name'  => $user['last_name'],
                 'email'      => $user['email'],
-                'password'   => bcrypt($user['password'])
+                'password'   => $user['password']
             ]);
         }
     }

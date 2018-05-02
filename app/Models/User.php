@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\HasRoleTrait;
 use App\Models\Post;
+use App\Models\Social;
 
 class User extends Authenticatable
 {
@@ -17,14 +18,20 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'profile_image',
-        'social_login_token'
+        'profile_image'
     ];
 
     protected $hidden = [
         'password', 'remember_token',
     ];
 
+    // Mutators
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = bcrypt($value);
+    }
+
+    // Relationship
     public function posts()
     {
         return $this->hasMany(Post::class);
@@ -33,5 +40,10 @@ class User extends Authenticatable
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function social()
+    {
+        return $this->belongsTo(Social::class);
     }
 }

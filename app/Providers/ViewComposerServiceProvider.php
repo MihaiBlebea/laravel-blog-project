@@ -38,7 +38,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 
         // Profile sidebar navigation
         View::composer('user.*', function($view) {
-            $user = Request::user();
+            $user = $view->getData()['user'];
 
             $view->with('sidebar_nav', [
                 [

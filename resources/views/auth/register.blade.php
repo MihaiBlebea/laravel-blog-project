@@ -8,6 +8,11 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
+
+                    <div class="mb-3">
+                        @include('partials._social-login')
+                    </div>
+                    
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 

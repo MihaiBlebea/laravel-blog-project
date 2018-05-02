@@ -1,8 +1,8 @@
 <?php
 
-Route::get('/auth/{driver_name}', 'Auth\SocialiteAuthController@redirectToProvider')->name('auth');
+Route::get('/auth/{driver_name}', 'Auth\SocialiteAuthController@redirectToProvider')->name('socialite.auth');
 
-Route::get('/auth/redirect/{driver_name}', 'Auth\SocialiteAuthController@handleProviderCallback')->name('redirect');
+Route::get('/auth/redirect/{driver_name}', 'Auth\SocialiteAuthController@handleProviderCallback')->name('socialite.redirect');
 
 Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
 
