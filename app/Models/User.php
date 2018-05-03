@@ -46,4 +46,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Social::class);
     }
+
+    // Custom methods
+    public function hasGitHub()
+    {
+        return isset($this->social->github_token);
+    }
 }

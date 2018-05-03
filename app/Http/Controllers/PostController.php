@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Auth;
 use App\Http\Requests\PostFormRequest;
+use Storage;
 
 class PostController extends Controller
 {
@@ -21,14 +22,16 @@ class PostController extends Controller
 
     public function store(PostFormRequest $request)
     {
-        $post = Post::create([
+        $path = $request->file('feature_image')->store('feature_images');
+        $post = Post::updateOrCreate([
             'category_id'   => $request->input('category_id'),
             'user_id'       => Auth::user()->id,
-            'slug'          => str_slug($request->input('title'), '-'),
             'title'         => $request->input('title'),
-            'feature_image' => $request->input('feature_image'),
+            'feature_image' => $path,
             'content'       => $request->input('content'),
         ]);
+
+        // Storage::delete($path);
 
         if($post)
         {

@@ -30,9 +30,11 @@
         <main class="py-4">
 
             @if(Session::has('message'))
+
                 <div class="container">
                     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{!! Session::get('message') !!}</p>
                 </div>
+                
             @endif
 
             @yield('content')

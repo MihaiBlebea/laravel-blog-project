@@ -12,7 +12,6 @@ class Post extends Model
     protected $fillable = [
         'category_id',
         'user_id',
-        'slug',
         'title',
         'feature_image',
         'content'
@@ -23,6 +22,16 @@ class Post extends Model
         return 'slug';
     }
 
+    // Mutators
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = str_slug($value, '-');
+    }
+
+    // TO DO delete the old image everytime a new image is uploaded
+
+    // Relationship methods
     public function author()
     {
         return $this->belongsTo(User::class, 'user_id');

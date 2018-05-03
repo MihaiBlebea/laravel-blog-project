@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use View;
 use Request;
+use Auth;
 
 class ViewComposerServiceProvider extends ServiceProvider
 {
@@ -15,21 +16,25 @@ class ViewComposerServiceProvider extends ServiceProvider
             $view->with('sidebar_nav', [
                 [
                     'name'  => 'users',
+                    'slug' => '',
                     'route' => 'admin.users',
                     'params' => [],
                 ],
                 [
                     'name'  => 'posts',
+                    'slug' => '',
                     'route' => 'admin.posts',
                     'params' => [],
                 ],
                 [
                     'name'  => 'categories',
+                    'slug' => '',
                     'route' => 'admin.categories',
                     'params' => [],
                 ],
                 [
                     'name'  => 'comments',
+                    'slug' => '',
                     'route' => 'admin.comments',
                     'params' => [],
                 ]
@@ -37,29 +42,39 @@ class ViewComposerServiceProvider extends ServiceProvider
         });
 
         // Profile sidebar navigation
-        View::composer('user.*', function($view) {
-            $user = $view->getData()['user'];
+        View::composer(['user.*', 'post.create'], function($view) {
+            // $user = $view->getData()['user'];
 
             $view->with('sidebar_nav', [
                 [
-                    'name'  => 'profile',
-                    'route' => "user.profile",
-                    'params' => ['user' => $user->id],
+                    'name'   => 'profile',
+                    'slug'   => 'user/profile',
+                    'route'  => 'user.profile',
+                    'params' => [],
                 ],
                 [
-                    'name'  => 'update',
-                    'route' => 'user.update',
-                    'params' => ['user' => $user->id],
+                    'name'   => 'write',
+                    'slug'   => 'user/new/post',
+                    'route'  => 'user.post.new',
+                    'params' => [],
                 ],
                 [
-                    'name'  => 'posts',
-                    'route' => 'user.posts',
-                    'params' => ['user' => $user->id],
+                    'name'   => 'edit profile',
+                    'slug'   => 'user/update',
+                    'route'  => 'user.update',
+                    'params' => [],
                 ],
                 [
-                    'name'  => 'repos',
-                    'route' => 'user.repos',
-                    'params' => ['user' => $user->id],
+                    'name'   => 'posts',
+                    'slug'   => 'user/posts',
+                    'route'  => 'user.posts',
+                    'params' => [],
+                ],
+                [
+                    'name'   => 'repos',
+                    'slug'   => 'user/repos',
+                    'route'  => 'user.repos',
+                    'params' => [],
                 ]
             ]);
         });
