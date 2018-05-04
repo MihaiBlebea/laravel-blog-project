@@ -9,6 +9,7 @@ use GuzzleHttp\Client as Guzzle;
 use App\Services\RepoService;
 use Session;
 use Auth;
+use Storage;
 use Socialite;
 
 class UserController extends Controller
@@ -27,7 +28,23 @@ class UserController extends Controller
 
     public function postUpdate(Request $request)
     {
-        //
+        $user = Auth::user();
+        
+        $path = Storage::disk('public_upload')->put('profile_image', $request->file('profile_image'));
+        if(!$path)
+        {
+            return false;
+        };
+
+        $user->update([
+            'first_name'    => $request->input('first_name'),
+            'last_name'     => $request->input('last_name'),
+            'email'         => $request->input('email'),
+            'password'      => $request->input('password'),
+            'profile_image' => $path
+        ]);
+
+        return redirect()->back();
     }
 
     public function createPost()

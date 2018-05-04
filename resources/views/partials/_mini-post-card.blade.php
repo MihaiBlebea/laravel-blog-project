@@ -16,7 +16,7 @@
                         </li>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Edit</a>
+                        <a class="nav-link" href="{{ route('post.update', ['post' => $post->slug ]) }}">Edit</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Delete</a>

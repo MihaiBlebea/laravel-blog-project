@@ -5,7 +5,8 @@
            class="form-control"
            id="title"
            aria-describedby="title"
-           placeholder="Create title">
+           placeholder="Create title"
+           value="{{ $post->title or old('title') }}">
 
     @if($errors->has('title'))
         <span class="invalid-feedback">
@@ -19,7 +20,7 @@
     <textarea class="form-control"
               name="content"
               id="content"
-              rows="10"></textarea>
+              rows="10">{{ $post->content or old('content') }}</textarea>
 
     @if($errors->has('content'))
         <span class="invalid-feedback">
@@ -33,7 +34,8 @@
     <select name="category_id" class="form-control" id="category">
         @foreach($categories as $category)
 
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            <option value="{{ $category->id }}"
+                    {{ ($post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
 
         @endforeach
     </select>

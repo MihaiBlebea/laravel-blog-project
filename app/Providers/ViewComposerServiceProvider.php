@@ -42,7 +42,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         });
 
         // Profile sidebar navigation
-        View::composer(['user.*', 'post.create'], function($view) {
+        View::composer(['user.*', 'post.*'], function($view) {
             // $user = $view->getData()['user'];
 
             $view->with('sidebar_nav', [

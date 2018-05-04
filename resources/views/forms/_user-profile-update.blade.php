@@ -2,7 +2,11 @@
     <label for="first_name" class="col-md-4 col-form-label text-md-right">First name:</label>
 
     <div class="col-md-6">
-        <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="{{ old('first_name') }}" required autofocus>
+        <input id="first_name"
+               type="text"
+               class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}"
+               name="first_name"
+               value="{{ $user->first_name or old('first_name') }}" required>
 
         @if ($errors->has('first_name'))
             <span class="invalid-feedback">
@@ -16,7 +20,12 @@
     <label for="last_name" class="col-md-4 col-form-label text-md-right">Last name:</label>
 
     <div class="col-md-6">
-        <input id="last_name" type="text" class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" name="last_name" value="{{ old('last_name') }}" required autofocus>
+        <input id="last_name"
+               type="text"
+               class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}"
+               name="last_name"
+               value="{{ $user->last_name or old('last_name') }}"
+               required>
 
         @if ($errors->has('last_name'))
             <span class="invalid-feedback">
@@ -30,7 +39,12 @@
     <label for="email" class="col-md-4 col-form-label text-md-right">Email:</label>
 
     <div class="col-md-6">
-        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+        <input id="email"
+               type="email"
+               class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+               name="email"
+               value="{{ $user->email or old('email') }}" 
+               required>
 
         @if ($errors->has('email'))
             <span class="invalid-feedback">
