@@ -1,19 +1,19 @@
 <?php
 
-Route::get('/comments', 'App\Http\Controllers\CommentController@index')->name('comment.index');
+Route::get('/comments', 'CommentController@index')->name('comment.index');
 
-Route::get('/comments/{post}', 'App\Http\Controllers\CommentController@getFromPost')->name('comment.post');
+Route::get('/comments/{post}', 'CommentController@getFromPost')->name('comment.post');
 
-Route::get('/comments/{post}/approved', 'App\Http\Controllers\CommentController@getApprovedFromPost')->name('comment.approved.post');
+Route::get('/comments/{post}/approved', 'CommentController@getApprovedFromPost')->name('comment.approved.post');
 
 Route::group(['prefix' => 'comment', 'as' => 'comment.'], function() {
 
-    Route::get('/{comment}', 'App\Http\Controllers\CommentController@get')->name('get');
+    Route::get('/{comment}', 'CommentController@get')->name('get');
 
-    Route::get('/approve/{comment}', 'App\Http\Controllers\CommentController@approve')->name('approve');
+    Route::get('/approve/{comment}', 'CommentController@approve')->name('approve');
 
-    Route::post('/store', 'App\Http\Controllers\CommentController@store')->name('store');
+    Route::post('/store', 'CommentController@store')->name('store');
 
-    Route::delete('/delete/{comment}', 'App\Http\Controllers\CommentController@delete')->name('delete');
+    Route::delete('/delete/{comment}', 'CommentController@delete')->name('delete');
 
 });
