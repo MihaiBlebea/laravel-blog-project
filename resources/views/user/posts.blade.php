@@ -5,7 +5,9 @@
 
     @foreach($posts as $post)
 
-        @include('partials._post-card')
+        <div class="mb-3">
+            @include('partials._mini-post-card')
+        </div>
         
     @endforeach
 

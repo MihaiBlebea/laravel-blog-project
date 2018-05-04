@@ -46,4 +46,4 @@
     </div>
 </div>
 
-<button type="submit" class="btn btn-outline-primary">Post</button>
+<button type="submit" class="btn btn-outline-primary">Save</button>

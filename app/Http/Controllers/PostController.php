@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use Auth;
 use App\Http\Requests\PostFormRequest;
+use Carbon\Carbon;
 use Storage;
 
 class PostController extends Controller
@@ -20,9 +21,23 @@ class PostController extends Controller
         return $post;
     }
 
+    public function publish(Post $post)
+    {
+        $post->update([
+            'published' => true,
+            'publish_at' => Carbon::now()
+        ]);
+        return redirect()->back();
+    }
+
     public function store(PostFormRequest $request)
     {
-        $path = $request->file('feature_image')->store('feature_images');
+        $path = Storage::disk('public_upload')->put('feature-images', $request->file('feature_image'));
+        if(!$path)
+        {
+            return false;
+        };
+
         $post = Post::updateOrCreate([
             'category_id'   => $request->input('category_id'),
             'user_id'       => Auth::user()->id,

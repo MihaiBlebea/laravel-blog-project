@@ -10,4 +10,5 @@ Route::group(['prefix' => 'post', 'as' => 'post.'], function() {
 
     Route::delete('/delete/{post}', 'PostController@delete')->name('delete');
 
+    Route::get('publish/{post}', 'PostController@publish')->name('publish');
 });

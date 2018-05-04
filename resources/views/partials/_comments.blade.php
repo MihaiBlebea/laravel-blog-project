@@ -10,22 +10,33 @@
     </div>
 </div>
 
-@foreach($post->comments->where('parent_id', null) as $index => $comment)
+@if($post->comments->count() > 0)
 
-    <div class="mb-2">
-        @include('partials._comment-card')
-    </div>
+    @foreach($post->comments->where('parent_id', null) as $index => $comment)
 
-    @foreach($post->comments->where('parent_id', $comment->id) as $comment)
-
-        <div class="pl-5 mb-2">
+        <div class="mb-2">
             @include('partials._comment-card')
         </div>
 
+        @foreach($post->comments->where('parent_id', $comment->id) as $comment)
+
+            <div class="pl-5 mb-2">
+                @include('partials._comment-card')
+            </div>
+
+        @endforeach
+
+        @if($loop->last == false)
+            <hr>
+        @endif
+
     @endforeach
 
-    @if($loop->last == false)
-        <hr>
-    @endif
+@else
 
-@endforeach
+    @include('partials._notification-card', [
+        'title' => 'No comments yet...',
+        'content' => 'Be the first one to comment on this post!'
+    ])
+
+@endif

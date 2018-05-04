@@ -14,7 +14,9 @@ class Post extends Model
         'user_id',
         'title',
         'feature_image',
-        'content'
+        'content',
+        'published',
+        'publish_date'
     ];
 
     public function getRouteKeyName()
@@ -47,8 +49,9 @@ class Post extends Model
         return $this->belongsTo(Category::class);
     }
 
+    // Custom methods
     public function except()
     {
-        return substr($this->content, 0, 200) . '...';
+        return substr($this->content, 0, 200);
     }
 }

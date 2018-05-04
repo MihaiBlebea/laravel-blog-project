@@ -1,10 +1,10 @@
 <div class="card">
     <a href="{{ route('blog.post', [ 'category' => $post->category->slug, 'post' => $post->slug ]) }}">
-       <img class="card-img-top feature-image-post-card" src="{{ storage_path($post->feature_image) }}" alt="Feature image">
+       <img class="card-img-top feature-image-post-card" src="{{ public_upload_path($post->feature_image) }}" alt="Feature image">
     </a>
     <div class="card-body">
-        <h5 class="card-title">{{ $post->title }}</h5>
-        <p class="card-text">{!! $post->except() !!}</p>
+        <h2 class="card-title">{{ $post->title }}</h2>
+        <p class="card-text">{!! $post->except() !!}...</p>
         <a href="{{ route('blog.post', [ 'category' => $post->category->slug, 'post' => $post->slug ]) }}"
            class="btn btn-primary">Read article</a>
     </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="featured-image" style="background-image: url('{{ $post->feature_image }}');"></div>
+<div class="featured-image" style="background-image: url('{{ public_upload_path($post->feature_image) }}');"></div>
 <div class="container post-content">
     <div class="row justify-content-center">
         <div class="col-md-8">

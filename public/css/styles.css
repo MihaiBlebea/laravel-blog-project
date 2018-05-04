@@ -8,6 +8,14 @@
     background-size: cover;
 }
 
+.mini-featured-image {
+    width: 64px;
+    height: 64px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+}
+
 .post-content {
     position: relative;
     top: -200px;
