@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 use Auth;
 use App\Http\Requests\PostFormRequest;
 use Carbon\Carbon;
@@ -15,6 +16,15 @@ class PostController extends Controller
     public function index()
     {
         return Post::all();
+    }
+
+    public function userPosts(User $user)
+    {
+        $posts = $user->posts->where('published', true);
+        return view('post.user-posts')->with([
+            'user'  => $user,
+            'posts' => $posts
+        ]);
     }
 
     public function get(Post $post)

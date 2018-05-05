@@ -2,10 +2,12 @@
 
 Route::get('/posts', 'PostController@index')->name('post.index');
 
+Route::get('/posts/{user}', 'PostController@userPosts')->name('post.user');
+
 Route::group(['prefix' => 'post', 'as' => 'post.'], function() {
 
     Route::get('/{post}', 'PostController@get')->name('get');
-    
+
     Route::post('/store', 'PostController@store')->name('store');
 
     Route::get('/update/{post}', 'PostController@getUpdate')->name('update');

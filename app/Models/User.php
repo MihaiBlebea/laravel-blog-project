@@ -32,10 +32,21 @@ class User extends Authenticatable
         'email'
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     // Mutators
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function setFirstNameAttribute($value)
+    {
+        $this->attributes['first_name'] = $value;
+        $this->attributes['slug'] = strtolower($value) . '-' . random(8);
     }
 
     // Relationship
