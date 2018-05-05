@@ -54,4 +54,9 @@ class Post extends Model
     {
         return substr($this->content, 0, 200);
     }
+
+    public static function search(String $search_term)
+    {
+        return self::where('title', 'LIKE', '%' . $search_term . '%')->get();
+    }
 }

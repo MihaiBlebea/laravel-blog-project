@@ -21,3 +21,5 @@ Route::get('/blog', 'BlogController@index')->name('blog.index');
 Route::get('/blog/{category}', 'BlogController@category')->name('blog.category');
 
 Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post');
+
+Route::post('/search', 'SearchController@search')->name('search');
