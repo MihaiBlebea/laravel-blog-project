@@ -9,6 +9,7 @@ use App\Traits\SearchableTrait;
 use App\Models\Post;
 use App\Models\Social;
 use App\Models\Search;
+use App\Models\Subscription;
 
 class User extends Authenticatable
 {
@@ -69,6 +70,11 @@ class User extends Authenticatable
     public function searches()
     {
         return $this->hasMany(Search::class);
+    }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
     }
 
     // Custom methods
