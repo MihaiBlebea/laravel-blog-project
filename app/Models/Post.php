@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Comment;
 use App\Models\Category;
+use App\Traits\SearchableTrait;
 
 class Post extends Model
 {
+    use SearchableTrait;
+
     protected $fillable = [
         'category_id',
         'user_id',
@@ -17,6 +20,10 @@ class Post extends Model
         'content',
         'published',
         'publish_date'
+    ];
+
+    private static $search_fileds = [
+        'title'
     ];
 
     public function getRouteKeyName()
@@ -55,8 +62,8 @@ class Post extends Model
         return substr($this->content, 0, 200);
     }
 
-    public static function search(String $search_term)
-    {
-        return self::where('title', 'LIKE', '%' . $search_term . '%')->get();
-    }
+    // public static function search(String $search_term)
+    // {
+    //     return self::where('title', 'LIKE', '%' . $search_term . '%')->get();
+    // }
 }
