@@ -5,9 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
+            @include('partials._page-title', ['title' => 'Categories', 'subtitle' => 'Select your favourite category'])
+
             <div class="row mb-4">
                 <div class="col">
-                    @include('partials._search-bar')
+                    @include('forms._search-bar', ['model' => 'post'] )
                 </div>
             </div>
 

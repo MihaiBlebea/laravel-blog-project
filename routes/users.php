@@ -4,6 +4,8 @@ Route::get('/auth/{driver_name}', 'Auth\SocialiteAuthController@redirectToProvid
 
 Route::get('/auth/redirect/{driver_name}', 'Auth\SocialiteAuthController@handleProviderCallback')->name('socialite.redirect');
 
+Route::get('/users', 'UserController@users')->name('users');
+
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth'], function() {
 
     Route::get('/profile', 'UserController@get')->name('profile');

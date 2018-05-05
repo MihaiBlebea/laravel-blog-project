@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Traits\HasRoleTrait;
+use App\Traits\SearchableTrait;
 use App\Models\Post;
 use App\Models\Social;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoleTrait;
+    use Notifiable, HasRoleTrait, SearchableTrait;
 
     protected $fillable = [
         'role_id',
@@ -23,6 +24,12 @@ class User extends Authenticatable
 
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    private static $search_fileds = [
+        'first_name',
+        'last_name',
+        'email'
     ];
 
     // Mutators

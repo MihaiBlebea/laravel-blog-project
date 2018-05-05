@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Auth;
+use Request;
 
 class BladeServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,11 @@ class BladeServiceProvider extends ServiceProvider
         });
         Blade::directive('endcan', function() {
             return '<?php endif; ?>';
+        });
+
+        // Check if the model for search is Post
+        Blade::if('search', function ($model) {
+            return $model == Request::input('model');
         });
     }
 

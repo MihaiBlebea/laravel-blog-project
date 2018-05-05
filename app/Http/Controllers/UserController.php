@@ -20,6 +20,11 @@ class UserController extends Controller
         return view('user.profile')->with('user', $user);
     }
 
+    public function users()
+    {
+        return view('user.users')->with('users', User::paginate(10));
+    }
+
     public function getUpdate()
     {
         $user = Auth::user();
@@ -29,7 +34,7 @@ class UserController extends Controller
     public function postUpdate(Request $request)
     {
         $user = Auth::user();
-        
+
         $path = Storage::disk('public_upload')->put('profile_image', $request->file('profile_image'));
         if(!$path)
         {

@@ -5,6 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
+            @include('partials._page-title', ['title' => $category->name, 'subtitle' => 'Read all about ' . $category->name])
+
             @include('partials._breadcrumbs')
 
             @if($posts->count() > 0)
