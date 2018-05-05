@@ -5,6 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
+            @include('partials._page-title', ['title' => 'Results', 'subtitle' => 'We found ' . $results->count() . ' results'])
+
             @search('post')
 
                 <div class="row mb-4">
@@ -13,7 +15,7 @@
                     </div>
                 </div>
 
-                @foreach($posts as $post)
+                @foreach($results as $post)
 
                     <div class="mb-3">
                         @include('partials._post-card')
@@ -30,7 +32,7 @@
                     </div>
                 </div>
 
-                @foreach($users as $user)
+                @foreach($results as $user)
 
                     <div class="mb-3">
                         @include('partials._user-card')
@@ -39,6 +41,15 @@
                 @endforeach
             @endsearch
 
+
+            @if($results->count() == 0)
+
+                @include('partials._notification-card', [
+                    'title' => 'No results found!',
+                    'content' => 'We are sorry, but your search for <strong>"' . $search_term . '"</strong> did not yield any results.'
+                ])
+
+            @endif
 
         </div>
     </div>

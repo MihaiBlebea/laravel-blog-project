@@ -8,6 +8,7 @@ use App\Traits\HasRoleTrait;
 use App\Traits\SearchableTrait;
 use App\Models\Post;
 use App\Models\Social;
+use App\Models\Search;
 
 class User extends Authenticatable
 {
@@ -63,6 +64,11 @@ class User extends Authenticatable
     public function social()
     {
         return $this->belongsTo(Social::class);
+    }
+
+    public function searches()
+    {
+        return $this->hasMany(Search::class);
     }
 
     // Custom methods

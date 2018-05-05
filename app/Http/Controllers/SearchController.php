@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SearchFormRequest;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Search;
+use Auth;
 
 class SearchController extends Controller
 {
@@ -14,20 +16,12 @@ class SearchController extends Controller
         $results = [];
         if(strtolower($request->input('model')) == 'post')
         {
-            $posts = Post::search($request->input('search_term'));
-            return view('search.results')->with([
-                'posts' => $posts,
-                'model' => $request->input('model')
-            ]);
+            $results = Post::search($request->input('search_term'));
         }
 
         if(strtolower($request->input('model')) == 'user')
         {
-            $users = User::search($request->input('search_term'));
-            return view('search.results')->with([
-                'users' => $users,
-                'model' => $request->input('model')
-            ]);
+            $results = User::search($request->input('search_term'));
         }
 
         if(strtolower($request->input('model')) == 'repo')
@@ -35,6 +29,19 @@ class SearchController extends Controller
             $results = Repo::search($request->input('search_term'));
         }
 
+        // Store search in the database
+        Search::create([
+            'user_id'       => Auth::user()->id,
+            'term'          => $request->input('search_term'),
+            'model'         => $request->input('model'),
+            'results_count' => $results->count()
+        ]);
+
+        return view('search.results')->with([
+            'results'     => $results,
+            'search_term' => $request->input('search_term'),
+            'model'       => $request->input('model')
+        ]);
     }
 
 }
