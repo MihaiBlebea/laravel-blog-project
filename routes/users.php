@@ -17,4 +17,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth'], func
     Route::get('/posts', 'UserController@getPosts')->name('posts');
 
     Route::get('/repos', 'UserController@getRepos')->name('repos');
+
+    Route::get('/subscribe/{user}', 'UserController@subscribe')->name('subscribe');
+    Route::get('/unsubscribe/{user}', 'UserController@unsubscribe')->name('unsubscribe');
 });

@@ -28,12 +28,16 @@ trait HasRoleTrait
     // Roles custom methods
     public function hasRole(String $role_name)
     {
-        $role = $this->role->first();
-        if($role && $role->name == $role_name)
+        return (bool) $this->role()->where('name', $role_name)->count();
+    }
+
+    public function hasAnyRole(Array $roles)
+    {
+        if(collect($roles)->count() > 0)
         {
-            return true;
+            return (bool) $this->role()->whereIn('name', $roles)->count();
         }
-        return false;
+        return true;
     }
 
     public function assignRole(String $role_name)

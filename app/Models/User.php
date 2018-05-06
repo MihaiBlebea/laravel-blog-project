@@ -82,4 +82,9 @@ class User extends Authenticatable
     {
         return isset($this->social->github_token);
     }
+
+    public function isSubscribed(User $user)
+    {
+        return (bool) $this->subscriptions()->where('subscribe_to', $user->id)->count();
+    }
 }

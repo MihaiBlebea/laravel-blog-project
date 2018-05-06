@@ -25,7 +25,8 @@ Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post');
 Route::post('/search', 'SearchController@search')->name('search');
 
 // Tests
-Route::get('/test/{user}', function(User $user) {
-    $result = $user->subscriptions[1]->subscribed;
+Route::get('/test', function() {
+
+    $result = auth()->user()->hasAnyRole(['guest', 'editor']);
     dd($result);
 });

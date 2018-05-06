@@ -41,7 +41,14 @@ class PostController extends Controller
         return redirect()->back();
     }
 
-    public function store(PostFormRequest $request)
+    public function getStore()
+    {
+        return view('post.create')->with([
+            'categories' => Category::all()
+        ]);
+    }
+
+    public function postStore(PostFormRequest $request)
     {
         $path = Storage::disk('public_upload')->put('feature-images', $request->file('feature_image'));
         if(!$path)

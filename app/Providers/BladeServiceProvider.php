@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
-use Auth;
+use App\Models\User;
 use Request;
 
 class BladeServiceProvider extends ServiceProvider
@@ -25,8 +25,18 @@ class BladeServiceProvider extends ServiceProvider
         });
 
         // Check if the model for search is Post
-        Blade::if('search', function ($model) {
+        Blade::if('search', function($model) {
             return $model == Request::input('model');
+        });
+
+        // Check if the auth User is subscribed to a particular user
+        Blade::if('subscribed', function(User $user) {
+            return auth()->check() && auth()->user()->isSubscribed($user);
+        });
+
+        // Check if the auth User has any of these role => array of role
+        Blade::if('hasAnyRole', function(Array $roles) {
+            return auth()->check() && auth()->user()->hasAnyRole($roles);
         });
     }
 

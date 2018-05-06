@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-3">
 
+            <img class="img-thumbnail mb-3" src="{{ public_upload_path(Auth::user()->profile_image) }}">
             @include('partials._sidebar-navigation')
 
         </div>

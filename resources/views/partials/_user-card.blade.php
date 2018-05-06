@@ -14,9 +14,21 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">See profile</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Subscribe</a>
-                    </li>
+
+                    @subscribed($user)
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.unsubscribe', [ 'user' => $user->slug ]) }}">Unsubscribe</a>
+                        </li>
+
+                    @else
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.subscribe', [ 'user' => $user->slug ]) }}">Subscribe</a>
+                        </li>
+
+                    @endsubscribed
+
                 </ul>
             </div>
         </div>
