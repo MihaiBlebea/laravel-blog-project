@@ -4,10 +4,11 @@ Route::get('/categories', 'CategoryController@index')->name('category.index');
 
 Route::group(['prefix' => 'category', 'as' => 'category.'], function() {
 
-    Route::get('/{category}', 'CategoryController@get')->name('get');
+    Route::get('/store', 'CategoryController@getStore')->name('store');
+    Route::post('/store', 'CategoryController@postStore')->name('store');
 
-    Route::post('/store', 'CategoryController@store')->name('store');
+    Route::get('/update/{category}', 'CategoryController@getUpdate')->name('update');
+    Route::post('/update/{category}', 'CategoryController@postUpdate')->name('update');
 
-    Route::delete('/delete/{category}', 'CategoryController@delete')->name('delete');
-
+    Route::get('/delete/{category}', 'CategoryController@delete')->name('delete');
 });

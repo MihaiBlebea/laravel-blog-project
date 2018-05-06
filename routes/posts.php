@@ -1,14 +1,13 @@
 <?php
 
-Route::get('/posts', 'PostController@index')->name('post.index');
-
-Route::get('/posts/{user}', 'PostController@userPosts')->name('post.user');
+Route::get('/posts/{user?}', 'PostController@index')->name('post.index');
 
 Route::group(['prefix' => 'post', 'as' => 'post.'], function() {
 
-    Route::get('/{post}', 'PostController@get')->name('get');
+    // Route::get('/blog/{category}/{post}', 'PostController@get')->name('get');
 
-    Route::post('/store', 'PostController@store')->name('store');
+    Route::get('/store', 'PostController@getStore')->name('store');
+    Route::post('/store', 'PostController@postStore')->name('store');
 
     Route::get('/update/{post}', 'PostController@getUpdate')->name('update');
     Route::post('/update/{post}', 'PostController@postUpdate')->name('update');

@@ -1,12 +1,10 @@
 @extends('layouts._admin')
 
 @section('admin_panel')
-<div class="card">
-    <div class="card-header">
-        <span class="float-left">Categories</span>
-        <button type="button" class="btn btn-sm btn-outline-primary float-right">Add new</button>
-    </div>
 
+@include('partials._page-title', ['title' => 'Categories', 'subtitle' => 'Manage categories'])
+
+<div class="card">
     <div class="card-body">
         <table class="table">
             <thead>
@@ -15,7 +13,8 @@
                     <th scope="col">Name</th>
                     <th scope="col">Slug</th>
                     <th scope="col">Posts</th>
-                    <th scope="col">View</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,11 +24,18 @@
                         <td>{{ $category->name }}</td>
                         <td>{{ $category->slug }}</td>
                         <td>{{ $category->posts->count() }}</td>
-                        <td><a href="">Open</a></td>
+                        <td><a href="{{ route('category.update', ['category' => $category->slug] )}}">Update</a></td>
+                        <td><a class="text-danger" href="{{ route('category.delete', ['category' => $category->slug]) }}">Delete</a></td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('category.store') }}">New category</a>
+            </li>
+        </ul>
     </div>
 </div>
 

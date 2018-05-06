@@ -14,9 +14,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     // -------------------------------- //
 
     // Manage posts
-    Route::get('/post/create', 'PostController@getStore')->name('post.create');
+    // Route::get('/post/create', 'PostController@getStore')->name('post.create');
 
-    Route::get('/posts', 'PostController@posts')->name('posts');
+    // Route::get('/posts', 'PostController@posts')->name('posts');
 
     // -------------------------------- //
 
@@ -24,11 +24,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
     Route::get('/comments', 'AdminController@comments')->name('comments');
 
     // Manage categories
-    Route::get('/categories', 'AdminController@categories')->name('categories');
+    // Route::get('/categories', 'AdminController@categories')->name('categories');
 
 
-    Route::get('/new/post', 'UserController@createPost')->name('post.new');
-    Route::get('/posts', 'UserController@getPosts')->name('posts');
+    // Route::get('/new/post', 'UserController@createPost')->name('post.new');
+    // Route::get('/posts', 'UserController@getPosts')->name('posts');
 
     // Route::get('/repos', 'UserController@getRepos')->name('repos');
 

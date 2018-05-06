@@ -12,79 +12,76 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         // Admin sidebar navigation
-        View::composer(['admin.*', 'post.create'], function($view) {
+        View::composer(['admin.*', 'post.create', 'category.*'], function($view) {
+            $menu = [
+                [
+                    'name'   => 'write post',
+                    'slug'   => 'post/store',
+                    'route'  => 'post.store',
+                    'params' => [],
+                    'roles'  => []
+                ],
+                [
+                    'name'   => 'manage posts',
+                    'slug'   => 'posts/' . auth()->user()->slug,
+                    'route'  => 'post.index',
+                    'params' => ['user' => auth()->user()->slug],
+                    'roles'  => []
+                ],
+                [
+                    'name'   => 'profile',
+                    'slug'   => 'admin/profile',
+                    'route'  => 'admin.profile',
+                    'params' => [],
+                    'roles'  => []
+                ],
+                [
+                    'name'   => 'update profile',
+                    'slug'   => 'admin/profile/update',
+                    'route'  => 'admin.profile.update',
+                    'params' => [],
+                    'roles'  => []
+                ],
+                [
+                    'name'   => 'pages',
+                    'slug'   => '',
+                    'route'  => 'user.posts',
+                    'params' => [],
+                    'roles'  => ['admin']
+                ],
+                [
+                    'name'   => 'users',
+                    'slug'   => 'admin/users',
+                    'route'  => 'admin.users',
+                    'params' => [],
+                    'roles'  => ['admin']
+                ],
+                [
+                    'name'   => 'categories',
+                    'slug'   => '',
+                    'route'  => 'category.index',
+                    'params' => [],
+                    'roles'  => ['admin']
+                ],
+                [
+                    'name'   => 'subscriptions',
+                    'slug'   => '',
+                    'route'  => 'user.posts',
+                    'params' => [],
+                    'roles'  => []
+                ],
+                [
+                    'name'   => 'gitHub repos',
+                    'slug'   => '',
+                    'route'  => 'user.posts',
+                    'params' => [],
+                    'roles'  => []
+                ],
+            ];
             $view->with([
-                'sidebar_nav' => config('admin.menu'),
-                'user'        => auth()->user()
+                'sidebar_nav' => $menu,
             ]);
         });
-
-        // View::composer('admin.*', function($view) {
-        //     $view->with('sidebar_nav', [
-        //         [
-        //             'name'  => 'users',
-        //             'slug' => '',
-        //             'route' => 'admin.users',
-        //             'params' => [],
-        //         ],
-        //         [
-        //             'name'  => 'posts',
-        //             'slug' => '',
-        //             'route' => 'admin.posts',
-        //             'params' => [],
-        //         ],
-        //         [
-        //             'name'  => 'categories',
-        //             'slug' => '',
-        //             'route' => 'admin.categories',
-        //             'params' => [],
-        //         ],
-        //         [
-        //             'name'  => 'comments',
-        //             'slug' => '',
-        //             'route' => 'admin.comments',
-        //             'params' => [],
-        //         ]
-        //     ]);
-        // });
-
-        // Profile sidebar navigation
-        // View::composer(['user.*', 'post.*'], function($view) {
-        //     // $user = $view->getData()['user'];
-        //
-        //     $view->with('sidebar_nav', [
-        //         [
-        //             'name'   => 'profile',
-        //             'slug'   => 'user/profile',
-        //             'route'  => 'user.profile',
-        //             'params' => [],
-        //         ],
-        //         [
-        //             'name'   => 'write',
-        //             'slug'   => 'user/new/post',
-        //             'route'  => 'user.post.new',
-        //             'params' => [],
-        //         ],
-        //         [
-        //             'name'   => 'edit profile',
-        //             'slug'   => 'user/update',
-        //             'route'  => 'user.update',
-        //             'params' => [],
-        //         ],
-        //         [
-        //             'name'   => 'posts',
-        //             'slug'   => 'user/posts',
-        //             'route'  => 'user.posts',
-        //             'params' => [],
-        //         ],
-        //         [
-        //             'name'   => 'repos',
-        //             'slug'   => 'user/repos',
-        //             'route'  => 'user.repos',
-        //             'params' => [],
-        //         ]
-        //     ]);
-        // });
 
         // Blog / Category / Post breadcrumbs
         View::composer(['layouts._post', 'layouts._category'], function($view) {

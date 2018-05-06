@@ -13,18 +13,20 @@ use Storage;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(User $user = null)
     {
-        return Post::all();
-    }
-
-    public function userPosts(User $user)
-    {
-        $posts = $user->posts->where('published', true);
-        return view('post.user-posts')->with([
-            'user'  => $user,
-            'posts' => $posts
-        ]);
+        if($user == null)
+        {
+            $posts = Post::where('published', true)->paginate(10);
+            $response = ['posts' => $posts];
+        } else {
+            $posts = $user->posts()->where('published', true)->paginate();
+            $response = [
+                'posts' => $posts,
+                'user'  => $user
+            ];
+        }
+        return view('admin.posts')->with($response);
     }
 
     public function get(Post $post)

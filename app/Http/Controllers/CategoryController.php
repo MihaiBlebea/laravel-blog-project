@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CategoryFormRequest;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        //
+        $categories = Category::paginate(10);
+        return view('admin.categories')->with('categories', $categories);
     }
 
     public function get()
@@ -16,13 +19,62 @@ class CategoryController extends Controller
         //
     }
 
-    public function store()
+    public function getStore()
     {
-        //
+        return view('category.create');
     }
 
-    public function delete()
+    public function postStore(CategoryFormRequest $request)
     {
-        //
+        if($request->file('cover_image'))
+        {
+            $path = Storage::disk('public_upload')->put('cover_image', $request->file('cover_image'));
+            if(!$path)
+            {
+                throw new \Exception('The cover image could not be saved to storage' , 1);
+            };
+        }
+
+        Category::create([
+            'name'        => $request->input('name'),
+            'description' => $request->input('description'),
+            'cover_image' => isset($path) ? $path : null,
+        ]);
+
+        return redirect()->back();
+    }
+
+    public function getUpdate(Category $category)
+    {
+        return view('category.update')->with('category', $category);
+    }
+
+    public function postUpdate(CategoryFormRequest $request, Category $category)
+    {
+        if($request->file('cover_image'))
+        {
+            $path = Storage::disk('public_upload')->put('cover_image', $request->file('cover_image'));
+            if(!$path)
+            {
+                throw new \Exception('The cover image could not be saved to storage' , 1);
+            };
+        }
+
+        $category->update([
+            'name'        => $request->input('name'),
+            'description' => $request->input('description'),
+            'cover_image' => isset($path) ? $path : null,
+        ]);
+
+        return redirect()->route('category.index');
+    }
+
+    public function delete(Category $category)
+    {
+        if($category->posts()->count() == 0)
+        {
+            $category->delete();
+        }
+        return redirect()->route('category.index');
     }
 }

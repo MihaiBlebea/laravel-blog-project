@@ -24,6 +24,13 @@ class Category extends Model
         return $this->hasMany(Post::class);
     }
 
+    // Mutators
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = str_slug($value, '-');
+    }
+
     public function shortDescription()
     {
         return substr($this->description, 0, 150) . '...';

@@ -17,15 +17,15 @@ return [
     'menu' => [
         [
             'name'   => 'write post',
-            'slug'   => 'admin/post/create',
-            'route'  => 'admin.post.create',
+            'slug'   => 'post/store',
+            'route'  => 'post.store',
             'params' => [],
-            'roles'  => ['admin']
+            'roles'  => []
         ],
         [
             'name'   => 'manage post',
             'slug'   => 'admin/posts',
-            'route'  => 'admin.posts',
+            'route'  => 'post.index',
             'params' => [],
             'roles'  => ['admin']
         ],
