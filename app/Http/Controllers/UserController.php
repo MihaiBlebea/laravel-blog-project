@@ -11,9 +11,12 @@ use Storage;
 
 class UserController extends Controller
 {
-    public function profile()
+    public function profile(User $user = null)
     {
-        $user = auth()->user();
+        if(!isset($user))
+        {
+            $user = auth()->user();
+        }
         return view('admin.profile')->with('user', $user);
     }
 
@@ -52,49 +55,6 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    // public function createPost()
-    // {
-    //     $user = auth()->user();
-    //     return view('post.create')->with([
-    //         'user'       => $user,
-    //         'categories' => Category::all()
-    //     ]);
-    // }
-
-    // public function getPosts()
-    // {
-    //     $user = auth()->user();
-    //     return view('user.posts')
-    //             ->with('user', $user)
-    //             ->with('posts', $user->posts);
-    // }
-
-    // public function getRepos()
-    // {
-    //     $user = auth()->user();
-    //     // Check if user has github token
-    //     if(isset($user->social->github_token))
-    //     {
-    //         $url = Socialite::driver('github')->userFromToken($user->social->github_token)->user['repos_url'];
-    //         $guzzle = new Guzzle();
-    //         $service = new RepoService($guzzle, $url);
-    //         $repos = $service->repos();
-    //
-    //         return view('user.repos')->with([
-    //             'user'  => $user,
-    //             'repos' => $repos
-    //         ]);
-    //     }
-    //
-    //     // Session::flash('alert-class', 'alert-danger');
-    //     // Session::flash('message', 'Please link your GitHub account first. <a href="">Link GitHub</a>');
-    //
-    //     return view('user.repos')->with([
-    //         'user'    => $user,
-    //         'repos'   => []
-    //     ]);
-    // }
-
     public function subscribe(User $user)
     {
         Subscription::create([
@@ -110,5 +70,15 @@ class UserController extends Controller
         $subscription = auth()->user()->subscriptions()->where('subscribe_to', $user->id)->first();
         $subscription->delete();
         return redirect()->back();
+    }
+
+    public function getSubscriptions(User $user = null)
+    {
+        if(!isset($user))
+        {
+            $user = auth()->user();
+        }
+        $subscriptions = $user->subscriptions()->paginate(10);
+        return view('admin.subscriptions')->with('subscriptions', $subscriptions);
     }
 }

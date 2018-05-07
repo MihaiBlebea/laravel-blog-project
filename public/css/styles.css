@@ -16,6 +16,20 @@
     background-size: cover;
 }
 
+.profile-image-wrapper {
+    height:200px;
+    width:200px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    border-radius: 50%;
+}
+
+.profile-image-wrapper.small {
+    width: 64px;
+    height: 64px;
+}
+
 .post-content {
     position: relative;
     top: -200px;

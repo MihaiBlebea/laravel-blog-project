@@ -1,12 +1,10 @@
 @extends('layouts._admin')
 
 @section('admin_panel')
-<div class="card">
-    <div class="card-header">
-        <span class="float-left">Users</span>
-        <button type="button" class="btn btn-sm btn-outline-primary float-right">Add new</button>
-    </div>
 
+@include('partials._page-title', ['title' => 'Users', 'subtitle' => 'Manage users'])
+
+<div class="card">
     <div class="card-body">
         <table class="table">
             <thead>

@@ -1,4 +1,4 @@
-@extends('layouts._profile')
+@extends('layouts._admin')
 
 @push('script-head')
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=5g5faf78gvk6yfq9bd3bbfjo858kjx1q8o0nbiwtygo2e4er"></script>
@@ -6,7 +6,8 @@
 @endpush
 
 @section('profile_content')
-    <h1 class="mb-5">Update post</h1>
+
+    @include('partials._page-title', ['title' => 'Update post'])
 
     <form action="{{ route('post.update', [ 'post' => $post->slug ]) }}" method="POST" enctype="multipart/form-data">
         @csrf

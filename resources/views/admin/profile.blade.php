@@ -1,5 +1,10 @@
-@extends('layouts._profile')
+@extends('layouts._admin')
 
-@section('profile_content')
-    <h1 class="mb-5">{{ $user->first_name }} {{ $user->last_name }}'s profile</h1>
+@section('admin_panel')
+
+    @include('partials._page-title', [
+        'title' => $user->first_name . ' ' . $user->last_name,
+        'subtitle' => 'dev profile'
+    ])
+
 @endsection

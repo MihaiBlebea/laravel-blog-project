@@ -45,7 +45,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                 [
                     'name'   => 'pages',
                     'slug'   => '',
-                    'route'  => 'user.posts',
+                    'route'  => 'post.index',
                     'params' => [],
                     'roles'  => ['admin']
                 ],
@@ -58,22 +58,22 @@ class ViewComposerServiceProvider extends ServiceProvider
                 ],
                 [
                     'name'   => 'categories',
-                    'slug'   => '',
+                    'slug'   => 'categories',
                     'route'  => 'category.index',
                     'params' => [],
                     'roles'  => ['admin']
                 ],
                 [
                     'name'   => 'subscriptions',
-                    'slug'   => '',
-                    'route'  => 'user.posts',
+                    'slug'   => 'user/subscriptions',
+                    'route'  => 'user.subscriptions',
                     'params' => [],
                     'roles'  => []
                 ],
                 [
                     'name'   => 'gitHub repos',
                     'slug'   => '',
-                    'route'  => 'user.posts',
+                    'route'  => 'post.index',
                     'params' => [],
                     'roles'  => []
                 ],

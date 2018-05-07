@@ -1,7 +1,9 @@
-@extends('layouts._profile')
+@extends('layouts._admin')
 
-@section('profile_content')
-    <h1 class="mb-5">Update profile</h1>
+@section('admin_panel')
+
+    @include('partials._page-title', ['title' => 'Update profile'])
+
     <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data">
         @csrf
 

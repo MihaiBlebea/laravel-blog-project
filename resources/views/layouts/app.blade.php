@@ -34,11 +34,14 @@
                 <div class="container">
                     <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{!! Session::get('message') !!}</p>
                 </div>
-                
+
             @endif
 
             @yield('content')
         </main>
+
+        @include('partials._footer')
+        
     </div>
 </body>
 </html>

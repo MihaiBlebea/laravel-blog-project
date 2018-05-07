@@ -5,7 +5,11 @@
     <div class="row justify-content-center">
         <div class="col-md-3">
 
-            <img class="img-thumbnail mb-3" src="{{ public_upload_path(Auth::user()->profile_image) }}">
+            <div class="profile-image-wrapper mx-auto d-block mb-2" style="background-image: url('{{ public_upload_path(Auth::user()->profile_image) }}');"></div>
+            <div class="text-center">
+                <strong>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</strong>
+            </div>
+            <hr>
             @include('partials._sidebar-navigation')
 
         </div>
