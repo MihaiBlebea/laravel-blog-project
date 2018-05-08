@@ -5,18 +5,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials._page-title', ['title' => $user->first_name . ' ' . $user->last_name . '\' projects'])
+            @include('partials._page-title', ['title' => auth()->user()->first_name . ' ' . auth()->user()->last_name . '\' projects'])
 
             <div class="row mb-4">
                 <div class="col">
-                    @include('forms._search-bar', ['model' => 'user'] )
+                    @include('forms._search-bar', ['model' => 'repo'] )
                 </div>
             </div>
 
-            @foreach($posts as $post)
+            @foreach($repos as $index => $repo)
 
                 <div class="mb-3">
-                    @include('partials._post-card')
+                    @include('partials._repo-card')
                 </div>
 
             @endforeach

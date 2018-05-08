@@ -64,7 +64,7 @@ class User extends Authenticatable
 
     public function social()
     {
-        return $this->belongsTo(Social::class);
+        return $this->hasOne(Social::class);
     }
 
     public function searches()
@@ -81,6 +81,15 @@ class User extends Authenticatable
     public function hasGitHub()
     {
         return isset($this->social->github_token);
+    }
+
+    public function getGitHubToken()
+    {
+        if($this->hasGitHub())
+        {
+            return $this->social->github_token;
+        }
+        return null;
     }
 
     public function isSubscribed(User $user)

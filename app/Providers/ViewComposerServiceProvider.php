@@ -72,8 +72,8 @@ class ViewComposerServiceProvider extends ServiceProvider
                 ],
                 [
                     'name'   => 'gitHub repos',
-                    'slug'   => '',
-                    'route'  => 'post.index',
+                    'slug'   => 'repos',
+                    'route'  => 'repos',
                     'params' => [],
                     'roles'  => []
                 ],
