@@ -13,14 +13,15 @@ use Storage;
 
 class PostController extends Controller
 {
+    // Get all user's post for admin panel
     public function index(User $user = null)
     {
         if($user == null)
         {
-            $posts = Post::where('published', true)->paginate(10);
+            $posts = Post::paginate(10);
             $response = ['posts' => $posts];
         } else {
-            $posts = $user->posts()->where('published', true)->paginate();
+            $posts = $user->posts()->paginate(10);
             $response = [
                 'posts' => $posts,
                 'user'  => $user
@@ -29,11 +30,13 @@ class PostController extends Controller
         return view('admin.posts')->with($response);
     }
 
+    // Get a specific post
     public function get(Post $post)
     {
         return $post;
     }
 
+    // Publish a post
     public function publish(Post $post)
     {
         $post->update([
@@ -43,6 +46,17 @@ class PostController extends Controller
         return redirect()->back();
     }
 
+    // Unpublish a post
+    public function unpublish(Post $post)
+    {
+        $post->update([
+            'published' => false,
+            'publish_at' => null
+        ]);
+        return redirect()->back();
+    }
+
+    // Get the create post form page
     public function getStore()
     {
         return view('post.create')->with([
@@ -50,12 +64,13 @@ class PostController extends Controller
         ]);
     }
 
+    // Send the payload to create a post
     public function postStore(PostFormRequest $request)
     {
         $path = Storage::disk('public_upload')->put('feature-images', $request->file('feature_image'));
         if(!$path)
         {
-            return false;
+            throw new \Exception("Could Not Save The Imaage In The Storage", 1);
         };
 
         $post = Post::updateOrCreate([
@@ -66,14 +81,13 @@ class PostController extends Controller
             'content'       => $request->input('content'),
         ]);
 
-        // Storage::delete($path);
-
         if($post)
         {
             return redirect()->back();
         }
     }
 
+    // Get the post update form page
     public function getUpdate(Post $post)
     {
         return view('post.update')->with([
@@ -82,6 +96,7 @@ class PostController extends Controller
         ]);
     }
 
+    // Send the payload to upload a post
     public function postUpdate(PostFormRequest $request, Post $post)
     {
         if($request->file('feature_image'))
@@ -89,7 +104,7 @@ class PostController extends Controller
             $path = Storage::disk('public_upload')->put('feature-images', $request->file('feature_image'));
             if(!$path)
             {
-                return false;
+                throw new \Exception("Could Not Save The Imaage In The Storage", 1);
             };
         }
 

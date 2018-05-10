@@ -8,23 +8,30 @@ use Exception;
 
 class RepoService implements RepoServiceInterface
 {
-    private $url;
-
     private $guzzle;
 
-    public function __construct(Guzzle $guzzle, String $url)
+    public function __construct(Guzzle $guzzle)
     {
-        $this->url = $url;
         $this->guzzle = $guzzle;
     }
 
-    public function repos()
+    public function repos(String $url)
     {
-        $response = $this->guzzle->request('GET', $this->url);
+        $response = $this->guzzle->request('GET', $url);
         if($response->getStatusCode() == 200)
         {
             return collect(json_decode($response->getBody()->getContents()));
         }
         throw new Exception("Coult not get the repos from GitHub", 1);
+    }
+
+    public function repo(String $url)
+    {
+        $response = $this->guzzle->request('GET', $url);
+        if($response->getStatusCode() == 200)
+        {
+            return collect(json_decode($response->getBody()->getContents()));
+        }
+        throw new Exception("Coult not get the repo from GitHub", 1);
     }
 }

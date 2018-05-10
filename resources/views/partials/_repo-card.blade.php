@@ -2,13 +2,12 @@
     <div class="card-body">
         <h5>{{ $index + 1 }}. {{ $repo->full_name }}</h5>
 
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Edit</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Delete</a>
-            </li>
-        </ul>
+        <form action="{{ route('repo.add') }}" method="POST">
+            @csrf
+
+            <input type="hidden" name="repo_url" value="{{ $repo->url }}">
+
+            <button type="submit" class="btn btn-outline-primary">Add</button>
+        </form>
     </div>
 </div>

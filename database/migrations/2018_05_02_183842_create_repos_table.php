@@ -15,9 +15,8 @@ class CreateReposTable extends Migration
             $table->string('full_name');
             $table->string('url')->unique();
             $table->string('language');
-            $table->string('homepage');
-            $table->string('description');
-            $table->timestamp('was_created');
+            $table->string('homepage')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }
