@@ -11,25 +11,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
 
     Route::post('/profile/update', 'UserController@postUpdate')->name('profile.update');
 
-    // -------------------------------- //
-
-    // Manage posts
-    // Route::get('/post/create', 'PostController@getStore')->name('post.create');
-
-    // Route::get('/posts', 'PostController@posts')->name('posts');
-
-    // -------------------------------- //
-
     // Manage comments
     Route::get('/comments', 'AdminController@comments')->name('comments');
-
-    // Manage categories
-    // Route::get('/categories', 'AdminController@categories')->name('categories');
-
-
-    // Route::get('/new/post', 'UserController@createPost')->name('post.new');
-    // Route::get('/posts', 'UserController@getPosts')->name('posts');
-
-    // Route::get('/repos', 'UserController@getRepos')->name('repos');
 
 });

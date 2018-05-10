@@ -22,8 +22,12 @@ class RoleSeeder extends Seeder
             'name'        => 'writer',
             'description' => 'This is the writer role'
         ],
+        [
+            'name'        => 'user',
+            'description' => 'This is the user role'
+        ],
     ];
-    
+
     public function run()
     {
         foreach($this->roles as $role)

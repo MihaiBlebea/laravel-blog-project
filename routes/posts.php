@@ -1,8 +1,12 @@
 <?php
 
-Route::get('/posts/{user?}', 'PostController@index')->name('post.index');
+Route::get('/posts/{user?}', 'PostController@index')->name('post.index')->middleware('role:user,admin');
 
-Route::group(['prefix' => 'post', 'as' => 'post.'], function() {
+Route::group([
+    'prefix' => 'post',
+    'as' => 'post.',
+    'middleware' => 'role:user,admin'
+], function() {
 
     // Route::get('/blog/{category}/{post}', 'PostController@get')->name('get');
 
@@ -15,4 +19,5 @@ Route::group(['prefix' => 'post', 'as' => 'post.'], function() {
     Route::delete('/delete/{post}', 'PostController@delete')->name('delete');
 
     Route::get('publish/{post}', 'PostController@publish')->name('publish');
+
 });

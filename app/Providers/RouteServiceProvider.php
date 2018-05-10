@@ -39,34 +39,18 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
-
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/users.php'));
-
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/posts.php'));
-
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/comments.php'));
-
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/categories.php'));
-
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/repos.php'));
-
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/admin.php'));
-
+        Route::group([
+           'middleware' => 'web',
+           'namespace' => $this->namespace,
+       ], function ($router) {
+           require base_path('routes/web.php');
+           require base_path('routes/users.php');
+           require base_path('routes/posts.php');
+           require base_path('routes/comments.php');
+           require base_path('routes/categories.php');
+           require base_path('routes/repos.php');
+           require base_path('routes/admin.php');
+       });
     }
 
     protected function mapApiRoutes()
