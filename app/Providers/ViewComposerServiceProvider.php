@@ -12,7 +12,7 @@ class ViewComposerServiceProvider extends ServiceProvider
     public function boot()
     {
         // Admin sidebar navigation
-        View::composer(['admin.*', 'post.create', 'category.*'], function($view) {
+        View::composer(['admin.*', 'post.create', 'category.*', 'pages.index'], function($view) {
             $menu = [
                 [
                     'name'   => 'write post',
@@ -44,8 +44,8 @@ class ViewComposerServiceProvider extends ServiceProvider
                 ],
                 [
                     'name'   => 'pages',
-                    'slug'   => '',
-                    'route'  => 'post.index',
+                    'slug'   => 'pages',
+                    'route'  => 'pages',
                     'params' => [],
                     'roles'  => ['admin']
                 ],

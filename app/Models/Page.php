@@ -9,7 +9,8 @@ class Page extends Model
     protected $fillable = [
         'name',
         'slug',
-        'content',
+        'view',
+        'type',
         'published'
     ];
 

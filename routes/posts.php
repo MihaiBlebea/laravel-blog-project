@@ -18,6 +18,6 @@ Route::group([
 
     Route::delete('/delete/{post}', 'PostController@delete')->name('delete');
 
-    Route::get('publish/{post}', 'PostController@publish')->name('publish');
+    Route::get('/toggle/{post}', 'PostController@togglePublish')->name('publish');
 
 });

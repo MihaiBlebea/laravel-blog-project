@@ -29,23 +29,39 @@
     @endif
 </div>
 
-<div class="form-group">
-    <label for="category">Select category:</label>
-    <select name="category_id" class="form-control" id="category">
-        @foreach($categories as $category)
+<div class="row form-group">
+    <div class="col">
 
-            <option value="{{ $category->id }}"
-                    {{ (isset($post) && $post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+        <label for="category">Select category:</label>
+        <select name="category_id" class="form-control" id="category">
+            @foreach($categories as $category)
 
-        @endforeach
-    </select>
+                <option value="{{ $category->id }}"
+                        {{ (isset($post) && $post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+
+            @endforeach
+        </select>
+
+    </div>
+    <div class="col">
+
+        <label for="publish_mode">Publish?:</label>
+        <select name="publish_mode" class="form-control" id="publish_mode">
+            <option value="save">Save</option>
+            <option value="publish">Publish</option>
+        </select>
+        <!-- <input type="datetime-local" class="form-control" id="publish_date"> -->
+
+    </div>
 </div>
 
 <div class="form-group">
     <label for="feature_image">Upload feature image:</label>
     <div>
-        <input type="file" name="feature_image" id="feature_image">
+        <input type="file" name="feature_image" id="feature_image" onchange="readURL(this);" >
     </div>
 </div>
+
+<div id="preview-image"></div>
 
 <button type="submit" class="btn btn-outline-primary">Save</button>

@@ -16,3 +16,7 @@
 
     </form>
 @endsection
+
+@push('javascript')
+<script src="{{ asset('js/image-upload-helper.js') }}"></script>
+@endpush

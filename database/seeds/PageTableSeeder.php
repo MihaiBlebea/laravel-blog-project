@@ -7,18 +7,27 @@ class PageTableSeeder extends Seeder
 {
     private $pages = [
         [
-            'name'      => 'About page',
-            'content'   => 'asdasdasdada',
+            'name'      => 'About',
+            'view'      => 'pages.page.about',
+            'type'      => 'page',
             'published' => true
         ],
         [
-            'name'      => 'Contact page',
-            'content'   => 'asdasdasdada',
+            'name'      => 'Contact',
+            'view'      => 'pages.page.contact',
+            'type'      => 'page',
             'published' => true
         ],
         [
-            'name'      => 'Home page',
-            'content'   => 'asdasdasdada',
+            'name'      => 'Home',
+            'view'      => 'pages.page.home',
+            'type'      => 'page',
+            'published' => true
+        ],
+        [
+            'name'      => 'Developers',
+            'view'      => 'pages.landing.developers',
+            'type'      => 'page',
             'published' => true
         ]
     ];
@@ -29,7 +38,7 @@ class PageTableSeeder extends Seeder
         {
             Page::create([
                 'name'      => $page['name'],
-                'content'   => $page['content'],
+                'view'      => $page['view'],
                 'published' => $page['published']
             ]);
         }

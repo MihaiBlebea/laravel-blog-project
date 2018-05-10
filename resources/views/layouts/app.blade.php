@@ -41,7 +41,9 @@
         </main>
 
         @include('partials._footer')
-        
+
     </div>
+
+    @stack('javascript')
 </body>
 </html>

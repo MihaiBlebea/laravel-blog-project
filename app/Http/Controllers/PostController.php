@@ -37,21 +37,10 @@ class PostController extends Controller
     }
 
     // Publish a post
-    public function publish(Post $post)
+    public function togglePublish(Post $post)
     {
         $post->update([
-            'published' => true,
-            'publish_at' => Carbon::now()
-        ]);
-        return redirect()->back();
-    }
-
-    // Unpublish a post
-    public function unpublish(Post $post)
-    {
-        $post->update([
-            'published' => false,
-            'publish_at' => null
+            'published' => !$post->published,
         ]);
         return redirect()->back();
     }
@@ -73,14 +62,15 @@ class PostController extends Controller
             throw new \Exception("Could Not Save The Imaage In The Storage", 1);
         };
 
-        $post = Post::updateOrCreate([
+        $post = Post::create([
             'category_id'   => $request->input('category_id'),
             'user_id'       => Auth::user()->id,
             'title'         => $request->input('title'),
             'feature_image' => $path,
             'content'       => $request->input('content'),
+            'published'     => ($request->input('publish_mode') == 'publish') ? true : false
         ]);
-
+    
         if($post)
         {
             return redirect()->back();
