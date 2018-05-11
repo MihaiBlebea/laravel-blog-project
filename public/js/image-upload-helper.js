@@ -19,8 +19,8 @@ function mountImg(name, src, container_id)
 {
     var container = document.getElementById(container_id);
     var img = document.createElement('img');
-    img.src = name;
-    img.alt = src;
+    img.src = src;
+    img.alt = name;
     img.className = 'thumb';
     img.style.width = '200px';
     container.appendChild(img);

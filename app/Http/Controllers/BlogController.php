@@ -11,13 +11,13 @@ class BlogController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('layouts._blog')->with('categories', $categories);
+        return view('pages.blog.blog')->with('categories', $categories);
     }
 
     public function category(Category $category)
     {
         $posts = $category->posts()->where('published', true)->paginate(10);
-        return view('layouts._category')->with([
+        return view('pages.blog.category')->with([
             'posts'    => $posts,
             'category' => $category
         ]);
@@ -25,6 +25,6 @@ class BlogController extends Controller
 
     public function post(Category $category, Post $post)
     {
-        return view('layouts._post')->with('post', $post);
+        return view('page.blog.post')->with('post', $post);
     }
 }

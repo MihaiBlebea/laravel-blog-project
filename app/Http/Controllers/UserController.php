@@ -26,6 +26,12 @@ class UserController extends Controller
         return view('user.users')->with('users', User::paginate(10));
     }
 
+    public function manageUsers()
+    {
+        $users = User::paginate(10);
+        return view('admin.users')->with('users', User::paginate(10));
+    }
+
     public function getUpdate()
     {
         $user = auth()->user();

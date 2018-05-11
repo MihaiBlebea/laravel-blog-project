@@ -14,6 +14,10 @@ class Page extends Model
         'published'
     ];
 
+    private $rules = [
+        "/" => ""
+    ];
+
     public function getRouteKeyName()
     {
         return 'slug';

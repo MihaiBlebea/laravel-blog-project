@@ -29,37 +29,30 @@ class ViewComposerServiceProvider extends ServiceProvider
                     'roles'  => []
                 ],
                 [
-                    'name'   => 'profile',
-                    'slug'   => 'admin/profile',
-                    'route'  => 'admin.profile',
-                    'params' => [],
-                    'roles'  => []
-                ],
-                [
                     'name'   => 'update profile',
                     'slug'   => 'admin/profile/update',
-                    'route'  => 'admin.profile.update',
+                    'route'  => 'user.update',
                     'params' => [],
                     'roles'  => []
                 ],
                 [
                     'name'   => 'pages',
                     'slug'   => 'pages',
-                    'route'  => 'pages',
+                    'route'  => 'page.manage',
                     'params' => [],
                     'roles'  => ['admin']
                 ],
                 [
                     'name'   => 'users',
                     'slug'   => 'admin/users',
-                    'route'  => 'admin.users',
+                    'route'  => 'user.manage',
                     'params' => [],
                     'roles'  => ['admin']
                 ],
                 [
                     'name'   => 'categories',
                     'slug'   => 'categories',
-                    'route'  => 'category.index',
+                    'route'  => 'category.manage',
                     'params' => [],
                     'roles'  => ['admin']
                 ],
@@ -69,14 +62,7 @@ class ViewComposerServiceProvider extends ServiceProvider
                     'route'  => 'user.subscriptions',
                     'params' => [],
                     'roles'  => []
-                ],
-                [
-                    'name'   => 'gitHub repos',
-                    'slug'   => 'repos',
-                    'route'  => 'repos',
-                    'params' => [],
-                    'roles'  => []
-                ],
+                ]
             ];
             $view->with([
                 'sidebar_nav' => $menu,

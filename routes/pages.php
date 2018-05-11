@@ -1,16 +1,21 @@
 <?php
 
-// status can be 'published' or 'unpublished' or null
-Route::get('/pages/{status?}', 'PageController@pages')->name('pages')->middleware('role:admin');
+Route::get('/home', 'PageController@homePage');
+
+Route::get('/', 'PageController@homePage')->name('home');
+
+Route::get('/{type}/{page}', 'PageController@page')->name('page.get');
+
 
 Route::group([
-    'prefix' => 'page',
+    'prefix' => 'admin/pages',
     'as' => 'page.',
     'middleware' => 'role:admin'
 ], function() {
 
-    Route::get('/toggle/{page}', 'PageController@togglePublish')->name('publish');
+    // status can be 'published' or 'unpublished' or null
+    Route::get('/manage/{status?}', 'PageController@pages')->name('manage');
 
-    Route::get('/{type}/{page}', 'PageController@page')->name('get');
+    Route::get('/toggle/{page}', 'PageController@togglePublish')->name('publish');
 
 });

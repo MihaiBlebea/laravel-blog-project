@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\CategoryFormRequest;
 use App\Models\Category;
+use Storage;
 
 class CategoryController extends Controller
 {

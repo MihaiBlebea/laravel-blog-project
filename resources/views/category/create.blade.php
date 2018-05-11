@@ -1,6 +1,6 @@
-@extends('layouts._profile')
+@extends('layouts._admin')
 
-@section('profile_content')
+@section('admin_panel')
 
     @include('partials._page-title', ['title' => 'New cateogry'])
 

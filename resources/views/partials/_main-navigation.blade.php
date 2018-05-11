@@ -13,6 +13,8 @@
                 <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                 <li><a class="nav-link" href="{{ route('blog.index') }}">Blog</a></li>
                 <li><a class="nav-link" href="{{ route('users') }}">Developers</a></li>
+                <li><a class="nav-link" href="{{ route('page.get', ['type' => 'page', 'page' => 'about']) }}">About</a></li>
+                <li><a class="nav-link" href="{{ route('page.get', ['type' => 'page', 'page' => 'contact']) }}">Contact</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

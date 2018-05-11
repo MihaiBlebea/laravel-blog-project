@@ -8,6 +8,11 @@ use App\Models\Page;
 
 class PageController extends Controller
 {
+    public function homePage()
+    {
+        return view('pages.page.home');
+    }
+
     public function pages(String $status = null)
     {
         if($status)

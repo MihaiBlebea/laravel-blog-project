@@ -1,14 +1,12 @@
 <?php
 
-Route::get('/posts/{user?}', 'PostController@index')->name('post.index')->middleware('role:user,admin');
-
 Route::group([
-    'prefix' => 'post',
+    'prefix' => 'admin/post',
     'as' => 'post.',
     'middleware' => 'role:user,admin'
 ], function() {
 
-    // Route::get('/blog/{category}/{post}', 'PostController@get')->name('get');
+    Route::get('/manage/{user?}', 'PostController@index')->name('index');
 
     Route::get('/store', 'PostController@getStore')->name('store');
     Route::post('/store', 'PostController@postStore')->name('store');

@@ -3,10 +3,12 @@
 Route::get('/categories', 'CategoryController@index')->name('category.index')->middleware('role:admin');
 
 Route::group([
-    'prefix' => 'category',
+    'prefix' => 'admin/categories',
     'as' => 'category.',
     'middleware' => 'role:admin'
 ], function() {
+
+    Route::get('/', 'CategoryController@index')->name('manage');
 
     Route::get('/store', 'CategoryController@getStore')->name('store');
     Route::post('/store', 'CategoryController@postStore')->name('store');

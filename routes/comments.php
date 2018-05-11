@@ -10,6 +10,7 @@ Route::get('/comments/{post}/approved', 'CommentController@getApprovedFromPost')
         ->name('comment.approved.post')
         ->middleware('role:user,admin');
 
+
 Route::group(['prefix' => 'comment', 'as' => 'comment.'], function() {
 
     Route::get('/approve/{comment}', 'CommentController@approve')
