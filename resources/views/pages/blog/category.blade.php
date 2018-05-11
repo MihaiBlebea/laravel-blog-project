@@ -5,9 +5,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials._page-title', ['title' => $category->name, 'subtitle' => 'Read all about ' . $category->name])
+            @if(isset($category))
 
-            @include('partials._breadcrumbs')
+                @include('partials._page-title', ['title' => $category->name, 'subtitle' => 'Read all about ' . $category->name])
+
+                @include('partials._breadcrumbs')
+
+            @else
+
+                @include('partials._page-title', ['title' => $user->first_name . ' ' . $user->last_name . '\'s posts'])
+
+            @endif
 
             @if($posts->count() > 0)
 

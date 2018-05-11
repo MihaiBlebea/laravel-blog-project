@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 
-class Repo extends Model
+class Profile extends Model
 {
     protected $fillable = [
         'user_id',
-        'name',
-        'full_name',
-        'url',
-        'language',
-        'homepage',
-        'description',
-        'was_created'
+        'short_description',
+        'description'
     ];
 
     public function user()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\User;
 
 class BlogController extends Controller
 {
@@ -20,6 +21,15 @@ class BlogController extends Controller
         return view('pages.blog.category')->with([
             'posts'    => $posts,
             'category' => $category
+        ]);
+    }
+
+    public function userPosts(User $user)
+    {
+        $posts = $user->posts()->where('published', true)->paginate(10);
+        return view('pages.blog.category')->with([
+            'posts' => $posts,
+            'user'  => $user
         ]);
     }
 

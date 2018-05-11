@@ -9,10 +9,10 @@
                 </p>
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('post.index', [ 'user' => $user->slug ]) }}">Read posts</a>
+                        <a class="nav-link" href="{{ route('blog.user', [ 'user' => $user->slug ]) }}">Read posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">See profile</a>
+                        <a class="nav-link" href="{{ route('user.profile', [ 'user' => $user->slug ]) }}">See profile</a>
                     </li>
 
                     @subscribed($user)

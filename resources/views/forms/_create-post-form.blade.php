@@ -58,10 +58,16 @@
 <div class="form-group">
     <label for="feature_image">Upload feature image:</label>
     <div>
-        <input type="file" name="feature_image" id="feature_image" onchange="readURL(this);" >
+        <input type="file" name="feature_image" id="feature_image" onchange="readURL(this);">
     </div>
 </div>
 
 <div id="preview-image"></div>
 
-<button type="submit" class="btn btn-outline-primary">Save</button>
+<div class="form-group mb-0">
+    <div class="col">
+        <button type="submit" class="btn btn-primary">
+            Save
+        </button>
+    </div>
+</div>

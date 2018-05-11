@@ -16,8 +16,12 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
 
 });
 
+Route::get('/admin', 'UserController@adminPanel')->name('admin.panel')->middleware(['auth', 'role:user,admin']);
+
 // Admin routes
 Route::group(['prefix' => 'admin/users', 'as' => 'user.', 'middleware' => ['auth', 'role:user,admin']], function() {
+
+    Route::get('/dashboard', 'UserController@dashboard')->name('dashboard');
 
     Route::get('/manage', 'UserController@manageUsers')->name('manage');
 

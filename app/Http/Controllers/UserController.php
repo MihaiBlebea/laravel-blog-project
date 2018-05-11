@@ -6,30 +6,37 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Subscription;
+use App\Models\Profile;
 use Session;
 use Storage;
 
 class UserController extends Controller
 {
+    public function dashboard()
+    {
+        $user = auth()->user();
+        return view('admin.dashboard')->with('user', $user);
+    }
+
     public function profile(User $user = null)
     {
         if(!isset($user))
         {
             $user = auth()->user();
         }
-        return view('admin.profile')->with('user', $user);
+        return view('user.profile')->with('user', $user);
     }
 
     public function users()
     {
-        $users = User::paginate(10);
-        return view('user.users')->with('users', User::paginate(10));
+        $users = User::where('id', '!=', auth()->user()->id)->paginate(10);
+        return view('user.users')->with('users', $users);
     }
 
     public function manageUsers()
     {
-        $users = User::paginate(10);
-        return view('admin.users')->with('users', User::paginate(10));
+        $users = User::where('id', '!=', auth()->user()->id)->paginate(10);
+        return view('admin.users')->with('users', $users);
     }
 
     public function getUpdate()
@@ -56,6 +63,13 @@ class UserController extends Controller
             'email'         => $request->input('email'),
             'password'      => $request->input('password'),
             'profile_image' => isset($path) ? $path : null
+        ]);
+
+        Profile::updateOrCreate([
+            'user_id' => $user->id
+        ], [
+            'short_description' => $request->input('short_description'),
+            'description'       => $request->input('description'),
         ]);
 
         return redirect()->back();

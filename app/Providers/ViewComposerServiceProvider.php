@@ -15,6 +15,13 @@ class ViewComposerServiceProvider extends ServiceProvider
         View::composer(['admin.*', 'post.create', 'category.*', 'pages.index'], function($view) {
             $menu = [
                 [
+                    'name'   => 'Dashboard',
+                    'slug'   => 'post/store',
+                    'route'  => 'user.dashboard',
+                    'params' => [],
+                    'roles'  => []
+                ],
+                [
                     'name'   => 'write post',
                     'slug'   => 'post/store',
                     'route'  => 'post.store',

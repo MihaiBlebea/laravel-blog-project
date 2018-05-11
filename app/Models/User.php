@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\Social;
 use App\Models\Search;
 use App\Models\Subscription;
+use App\Models\Profile;
 
 class User extends Authenticatable
 {
@@ -75,6 +76,11 @@ class User extends Authenticatable
     public function subscriptions()
     {
         return $this->hasMany(Subscription::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 
     // Custom methods
