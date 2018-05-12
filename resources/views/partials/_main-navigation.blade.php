@@ -45,7 +45,7 @@
                     </li>
                 @endguest
 
-                <li class="ml-md-2">
+                <li class="ml-md-2 mb-5 mb-md-0">
                     @include('partials._search-bar', ['model' => 'user'])
                 </li>
             </ul>

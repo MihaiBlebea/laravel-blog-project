@@ -13545,8 +13545,8 @@ a:hover {
 
 .navbar-laravel {
   background-color: #F5F2ED;
-  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  -webkit-box-shadow: 0 2px 4px #00b1b3;
+          box-shadow: 0 2px 4px #00b1b3;
 }
 
 .first-footer {
