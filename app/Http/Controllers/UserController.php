@@ -29,7 +29,12 @@ class UserController extends Controller
 
     public function users()
     {
-        $users = User::where('id', '!=', auth()->user()->id)->paginate(10);
+        if(auth()->check())
+        {
+            $users = User::where('id', '!=', auth()->user()->id)->paginate(10);
+        } else {
+            $users = User::paginate(10);
+        }
         return view('user.users')->with('users', $users);
     }
 
