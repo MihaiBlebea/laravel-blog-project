@@ -17,7 +17,7 @@
 
                 @foreach($categories as $category)
 
-                    <div class="col-md-4">
+                    <div class="col-md-6 mb-3">
                         @include('partials._category-card')
                     </div>
 

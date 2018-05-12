@@ -1,0 +1,38 @@
+.card {
+    box-shadow: 2px 2px $grey;
+    border-radius: 0px;
+    border: 0;
+}
+
+.overlay {
+    position:absolute;
+    z-index:2;
+    opacity:0.5;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background-color: $black;
+    width:100%;
+    height:100%;
+    transition: all 0.5s ease-in-out;
+}
+
+.overlay:hover {
+    text-shadow: 2px 2px $black;
+    opacity:0;
+    cursor:pointer;
+}
+
+.card-body.bg {
+    background-size: cover;
+    background-position: center;
+    min-height: 200px;
+}
+
+.bg .card-title {
+    color: $white;
+    z-index:4;
+    position:relative;
+    text-shadow: 2px 2px $black;
+}

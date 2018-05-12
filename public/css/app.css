@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://fonts.googleapis.com/css?family=Oswald:400,700);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.1.1 (https://getbootstrap.com/)
@@ -13466,9 +13466,85 @@ a.text-dark:focus {
   clip: auto;
 }
 
+body {
+  background-color: #F5F2ED;
+}
+
+h1 {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+}
+
+h2 {
+  font-family: 'Oswald', sans-serif;
+}
+
+h3 {
+  font-family: 'Oswald', sans-serif;
+}
+
+h4 {
+  font-family: 'Oswald', sans-serif;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.card {
+  -webkit-box-shadow: 2px 2px #3b3b3b;
+          box-shadow: 2px 2px #3b3b3b;
+  border-radius: 0px;
+  border: 0;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 2;
+  opacity: 0.5;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.overlay:hover {
+  text-shadow: 2px 2px #000;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.card-body.bg {
+  background-size: cover;
+  background-position: center;
+  min-height: 200px;
+}
+
+.bg .card-title {
+  color: #fff;
+  z-index: 4;
+  position: relative;
+  text-shadow: 2px 2px #000;
+}
+
 .navbar-laravel {
-  background-color: #fff;
+  background-color: #F5F2ED;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.first-footer {
+  background-color: #c4c4c4;
+  color: #000;
+}
+
+.second-footer {
+  background-color: #3b3b3b;
+  color: #fff;
 }
 
