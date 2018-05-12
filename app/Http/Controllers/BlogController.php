@@ -35,6 +35,6 @@ class BlogController extends Controller
 
     public function post(Category $category, Post $post)
     {
-        return view('page.blog.post')->with('post', $post);
+        return view('pages.blog.post')->with('post', $post);
     }
 }

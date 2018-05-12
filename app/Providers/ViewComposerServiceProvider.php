@@ -11,6 +11,8 @@ class ViewComposerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        View::composer('pages.page.home', \App\Http\ViewComposers\HomePageViewComposer::class);
+
         // Admin sidebar navigation
         View::composer(['admin.*', 'post.create', 'category.*', 'pages.index'], function($view) {
             $menu = [
@@ -77,7 +79,7 @@ class ViewComposerServiceProvider extends ServiceProvider
         });
 
         // Blog / Category / Post breadcrumbs
-        View::composer(['layouts._post', 'layouts._category'], function($view) {
+        View::composer(['pages.blog.*'], function($view) {
             $params = explode('/', Request::path());
             $breadcrumbs = [];
             foreach($params as $index => $param)

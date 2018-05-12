@@ -7,7 +7,7 @@
 .overlay {
     position:absolute;
     z-index:2;
-    opacity:0.5;
+    opacity:0.3;
     top:0;
     right:0;
     left:0;
@@ -35,4 +35,28 @@
     z-index:4;
     position:relative;
     text-shadow: 2px 2px $black;
+}
+
+@include media-breakpoint-up(xs) {
+    .card-body {
+        padding: 1.25rem;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .card-body {
+        padding: 2.5rem;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    //
+}
+
+@include media-breakpoint-up(lg) {
+    //
+}
+
+@include media-breakpoint-up(xl) {
+    //
 }

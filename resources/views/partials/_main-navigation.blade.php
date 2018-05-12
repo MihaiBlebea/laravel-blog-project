@@ -13,12 +13,11 @@
                 <li><a class="nav-link" href="{{ route('home') }}">Home</a></li>
                 <li><a class="nav-link" href="{{ route('blog.index') }}">Blog</a></li>
                 <li><a class="nav-link" href="{{ route('users') }}">Developers</a></li>
-                <li><a class="nav-link" href="{{ route('page.get', ['type' => 'page', 'page' => 'about']) }}">About</a></li>
-                <li><a class="nav-link" href="{{ route('page.get', ['type' => 'page', 'page' => 'contact']) }}">Contact</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+
                 <!-- Authentication Links -->
                 @guest
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
@@ -45,6 +44,10 @@
                         </div>
                     </li>
                 @endguest
+
+                <li class="ml-md-2">
+                    @include('partials._search-bar', ['model' => 'user'])
+                </li>
             </ul>
         </div>
     </div>
