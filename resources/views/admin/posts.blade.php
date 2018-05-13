@@ -15,6 +15,7 @@
                     <th scope="col">Comments</th>
                     <th scope="col">Created</th>
                     <th scope="col">View</th>
+                    <th scope="col">Edit</th>
                     <th scope="col">Publish</th>
                 </tr>
             </thead>
@@ -27,6 +28,7 @@
                         <td>{{ $post->comments->count() }}</td>
                         <td>{{ $post->created_at->toDateString() }}</td>
                         <td><a target="_new" href="{{ route('blog.post', ['category' => $post->category->slug, 'post' => $post->slug]) }}">Open</a></td>
+                        <td><a href="{{ route('post.update', ['post' => $post->slug]) }}">Update</a></td>
                         <td>
                             <a href="{{ route('post.publish', ['post' => $post->slug]) }}">{{ ($post->published == true) ? 'Unpublish' : 'Publish' }}</a></td>
                         <td>

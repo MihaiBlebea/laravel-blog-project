@@ -13,7 +13,9 @@ class SocialiteAuthController extends Controller
 {
     public function redirectToProvider(String $driver_name)
     {
-        return Socialite::driver($driver_name)->redirect();
+        return Socialite::driver($driver_name)
+                            ->scopes(['w_share'])
+                            ->redirect();
     }
 
     public function handleProviderCallback(String $driver_name)
