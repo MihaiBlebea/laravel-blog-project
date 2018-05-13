@@ -7,17 +7,11 @@
 
             @include('partials._page-title', ['title' => 'Categories', 'subtitle' => 'Select your favourite category'])
 
-            <div class="row mb-4">
-                <div class="col">
-                    @include('forms._search-bar', ['model' => 'post'] )
-                </div>
-            </div>
-
             <div class="row">
 
                 @foreach($categories as $category)
 
-                    <div class="col-md-4">
+                    <div class="col-md-6 mb-3 animated fadeIn delay-1">
                         @include('partials._category-card')
                     </div>
 

@@ -4,15 +4,18 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
 
+            @include('partials._page-title', ['title' => 'Register'])
+
+            <div class="card">
                 <div class="card-body">
 
-                    <div class="mb-3">
-                        @include('partials._social-login')
+                    <div class="row mb-5 justify-content-center">
+                        <div class="col">
+                            @include('partials._social-login')
+                        </div>
                     </div>
-                    
+
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 

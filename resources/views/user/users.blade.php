@@ -7,14 +7,8 @@
 
             @include('partials._page-title', ['title' => 'developers', 'subtitle' => 'Manage subscriptions'])
 
-            <div class="row mb-4">
-                <div class="col">
-                    @include('forms._search-bar', ['model' => 'user'] )
-                </div>
-            </div>
-
             @foreach($users as $user)
-                <div class="mb-3">
+                <div class="mb-3 animated fadeIn delay-1">
                     @include('partials._user-card')
                 </div>
             @endforeach

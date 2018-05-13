@@ -1,6 +1,6 @@
 <h3 class="mb-3 text-center">Let me know what you think about this</h3>
 
-<div class="card mb-2">
+<div class="card mb-3">
     <div class="card-body">
         <form action="{{ route('comment.store') }}" method="POST">
             @csrf
@@ -14,17 +14,19 @@
 
     @foreach($post->comments->where('parent_id', null) as $index => $comment)
 
-        <div class="mb-2">
+        <div class="mb-3">
             @include('partials._comment-card')
         </div>
 
-        @foreach($post->comments->where('parent_id', $comment->id) as $comment)
+        <div class="comment-border">
+            @foreach($post->comments->where('parent_id', $comment->id) as $comment)
 
-            <div class="pl-5 mb-2">
-                @include('partials._comment-card')
-            </div>
+                <div class="mb-3">
+                    @include('partials._comment-card')
+                </div>
 
-        @endforeach
+            @endforeach
+        </div>
 
         @if($loop->last == false)
             <hr>
