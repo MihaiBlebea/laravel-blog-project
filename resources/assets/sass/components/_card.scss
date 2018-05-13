@@ -1,0 +1,61 @@
+.card {
+    box-shadow: 2px 2px $grey;
+    border-radius: 0px;
+    border: 0;
+}
+
+.bg {
+    background-size: cover;
+    background-position: center;
+    transition: all 0.5s ease-in-out;
+}
+
+.card-title {
+    color: $white;
+    background-color: $primary;
+    padding: 10px;
+    width: fit-content;
+    position: absolute;
+    top: 50px;
+    text-shadow: 2px 2px $black;
+    transition: all 0.5s ease-in-out;
+}
+
+.bg:hover {
+    opacity: 0.2;
+}
+
+
+@include media-breakpoint-up(xs) {
+    .card-body {
+        padding: 1.25rem;
+    }
+
+    .bg {
+        min-height: 150px;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .card-body {
+        padding: 2.5rem;
+    }
+
+    .bg {
+        min-height: 250px;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .bg {
+        min-height: 350px;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    //
+}
+
+@include media-breakpoint-up(xl) {
+    //
+}

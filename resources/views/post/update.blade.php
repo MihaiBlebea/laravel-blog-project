@@ -5,7 +5,7 @@
     <script>tinymce.init({ selector:'#content', branding: false });</script>
 @endpush
 
-@section('profile_content')
+@section('admin_panel')
 
     @include('partials._page-title', ['title' => 'Update post'])
 

@@ -11,7 +11,7 @@
 
                 <div class="row mb-4">
                     <div class="col">
-                        @include('forms._search-bar', ['model' => 'post'] )
+                        @include('partials._search-bar', ['model' => 'post'] )
                     </div>
                 </div>
 

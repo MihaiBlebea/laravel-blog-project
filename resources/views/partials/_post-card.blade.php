@@ -1,10 +1,11 @@
 <div class="card">
     <a href="{{ route('blog.post', [ 'category' => $post->category->slug, 'post' => $post->slug ]) }}">
-       <img class="card-img-top feature-image-post-card" src="{{ public_upload_path($post->feature_image) }}" alt="Feature image">
-    </a>
-    <div class="card-body">
+        <div class="bg" style="background-image: url('{{ public_upload_path($post->feature_image) }}');"></div>
         <h2 class="card-title">{{ $post->title }}</h2>
-        <p class="card-text">{!! $post->except() !!}...</p>
+    </a>
+    <div class="card-body p-4">
+        <!-- <h2 class="card-title">{{ $post->title }}</h2> -->
+        <p class="card-text">{!! $post->except() !!}</p>
         <a href="{{ route('blog.post', [ 'category' => $post->category->slug, 'post' => $post->slug ]) }}"
            class="btn btn-primary">Read article</a>
     </div>

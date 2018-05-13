@@ -59,7 +59,7 @@ class Post extends Model
     // Custom methods
     public function except()
     {
-        return substr($this->content, 0, 200);
+        return substr(strip_tags($this->content), 0, 200);
     }
 
     // public static function search(String $search_term)
