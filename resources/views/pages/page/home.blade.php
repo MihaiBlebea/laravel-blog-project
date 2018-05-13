@@ -10,6 +10,8 @@
                     'title' => 'Ever been stuck on some piece of code with no solution in sight?',
                     'subtitle' => '...the solution is just 2 clicks away'
                 ])
+
+                <img style="width:100%;" src="{{ public_upload_path('designs\homepage-design.png') }}">
             </div>
 
             <div class="row">

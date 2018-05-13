@@ -70,7 +70,7 @@ class PostController extends Controller
             'content'       => $request->input('content'),
             'published'     => ($request->input('publish_mode') == 'publish') ? true : false
         ]);
-    
+
         if($post)
         {
             return redirect()->back();
