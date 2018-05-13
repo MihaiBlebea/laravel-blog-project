@@ -13633,37 +13633,29 @@ a:hover {
   border: 0;
 }
 
-.overlay {
-  position: absolute;
-  z-index: 2;
-  opacity: 0.3;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: #000;
-  width: 100%;
-  height: 100%;
+.bg {
+  background-size: cover;
+  background-position: center;
+  -webkit-filter: grayscale(100);
+          filter: grayscale(100);
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
 
-.overlay:hover {
-  text-shadow: 2px 2px #000;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.card-body.bg {
-  background-size: cover;
-  background-position: center;
-  min-height: 200px;
+.bg:hover {
+  -webkit-filter: grayscale(0);
+          filter: grayscale(0);
 }
 
 .bg .card-title {
   color: #fff;
-  z-index: 4;
+  background-color: #00b1b3;
+  padding: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   position: relative;
+  top: 1rem;
   text-shadow: 2px 2px #000;
 }
 
@@ -13671,9 +13663,23 @@ a:hover {
   padding: 1.25rem;
 }
 
+.bg {
+  min-height: 150px;
+}
+
 @media (min-width: 576px) {
   .card-body {
     padding: 2.5rem;
+  }
+
+  .bg {
+    min-height: 250px;
+  }
+}
+
+@media (min-width: 768px) {
+  .bg {
+    min-height: 350px;
   }
 }
 
@@ -13696,5 +13702,10 @@ a:hover {
 
 .jumbotron {
   background-color: initial;
+}
+
+.comment-border {
+  border-left: 3px solid #00b1b3;
+  margin-left: 30px;
 }
 

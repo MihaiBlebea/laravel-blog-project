@@ -4,36 +4,24 @@
     border: 0;
 }
 
-.overlay {
-    position:absolute;
-    z-index:2;
-    opacity:0.3;
-    top:0;
-    right:0;
-    left:0;
-    bottom:0;
-    background-color: $black;
-    width:100%;
-    height:100%;
+.bg {
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100);
     transition: all 0.5s ease-in-out;
 }
 
-.overlay:hover {
-    text-shadow: 2px 2px $black;
-    opacity:0;
-    cursor:pointer;
-}
-
-.card-body.bg {
-    background-size: cover;
-    background-position: center;
-    min-height: 200px;
+.bg:hover {
+    filter: grayscale(0);
 }
 
 .bg .card-title {
     color: $white;
-    z-index:4;
-    position:relative;
+    background-color: $primary;
+    padding: 10px;
+    width: fit-content;
+    position: relative;
+    top: 1rem;
     text-shadow: 2px 2px $black;
 }
 
@@ -41,16 +29,26 @@
     .card-body {
         padding: 1.25rem;
     }
+
+    .bg {
+        min-height: 150px;
+    }
 }
 
 @include media-breakpoint-up(sm) {
     .card-body {
         padding: 2.5rem;
     }
+
+    .bg {
+        min-height: 250px;
+    }
 }
 
 @include media-breakpoint-up(md) {
-    //
+    .bg {
+        min-height: 350px;
+    }
 }
 
 @include media-breakpoint-up(lg) {

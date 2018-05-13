@@ -27,7 +27,7 @@
 
                 @foreach($posts as $post)
 
-                    <div class="mb-3 animated fadeIn delay-1">
+                    <div class="mb-4 animated fadeIn delay-1">
                         @include('partials._post-card')
                     </div>
 

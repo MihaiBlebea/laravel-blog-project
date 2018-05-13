@@ -4,9 +4,10 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">403 Error</div>
 
+            @include('partials._page-title', ['title' => '403 Error'])
+
+            <div class="card">
                 <div class="card-body">
                     <p>You do not have permission to view this page</p>
 
