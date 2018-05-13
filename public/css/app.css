@@ -13466,6 +13466,140 @@ a.text-dark:focus {
   clip: auto;
 }
 
+.delay-1:nth-child(1) {
+  -webkit-animation-delay: 0.25s;
+          animation-delay: 0.25s;
+}
+
+.delay-1:nth-child(2) {
+  -webkit-animation-delay: 0.5s;
+          animation-delay: 0.5s;
+}
+
+.delay-1:nth-child(3) {
+  -webkit-animation-delay: 0.75s;
+          animation-delay: 0.75s;
+}
+
+.delay-1:nth-child(4) {
+  -webkit-animation-delay: 1s;
+          animation-delay: 1s;
+}
+
+.delay-1:nth-child(5) {
+  -webkit-animation-delay: 1.25s;
+          animation-delay: 1.25s;
+}
+
+.delay-1:nth-child(6) {
+  -webkit-animation-delay: 1.5s;
+          animation-delay: 1.5s;
+}
+
+.delay-1:nth-child(7) {
+  -webkit-animation-delay: 1.75s;
+          animation-delay: 1.75s;
+}
+
+.delay-1:nth-child(8) {
+  -webkit-animation-delay: 2s;
+          animation-delay: 2s;
+}
+
+.delay-1:nth-child(9) {
+  -webkit-animation-delay: 2.25s;
+          animation-delay: 2.25s;
+}
+
+/*!
+Animate.css - http://daneden.me/animate
+Licensed under the MIT license - http://opensource.org/licenses/MIT
+Copyright (c) 2015 Daniel Eden
+*/
+
+body {
+  -webkit-backface-visibility: hidden;
+}
+
+.animated {
+  -webkit-animation-duration: calc( 1s);
+  animation-duration: calc( 1s);
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  -webkit-animation-duration: calc( 1s * 2);
+  animation-duration: calc( 1s * 2);
+}
+
+.animated.bounceIn,
+.animated.bounceOut {
+  -webkit-animation-duration: calc( 1s * 0.75);
+  animation-duration: calc( 1s * 0.75);
+}
+
+.animated.flipOutX,
+.animated.flipOutY {
+  -webkit-animation-duration: calc( 1s * 0.75);
+  animation-duration: calc( 1s * 0.75);
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
+}
+
 body {
   background-color: #F5F2ED;
 }
@@ -13545,18 +13679,19 @@ a:hover {
 
 .navbar-laravel {
   background-color: #F5F2ED;
-  -webkit-box-shadow: 0 2px 4px #00b1b3;
-          box-shadow: 0 2px 4px #00b1b3;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .first-footer {
-  background-color: #616161;
+  background-color: #e2dcd2;
   color: #000;
+  border-bottom: 1px solid #F5F2ED;
 }
 
 .second-footer {
-  background-color: #3b3b3b;
-  color: #fff;
+  background-color: #e2dcd2;
+  color: #000;
 }
 
 .jumbotron {

@@ -6,9 +6,18 @@
 // Variables
 @import "utilities/variables";
 
+// Functions
+@import "utilities/functions";
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 @import 'node_modules/font-awesome/scss/font-awesome.scss';
+
+// Import custom animations
+@import "utilities/animations";
+
+// Import Animate SASS library for animate.css
+@import '~animate-sass/_animate.scss';
 
 // Import layouts
 @import 'utilities/layouts';

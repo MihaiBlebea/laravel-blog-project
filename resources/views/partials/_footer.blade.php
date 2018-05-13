@@ -17,8 +17,8 @@
         </div>
     </div>
 </footer>
-<footer class="second-footer pt-5 pb-4">
+<footer class="second-footer">
     <div class="row align-items-center">
-        <p class="col text-center">2018 {{ config('app.name', 'Laravel') }}</p>
+        <p class="col text-center mt-3">2018 {{ config('app.name', 'Laravel') }}</p>
     </div>
 </footer>

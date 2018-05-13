@@ -9,8 +9,15 @@ $line-height-base: 1.6;
 
 // Colors
 $grey: #3b3b3b;
-$light-grey: #616161;
 $crem: #F5F2ED;
+$first_footer: #e2dcd2;
+$second_footer: #e2dcd2;
 $black: #000;
 
 $primary: #00b1b3;
+
+// Animations
+$base_delay: 1s;
+
+$use-fadeIn: true;
+$use-fadeOut: true;

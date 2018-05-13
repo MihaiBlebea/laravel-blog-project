@@ -1,9 +1,10 @@
 .first-footer {
-    background-color: $light-grey;
+    background-color: $first_footer;
     color: $black;
+    border-bottom: 1px solid $crem; 
 }
 
 .second-footer {
-    background-color: $grey;
-    color: $white;
+    background-color: $second_footer;
+    color: $black;
 }

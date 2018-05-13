@@ -12,19 +12,17 @@
                 ])
             </div>
 
-        </div>
-    </div>
+            <div class="row">
+                @foreach($categories as $category)
 
-    <h2 class="text-center">Read the latest posts</h2>
-    <hr>
-    <div class="row">
-        @foreach($posts as $post)
+                    <div class="col-md-6 mb-3 animated fadeIn delay-1">
+                        @include('partials._category-card')
+                    </div>
 
-            <div class="col-md-4 mb-4">
-                @include('partials._post-card')
+                @endforeach
             </div>
 
-        @endforeach
+        </div>
     </div>
 
 </div>

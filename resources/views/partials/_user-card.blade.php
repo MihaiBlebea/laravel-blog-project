@@ -6,7 +6,9 @@
             <div class="media-body">
                 <h5 class="mt-0">{{ $user->first_name }} {{ $user->last_name }}</h5>
                 <p>
-                    <!-- Add content -->
+                    @hasProfile($user)
+                        {{ $user->profile->short_description }}
+                    @endif
                 </p>
                 <ul class="nav float-right">
                     <li class="nav-item">
