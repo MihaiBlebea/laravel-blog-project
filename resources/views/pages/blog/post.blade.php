@@ -12,6 +12,12 @@
 
                     <h1 class="mb-5 mt-5 text-center">{{ $post->title }}</h1>
 
+                    @hasProfile($post->author)
+
+                        @include('partials._profile-short-description', ['user' => $post->author])
+
+                    @endif
+
                     <p class="card-text">{!! $post->content !!}</p>
                 </div>
             </div>

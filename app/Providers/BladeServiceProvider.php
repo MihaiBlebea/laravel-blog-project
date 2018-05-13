@@ -38,6 +38,11 @@ class BladeServiceProvider extends ServiceProvider
         Blade::if('hasAnyRole', function(Array $roles) {
             return auth()->check() && auth()->user()->hasAnyRole($roles);
         });
+
+        // Check if an $user has setup a profile model
+        Blade::if('hasProfile', function(User $user) {
+            return (bool) $user->profile()->count();
+        });
     }
 
     public function register()
