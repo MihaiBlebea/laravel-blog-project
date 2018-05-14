@@ -11,6 +11,7 @@ class ViewComposerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        // Homepage
         View::composer('pages.page.home', \App\Http\ViewComposers\HomePageViewComposer::class);
 
         // Admin sidebar navigation

@@ -17,7 +17,7 @@
             <div class="row">
                 @foreach($categories as $category)
 
-                    <div class="col-md-6 mb-3 animated fadeIn delay-1">
+                    <div class="col-md-{{ (!$loop->last && isOdd($categories->count())) ? '6' : '12' }} mb-3 animated fadeIn delay-1">
                         @include('partials._category-card')
                     </div>
 

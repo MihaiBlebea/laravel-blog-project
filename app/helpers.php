@@ -23,3 +23,11 @@ if(!function_exists('random'))
         return str_random($length);
     }
 }
+
+if(!function_exists('isOdd'))
+{
+    function isOdd(Int $number)
+    {
+        return (bool) $number % 2 !== 0;
+    }
+}

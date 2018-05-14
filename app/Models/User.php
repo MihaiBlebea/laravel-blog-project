@@ -11,10 +11,11 @@ use App\Models\Social;
 use App\Models\Search;
 use App\Models\Subscription;
 use App\Models\Profile;
+use Jrean\UserVerification\Traits\UserVerification;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasRoleTrait, SearchableTrait;
+    use Notifiable, HasRoleTrait, SearchableTrait, UserVerification;
 
     protected $fillable = [
         'role_id',
@@ -22,7 +23,8 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'profile_image'
+        'verified',
+        'verification_token'
     ];
 
     protected $hidden = [
@@ -38,12 +40,6 @@ class User extends Authenticatable
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    // Mutators
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
     }
 
     public function setFirstNameAttribute($value)

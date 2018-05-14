@@ -28,6 +28,6 @@ Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post');
 Route::post('/search', 'SearchController@search')->name('search');
 
 Route::get('/test', function() {
-    
+
     dd($result);
 });

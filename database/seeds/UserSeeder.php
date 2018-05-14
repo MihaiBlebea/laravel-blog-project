@@ -12,6 +12,7 @@ class UserSeeder extends Seeder
             'last_name'  => 'Blebea',
             'email'      => 'mihaiserban.blebea@gmail.com',
             'password'   => 'intrex',
+            'verified'   => 1
         ],
         [
             'role_id'    => 2,
@@ -19,6 +20,7 @@ class UserSeeder extends Seeder
             'last_name'  => 'Blebea',
             'email'      => 'horia@gmail.com',
             'password'   => 'intrex',
+            'verified'   => 1
         ],
         [
             'role_id'    => 3,
@@ -26,6 +28,7 @@ class UserSeeder extends Seeder
             'last_name'  => 'Aliman',
             'email'      => 'cristinaliman@gmail.com',
             'password'   => 'intrex',
+            'verified'   => 1
         ]
     ];
 
@@ -38,7 +41,8 @@ class UserSeeder extends Seeder
                 'first_name' => $user['first_name'],
                 'last_name'  => $user['last_name'],
                 'email'      => $user['email'],
-                'password'   => $user['password']
+                'password'   => $user['password'],
+                'verified'   => $user['verified']
             ]);
         }
     }
