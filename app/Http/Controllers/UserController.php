@@ -66,8 +66,7 @@ class UserController extends Controller
             'first_name'    => $request->input('first_name'),
             'last_name'     => $request->input('last_name'),
             'email'         => $request->input('email'),
-            'password'      => $request->input('password'),
-            'profile_image' => isset($path) ? $path : null
+            'password'      => $request->input('password')
         ]);
 
         Profile::updateOrCreate([
@@ -75,6 +74,7 @@ class UserController extends Controller
         ], [
             'short_description' => $request->input('short_description'),
             'description'       => $request->input('description'),
+            'profile_image'     => isset($path) ? $path : null
         ]);
 
         return redirect()->back();
