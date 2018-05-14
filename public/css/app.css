@@ -13708,3 +13708,16 @@ a:hover {
   margin-left: 30px;
 }
 
+.profile-image-wrapper {
+  height: 200px;
+  width: 200px;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+}
+
+.profile-image-wrapper.small {
+  width: 64px;
+  height: 64px;
+}
+

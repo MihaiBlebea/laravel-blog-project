@@ -1,4 +1,4 @@
-.featured-image {
+/* .featured-image {
     position: relative;
     width: 100%;
     height: 400px;
@@ -6,29 +6,29 @@
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-}
-
+} */
+/*
 .mini-featured-image {
     width: 64px;
     height: 64px;
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-}
+} */
 
-.profile-image-wrapper {
+/* .profile-image-wrapper {
     height:200px;
     width:200px;
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
     border-radius: 50%;
-}
+} */
 
-.profile-image-wrapper.small {
+/* .profile-image-wrapper.small {
     width: 64px;
     height: 64px;
-}
+} */
 
 .post-content {
     position: relative;
