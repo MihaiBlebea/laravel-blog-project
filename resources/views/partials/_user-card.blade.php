@@ -2,7 +2,7 @@
     <div class="card-body p-4">
         <div class="media">
             <div class="mini-featured-image mr-3"
-                 style="background-image: url('{{ public_upload_path($user->profile_image) }}');"></div>
+                 style="background-image: url('{{ public_upload_path( isset($user->profile) ? $user->profile->profile_image : null) }}');"></div>
             <div class="media-body">
                 <h5 class="mt-0">{{ $user->first_name }} {{ $user->last_name }}</h5>
                 <p>
