@@ -154,6 +154,8 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Artesaos\LinkedIn\LinkedinServiceProvider::class,
         Jrean\UserVerification\UserVerificationServiceProvider::class,
+        JonathanTorres\LaravelMediumSdk\LaravelMediumSdkServiceProvider::class,
+        Thujohn\Twitter\TwitterServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -216,6 +218,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'LinkedIn'  => \Artesaos\LinkedIn\Facades\LinkedIn::class,
+        'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
         'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
     ],
 

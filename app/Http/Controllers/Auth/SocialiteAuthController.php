@@ -14,7 +14,7 @@ class SocialiteAuthController extends Controller
     public function redirectToProvider(String $driver_name)
     {
         return Socialite::driver($driver_name)
-                            ->scopes(['w_share'])
+                            // ->scopes(['w_share'])
                             ->redirect();
     }
 
@@ -22,15 +22,14 @@ class SocialiteAuthController extends Controller
     {
         $social_user = Socialite::driver($driver_name)->user();
         $split_name = Social::splitName($social_user->name);
-
+    
         // Get or create User model
         $user = User::firstOrCreate([
             'email' => $social_user->getEmail()
         ], [
             'role_id'            => 4,
             'first_name'         => $split_name[0],
-            'last_name'          => $split_name[1],
-            'profile_image'      => $social_user->getAvatar()
+            'last_name'          => $split_name[1]
         ]);
 
         // Update or create Social model
