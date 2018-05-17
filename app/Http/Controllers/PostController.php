@@ -31,9 +31,9 @@ class PostController extends Controller
     }
 
     // Get a specific post
-    public function get(Post $post)
+    public function preview(Post $post)
     {
-        return $post;
+        return view('pages.blog.post')->with('post', $post);
     }
 
     // Publish a post
@@ -48,34 +48,43 @@ class PostController extends Controller
     // Get the create post form page
     public function getStore()
     {
-        return view('post.create')->with([
-            'categories' => Category::all()
+        // Find the first category
+        $first_category = Category::first();
+
+        // Generate random slug
+        $post = Post::create([
+            'slug'        => str_random(10),
+            'category_id' => ($first_category) ? $first_category->id : 0,
+            'user_id'     => auth()->user()->id
         ]);
+
+        // Redirect to upload page with the new generated slug
+        return redirect()->route('post.draft', ['post' => $post->slug]);
     }
 
     // Send the payload to create a post
-    public function postStore(PostFormRequest $request)
-    {
-        $path = Storage::disk('public_upload')->put('feature-images', $request->file('feature_image'));
-        if(!$path)
-        {
-            throw new \Exception("Could Not Save The Imaage In The Storage", 1);
-        };
-
-        $post = Post::create([
-            'category_id'   => $request->input('category_id'),
-            'user_id'       => Auth::user()->id,
-            'title'         => $request->input('title'),
-            'feature_image' => $path,
-            'content'       => $request->input('content'),
-            'published'     => ($request->input('publish_mode') == 'publish') ? true : false
-        ]);
-
-        if($post)
-        {
-            return redirect()->back();
-        }
-    }
+    // public function postStore(PostFormRequest $request)
+    // {
+    //     $path = Storage::disk('public_upload')->put('feature-images', $request->file('feature_image'));
+    //     if(!$path)
+    //     {
+    //         throw new \Exception("Could Not Save The Imaage In The Storage", 1);
+    //     };
+    //
+    //     $post = Post::create([
+    //         'category_id'   => $request->input('category_id'),
+    //         'user_id'       => Auth::user()->id,
+    //         'title'         => $request->input('title'),
+    //         'feature_image' => $path,
+    //         'content'       => $request->input('content'),
+    //         'published'     => ($request->input('publish_mode') == 'publish') ? true : false
+    //     ]);
+    //
+    //     if($post)
+    //     {
+    //         return redirect()->back();
+    //     }
+    // }
 
     // Get the post update form page
     public function getUpdate(Post $post)
@@ -100,13 +109,13 @@ class PostController extends Controller
 
         $post->update([
             'category_id'   => $request->input('category_id'),
-            'slug'          => str_slug($request->input('title'), '-'),
+            // 'slug'          => str_slug($request->input('title'), '-'),
             'title'         => $request->input('title'),
             'feature_image' => ($path) ? $path : null,
             'content'       => $request->input('content'),
         ]);
 
-        return redirect()->back();
+        return redirect()->route('post.index', ['user' => auth()->user()->slug]);
     }
 
     public function delete(Post $post)

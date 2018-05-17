@@ -13,9 +13,16 @@
             <strong>{{ $errors->first('title') }}</strong>
         </span>
     @endif
+
+    <p class="mt-3">
+        <strong>Preview:</strong>
+        <a target="_blank" href="{{ route('post.preview', ['post' => $post->slug]) }}">
+            <span class="text-primary">{{ config('app.url') . '/blog/' . $post->category->slug . '/' . $post->slug }}</span>
+        </a>
+    </p>
 </div>
 
-<div class="form-group">
+<!-- <div class="form-group">
     <label for="content">Content:</label>
     <textarea class="form-control"
               name="content"
@@ -27,6 +34,16 @@
             <strong>{{ $errors->first('content') }}</strong>
         </span>
     @endif
+</div> -->
+
+<div class="form-group">
+
+    <!-- Rich text editor -->
+    <vue-editor-wrapper :draft-id="'{{ json_encode($post->id) }}'"
+                        :init-content="'{{ isset($post->content) ? $post->content : '' }}'">
+    </vue-editor-wrapper>
+    <!-- Rich text editor -->
+
 </div>
 
 <div class="row form-group">
@@ -37,7 +54,7 @@
             @foreach($categories as $category)
 
                 <option value="{{ $category->id }}"
-                        {{ (isset($post) && $post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                        {{ (isset($post->category) && $post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
 
             @endforeach
         </select>
@@ -62,12 +79,8 @@
     </div>
 </div>
 
+<!-- Upload image preview -->
 <div id="preview-image"></div>
+<!-- Upload image preview -->
 
-<div class="form-group mb-0">
-    <div class="col">
-        <button type="submit" class="btn btn-primary">
-            Save
-        </button>
-    </div>
-</div>
+@include('partials._form-button', ['cta' => 'Save'])

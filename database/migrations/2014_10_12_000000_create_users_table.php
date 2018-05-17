@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
             $table->integer('role_id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('slug')->unique();
+            $table->string('slug')->unique()->nullable();
             $table->string('email')->unique();
             $table->string('password')->nullable()->default(null);
             $table->boolean('verified')->default(false);

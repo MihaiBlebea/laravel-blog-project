@@ -2,6 +2,6 @@
 
 Route::group(['prefix' => 'social', 'as' => 'share.'], function() {
 
-    Route::get('/share/linkedin/{post}', 'SocialShareController@shareLinkedin')->name('linkedin');
+    Route::get('/share/{driver}/{post}', 'SocialShareController@share')->name('share');
 
 });
