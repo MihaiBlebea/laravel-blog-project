@@ -167,6 +167,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\BladeServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
+        App\Providers\ModelObserverServiceProvider::class,
     ],
 
     /*

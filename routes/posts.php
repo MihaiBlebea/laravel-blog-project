@@ -10,6 +10,9 @@ Route::group([
 
     Route::get('/store', 'PostController@getStore')->name('store');
     Route::post('/store', 'PostController@postStore')->name('store');
+    Route::get('/store/{post}', 'PostController@getUpdate')->name('draft');
+
+    Route::get('/preview/{post}', 'PostController@preview')->name('preview');
 
     Route::get('/update/{post}', 'PostController@getUpdate')->name('update');
     Route::post('/update/{post}', 'PostController@postUpdate')->name('update');

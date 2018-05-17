@@ -42,12 +42,6 @@ class User extends Authenticatable
         return 'slug';
     }
 
-    public function setFirstNameAttribute($value)
-    {
-        $this->attributes['first_name'] = $value;
-        $this->attributes['slug'] = strtolower($value) . '-' . random(8);
-    }
-
     // Relationship
     public function posts()
     {

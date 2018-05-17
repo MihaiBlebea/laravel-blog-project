@@ -12,10 +12,10 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->integer('category_id');
             $table->integer('user_id');
-            $table->string('slug');
-            $table->string('title');
-            $table->string('feature_image');
-            $table->longText('content');
+            $table->string('slug')->unique();
+            $table->string('title')->nullable();
+            $table->string('feature_image')->nullable();
+            $table->longText('content')->nullable();
             $table->boolean('published')->default(false);
             $table->timestamp('publish_at')->nullable();
             $table->timestamps();

@@ -14,6 +14,12 @@
         @csrf
 
         <div class="form-group">
+            <div class="col-md-12">
+                @include('partials._chapter-title', ['title' => 'Contact details'])
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="first_name" class="col">First name:</label>
 
             <div class="col-md-6">
@@ -66,6 +72,12 @@
                         <strong>{{ $errors->first('email') }}</strong>
                     </span>
                 @endif
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                @include('partials._chapter-title', ['title' => 'Profile information'])
             </div>
         </div>
 
