@@ -12,7 +12,6 @@ class CreateSearchesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->string('term');
-            $table->string('model');
             $table->integer('results_count');
             $table->timestamps();
         });
