@@ -24,11 +24,6 @@ class BladeServiceProvider extends ServiceProvider
             return '<?php endif; ?>';
         });
 
-        // Check if the model for search is Post
-        Blade::if('search', function($model) {
-            return $model == Request::input('model');
-        });
-
         // Check if the auth User is subscribed to a particular user
         Blade::if('subscribed', function(User $user) {
             return auth()->check() && auth()->user()->isSubscribed($user);
@@ -41,7 +36,7 @@ class BladeServiceProvider extends ServiceProvider
 
         // Check if an $user has setup a profile model
         Blade::if('hasProfile', function(User $user) {
-            return (bool) $user->profile()->count();
+            return (bool) isset($user->profile) && $user->profile()->count();
         });
     }
 

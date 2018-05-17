@@ -15,7 +15,7 @@ class SearchController extends Controller
 
         // Store search in the database
         Search::create([
-            'user_id'       => auth()::user()->id,
+            'user_id'       => auth()->user()->id,
             'term'          => $request->input('search_term'),
             'results_count' => $results->count()
         ]);

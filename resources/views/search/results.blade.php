@@ -7,39 +7,13 @@
 
             @include('partials._page-title', ['title' => 'Results', 'subtitle' => 'We found ' . $results->count() . ' results'])
 
-            @search('post')
+            @foreach($results as $post)
 
-                <div class="row mb-4">
-                    <div class="col">
-                        @include('partials._search-bar', ['model' => 'post'] )
-                    </div>
+                <div class="mb-3">
+                    @include('partials._post-card')
                 </div>
 
-                @foreach($results as $post)
-
-                    <div class="mb-3">
-                        @include('partials._post-card')
-                    </div>
-
-                @endforeach
-            @endsearch
-
-            @search('user')
-
-                <div class="row mb-4">
-                    <div class="col">
-                        @include('forms._search-bar', ['model' => 'user'] )
-                    </div>
-                </div>
-
-                @foreach($results as $user)
-
-                    <div class="mb-3">
-                        @include('partials._user-card')
-                    </div>
-
-                @endforeach
-            @endsearch
+            @endforeach
 
 
             @if($results->count() == 0)
