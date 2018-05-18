@@ -4,13 +4,16 @@ namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Traits\HasRoleTrait;
-use App\Traits\SearchableTrait;
-use App\Models\Post;
-use App\Models\Social;
-use App\Models\Search;
-use App\Models\Subscription;
-use App\Models\Profile;
+use App\Traits\{
+    HasRoleTrait,
+    SearchableTrait
+};
+use App\Models\{
+    Post,
+    Social,
+    Search,
+    Profile
+};
 use Jrean\UserVerification\Traits\UserVerification;
 
 class User extends Authenticatable
@@ -63,14 +66,14 @@ class User extends Authenticatable
         return $this->hasMany(Search::class);
     }
 
-    public function subscriptions()
-    {
-        return $this->hasMany(Subscription::class);
-    }
-
     public function profile()
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
 
     // Custom methods

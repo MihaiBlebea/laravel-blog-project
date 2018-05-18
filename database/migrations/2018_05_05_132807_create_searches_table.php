@@ -10,7 +10,6 @@ class CreateSearchesTable extends Migration
     {
         Schema::create('searches', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
             $table->string('term');
             $table->integer('results_count');
             $table->timestamps();

@@ -58,13 +58,6 @@ class AdminSidebareMenuViewComposer
                 'params' => [],
                 'roles'  => ['admin']
             ],
-            [
-                'name'   => 'subscriptions',
-                'slug'   => 'user/subscriptions',
-                'route'  => 'user.subscriptions',
-                'params' => [],
-                'roles'  => []
-            ]
         ];
         $view->with([
             'sidebar_nav' => $menu,
