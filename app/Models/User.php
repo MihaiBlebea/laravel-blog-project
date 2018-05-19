@@ -90,9 +90,4 @@ class User extends Authenticatable
         }
         return null;
     }
-
-    public function isSubscribed(User $user)
-    {
-        return (bool) $this->subscriptions()->where('subscribe_to', $user->id)->count();
-    }
 }

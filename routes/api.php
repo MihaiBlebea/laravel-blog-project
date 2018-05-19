@@ -10,4 +10,8 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
     Route::post('/upload/post', 'ApiController@autosavePost');
 
+    Route::post('/upload/project', 'ApiController@autosaveProject');
+
+    Route::post('/upload/profile', 'ApiController@autosaveProfile');
+
 });

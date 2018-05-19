@@ -11,44 +11,84 @@ use App\Models\{
 
 class ProjectController extends Controller
 {
-    public function index(User $user = null)
+    public function index(Request $request, User $user = null)
     {
         if($user == null)
         {
-            $user = auth()->user();
+            $schema = Project::query();
+        } else {
+            $schema = $user->projects();
         }
-        $projects = $user->projects()->paginate(10);
+
+        if($request->input('status') !== null && collect(['draft', 'published'])->contains($request->input('status')))
+        {
+            $projects = $schema->where('status', $request->input('status'))->paginate(10);
+        } else {
+            $projects = $schema->paginate(10);
+        }
+
         return view('projects.index')->with('projects', $projects);
     }
 
     public function get(Project $project)
     {
-        dd($project);
         return view('projects.project')->with('project', $project);
+    }
+
+    public function manage()
+    {
+        $user = auth()->user();
+        if($user->hasRole('admin'))
+        {
+            $projects = Project::paginate(10);
+        } else {
+            $projects = $user->projects()->paginate(10);
+        }
+        return view('admin.projects')->with('projects', $projects);
+    }
+
+    public function status(Request $request, Project $project)
+    {
+        if($request->input('status') !== null && collect(['draft', 'published'])->contains($request->input('status')))
+        {
+            $project->update([ 'status' => $request->input('status') ]);
+        }
+        return redirect()->back();
     }
 
     public function getStore()
     {
-        //
-    }
-
-    public function postStore(ProjectFormRequest $request)
-    {
-        //
+        $project = Project::create([
+            'user_id' => auth()->user()->id,
+            'name'    => 'Project ' . str_random(10)
+        ]);
+        if($project)
+        {
+            return redirect()->route('project.draft', ['project' => $project]);
+        }
     }
 
     public function getUpdate(Project $project)
     {
-        //
+        return view('projects.store')->with('project', $project);
     }
 
-    public function storeUpdate(ProjectFormRequest $request, Project $project)
+    public function postUpdate(ProjectFormRequest $request, Project $project)
     {
-        //
+        $project->update([
+            'name' => $request->input('name'),
+            'short_description' => $request->input('short_description'),
+            'description' => $request->input('description'),
+            'link' => $request->input('link'),
+            'status' => $request->input('status')
+        ]);
+
+        return redirect()->route('project.manage');
     }
 
     public function delete(Project $project)
     {
-
+        $project->delete();
+        return redirect()->back();
     }
 }

@@ -11,22 +11,14 @@ class BladeServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        Blade::directive('role', function($role) {
-            return "<?php if (auth()->check() && auth()->user()->hasRole( {$role} )): ?>";
-        });
-        Blade::directive('endrole', function() {
-            return '<?php endif; ?>';
-        });
-        Blade::directive('can', function($permission) {
-            return "<?php if (auth()->check() && auth()->user()->hasPermissionTo( {$permission} )): ?>";
-        });
-        Blade::directive('endcan', function() {
-            return '<?php endif; ?>';
+        // Check if the auth User can do an action
+        Blade::if('can', function(String $permission) {
+            return auth()->check() && auth()->user()->hasPermissionTo($permission);
         });
 
-        // Check if the auth User is subscribed to a particular user
-        Blade::if('subscribed', function(User $user) {
-            return auth()->check() && auth()->user()->isSubscribed($user);
+        // Check if the auth User has this specific role
+        Blade::if('role', function(String $role) {
+            return auth()->check() && auth()->user()->hasRole($role);
         });
 
         // Check if the auth User has any of these role => array of role

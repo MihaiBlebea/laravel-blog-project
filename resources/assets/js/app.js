@@ -10,6 +10,7 @@ import { VueEditor } from 'vue2-editor';
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('vue-editor', VueEditor);
 Vue.component('vue-editor-wrapper', require('./components/VueEditorWrapper.vue'));
+Vue.component('file-upload', require('./components/FileUpload.vue'));
 
 
 const app = new Vue({

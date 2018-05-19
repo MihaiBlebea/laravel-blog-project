@@ -13658,19 +13658,11 @@ a:hover {
   opacity: 0.2;
 }
 
-.card-body {
-  padding: 1.25rem;
-}
-
 .bg {
   min-height: 150px;
 }
 
 @media (min-width: 576px) {
-  .card-body {
-    padding: 2.5rem;
-  }
-
   .bg {
     min-height: 250px;
   }
@@ -13719,5 +13711,28 @@ a:hover {
 .profile-image-wrapper.small {
   width: 64px;
   height: 64px;
+}
+
+.bg-img {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.bg-img {
+  height: 200px;
+}
+
+@media (min-width: 576px) {
+  .bg-img {
+    height: 300px;
+  }
+}
+
+@media (min-width: 768px) {
+  .bg-img {
+    height: 450px;
+  }
 }
 

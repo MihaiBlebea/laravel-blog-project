@@ -13,9 +13,10 @@ class CreateProjectsTable extends Migration
             $table->integer('user_id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->text('short_description');
-            $table->text('description');
+            $table->text('short_description')->nullable();
+            $table->text('description')->nullable();
             $table->string('link')->unique()->nullable();
+            $table->enum('status', ['published', 'draft'])->default('draft');
             $table->timestamps();
         });
     }

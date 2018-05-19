@@ -10,3 +10,37 @@
         height: 64px;
     }
 }
+
+.bg-img {
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+
+@include media-breakpoint-up(xs) {
+    .bg-img {
+        height: 200px;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .bg-img {
+        height: 300px;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .bg-img {
+        height: 450px;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    //
+}
+
+@include media-breakpoint-up(xl) {
+    //
+}

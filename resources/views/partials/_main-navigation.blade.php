@@ -12,7 +12,7 @@
             <ul class="navbar-nav mr-auto">
                 <li><a class="nav-link" href="{{ route('blog.index') }}">Blog</a></li>
                 <li><a class="nav-link" href="{{ route('users') }}">Developers</a></li>
-                <li><a class="nav-link" href="{{ route('users') }}">Projects</a></li>
+                <li><a class="nav-link" href="{{ route('projects.index') }}">Projects</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

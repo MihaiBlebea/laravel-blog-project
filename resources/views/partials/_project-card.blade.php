@@ -1,14 +1,14 @@
 <div class="card">
-    <div class="card-body p-4">
+    <div class="card-body">
         <h4>{{ $project->name }}</h4>
         <ul class="nav float-right">
-            @auth
+            @role('admin')
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('project.update', [ 'project' => $project->slug ]) }}">Update</a>
                 </li>
-            @endauth
+            @endif
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('project.get', [ 'project' => $project->slug ]) }}">See profile</a>
+                <a class="nav-link" href="{{ route('project.get', [ 'project' => $project->slug ]) }}">Open</a>
             </li>
         </ul>
     </div>

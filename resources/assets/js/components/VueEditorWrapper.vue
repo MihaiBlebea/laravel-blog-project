@@ -3,15 +3,15 @@
         <vue-editor v-model="content"></vue-editor>
         <transition enter-active-class="animated fadeInDown"
                     leave-active-class="animated fadeInUp">
-            <p v-if="notify" class="text-primary">Saved at {{ time() }}</p>
+            <p v-bind:class="{ invisible: !notify }" class="text-primary">Saved at {{ time() }}</p>
         </transition>
-        <input type="hidden" v-model="content" name="content">
+        <input type="hidden" v-model="content" :name="name">
     </div>
 </template>
 
 <script>
 export default {
-    props: ['init-content', 'draft-id'],
+    props: ['init-content', 'draft-id', 'api', 'name'],
     data()
     {
         return {
@@ -20,7 +20,7 @@ export default {
             historyContent: null,
             interval: null,
             intervalLoop: 0,
-            savePath: '/api/v1/upload/post',
+            savePath: this.api,
 
             notify: false
         }
@@ -32,10 +32,10 @@ export default {
             this.intervalLoop++;
             if(this.content !== this.historyContent)
             {
-                var payload = {
-                    content: this.content,
-                    draft_id: this.draft
-                }
+                var payload = {}
+                payload[this.name] = this.content;
+                payload['draft_id'] = this.draft;
+                    
                 axios.post(this.savePath, payload).then((result)=> {
                     this.updateHistory();
                     this.savePrompt();

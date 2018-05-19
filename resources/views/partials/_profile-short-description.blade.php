@@ -9,8 +9,8 @@
 <div class="row">
     <div class="col">
 
-        @include('partials._social-buttons');
-        
+        @include('partials._social-buttons')
+
     </div>
 </div>
 <hr>

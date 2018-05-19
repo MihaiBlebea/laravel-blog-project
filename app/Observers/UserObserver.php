@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use App\Models\Profile;
 
 class UserObserver
 {
@@ -11,10 +12,14 @@ class UserObserver
         $user->update([
             'slug' => strtolower($user->first_name) . '-' . strtolower($user->last_name) . '-' . $user->id
         ]);
+
+        Profile::create([
+            'user_id' => $user->id
+        ]);
     }
 
     public function deleting(User $user)
     {
-        //
+        $user->profile->delete();
     }
 }

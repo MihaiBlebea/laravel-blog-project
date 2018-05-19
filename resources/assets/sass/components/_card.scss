@@ -27,20 +27,12 @@
 
 
 @include media-breakpoint-up(xs) {
-    .card-body {
-        padding: 1.25rem;
-    }
-
     .bg {
         min-height: 150px;
     }
 }
 
 @include media-breakpoint-up(sm) {
-    .card-body {
-        padding: 2.5rem;
-    }
-
     .bg {
         min-height: 250px;
     }

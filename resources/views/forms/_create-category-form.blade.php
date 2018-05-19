@@ -30,9 +30,9 @@
 
 <div class="form-group">
     <label for="cover_image">Cover image:</label>
-    <div>
-        <input type="file" name="cover_image" id="cover_image">
-    </div>
+    <file-upload :name="'cover_image'"></file-upload>
 </div>
 
-<button type="submit" class="btn btn-outline-primary">Save</button>
+<div class="mt-5">
+    @include('partials._form-button', ['cta' => 'Save'])
+</div>

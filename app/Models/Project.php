@@ -13,14 +13,15 @@ class Project extends Model
         'slug',
         'short_description',
         'description',
-        'link'
+        'link',
+        'status'
     ];
 
     public function getRouteKeyName()
     {
         return 'slug';
     }
-    
+
     public function user()
     {
         return $this->belongsTo(User::class);

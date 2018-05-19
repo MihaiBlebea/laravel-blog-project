@@ -19,7 +19,8 @@ class ViewComposerServiceProvider extends ServiceProvider
             'admin.*',
             'post.*',
             'category.*',
-            'pages.index'
+            'pages.index',
+            'projects.store'
         ], \App\Http\ViewComposers\AdminSidebareMenuViewComposer::class);
 
         // Blog / Category / Post breadcrumbs

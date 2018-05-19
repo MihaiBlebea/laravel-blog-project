@@ -58,6 +58,13 @@ class AdminSidebareMenuViewComposer
                 'params' => [],
                 'roles'  => ['admin']
             ],
+            [
+                'name'   => 'projects',
+                'slug'   => 'admin/projects/manage',
+                'route'  => 'project.manage',
+                'params' => [],
+                'roles'  => ['admin', 'user']
+            ],
         ];
         $view->with([
             'sidebar_nav' => $menu,

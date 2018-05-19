@@ -8,8 +8,10 @@
             @include('partials._page-title', ['title' => $project->name])
 
             <div class="card">
-                <div class="card-body">
-                    {{ $project->description }}
+                <div class="card-body p-4 p-md-5">
+                    {{ $project->short_description }}
+                    <hr>
+                    {!! $project->description !!}
                 </div>
             </div>
         </div>

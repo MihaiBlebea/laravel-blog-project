@@ -22,25 +22,13 @@
     </p>
 </div>
 
-<!-- <div class="form-group">
-    <label for="content">Content:</label>
-    <textarea class="form-control"
-              name="content"
-              id="content"
-              rows="10">{{ $post->content or old('content') }}</textarea>
-
-    @if($errors->has('content'))
-        <span class="invalid-feedback">
-            <strong>{{ $errors->first('content') }}</strong>
-        </span>
-    @endif
-</div> -->
-
 <div class="form-group">
 
     <!-- Rich text editor -->
     <vue-editor-wrapper :draft-id="'{{ json_encode($post->id) }}'"
-                        :init-content="'{{ isset($post->content) ? $post->content : '' }}'">
+                        :init-content="'{{ isset($post->content) ? $post->content : '' }}'"
+                        :api="'/api/v1/upload/post'"
+                        :name="'content'">
     </vue-editor-wrapper>
     <!-- Rich text editor -->
 
@@ -75,12 +63,10 @@
 <div class="form-group">
     <label for="feature_image">Upload feature image:</label>
     <div>
-        <input type="file" name="feature_image" id="feature_image" onchange="readURL(this);">
+        <file-upload :name="'feature_image'"></file-upload>
     </div>
 </div>
 
-<!-- Upload image preview -->
-<div id="preview-image"></div>
-<!-- Upload image preview -->
-
-@include('partials._form-button', ['cta' => 'Save'])
+<div class="mt-5">
+    @include('partials._form-button', ['cta' => 'Save'])
+</div>
