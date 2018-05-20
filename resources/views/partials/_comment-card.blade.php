@@ -9,9 +9,12 @@
 
                 @if($comment->parent_id === null)
                     <div class="mt-2">
-                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Reply
-                        </a>
+
+                        @auth
+                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                Reply
+                            </a>
+                        @endauth
 
                         <div class="collapse mt-2" id="collapseExample">
                             <form action="{{ route('comment.store') }}" method="POST">

@@ -21,8 +21,9 @@ class BlogController extends Controller
     {
         $posts = $category->posts()->where('published', true)->paginate(10);
         return view('pages.blog.category')->with([
-            'posts'    => $posts,
-            'category' => $category
+            'posts'      => $posts,
+            'categories' => Category::all(),
+            'category'   => $category
         ]);
     }
 
@@ -46,6 +47,9 @@ class BlogController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
-        return view('pages.blog.category')->with('posts', $posts);
+        return view('pages.blog.category')->with([
+            'posts' => $posts,
+            'categories' => Category::all()
+        ]);
     }
 }

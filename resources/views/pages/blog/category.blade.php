@@ -10,7 +10,7 @@
 
                 @include('partials._page-title', ['title' => $category->name, 'subtitle' => 'Read all about ' . $category->name])
 
-                @include('partials._breadcrumbs')
+                @include('partials._nav-category')
 
             @elseif(isset($user))
 
@@ -19,6 +19,8 @@
             @else
 
                 @include('partials._page-title', ['title' => 'Posts', 'subtitle' => 'your dev library'])
+
+                @include('partials._nav-category')
 
             @endif
             <!-- Display different title based on if category or user models are set -->
