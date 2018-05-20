@@ -14,4 +14,6 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
     Route::post('/upload/profile', 'ApiController@autosaveProfile');
 
+    Route::get('/tracking', 'ApiController@getTrackingData');
+
 });

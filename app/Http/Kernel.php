@@ -61,5 +61,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'role' => \App\Http\Middleware\RoleMiddleware::class,
         'isVerified' => \Jrean\UserVerification\Middleware\IsVerified::class,
+        'track' => \App\Http\Middleware\TrackMiddleware::class,
     ];
 }

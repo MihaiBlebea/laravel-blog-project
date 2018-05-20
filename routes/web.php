@@ -22,7 +22,7 @@ Route::get('/blog/{category}', 'BlogController@category')->name('blog.category')
 Route::get('/blog/dev/{user}', 'BlogController@userPosts')->name('blog.user');
 
 // Display one specific post
-Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post');
+Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post')->middleware('track');
 
 // Display results for blog search (will have to change this)
 Route::post('/search', 'SearchController@search')->name('search');

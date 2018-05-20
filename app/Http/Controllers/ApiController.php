@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\{
     Post,
     Project,
-    Profile
+    Profile,
+    Track
 };
 
 
@@ -37,5 +38,19 @@ class ApiController extends Controller
         ]);
 
         return ($profile) ? 200 : 400;
+    }
+
+    // Tracking chart functions
+    public function getTrackingData(Request $request)
+    {
+        if($request->input('sort') == 'date')
+        {
+            $total = Track::total(Track::trackDate());
+        } else {
+            $total = Track::total(Track::trackPage());
+        }
+        return $total->sortBy(function($item, $key) {
+            return $key;
+        });
     }
 }

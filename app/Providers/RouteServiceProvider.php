@@ -50,6 +50,7 @@ class RouteServiceProvider extends ServiceProvider
            require base_path('routes/categories.php');
            require base_path('routes/social_share.php');
            require base_path('routes/projects.php');
+           require base_path('routes/tracks.php');
            require base_path('routes/pages.php');
        });
     }
