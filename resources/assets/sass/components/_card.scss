@@ -1,5 +1,5 @@
 .card {
-    box-shadow: 2px 2px $grey;
+    box-shadow: 1px 1px 3px $grey;
     border-radius: 0px;
     border: 0;
 }
@@ -8,17 +8,10 @@
     background-size: cover;
     background-position: center;
     transition: all 0.5s ease-in-out;
-}
 
-.card-title {
-    color: $white;
-    background-color: $primary;
-    padding: 10px;
-    width: fit-content;
-    position: absolute;
-    top: 50px;
-    text-shadow: 2px 2px $black;
-    transition: all 0.5s ease-in-out;
+    &.small {
+        min-height: 150px;
+    }
 }
 
 .bg:hover {

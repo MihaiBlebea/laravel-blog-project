@@ -3,7 +3,6 @@
 @section('content')
 
 @include('partials._social-buttons', ['position' => 'vertical'])
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 col-12">
@@ -21,11 +20,15 @@
                 <p class="card-text font-article">{!! $post->content !!}</p>
 
             </div>
-
-            @include('partials._comments')
-
         </div>
     </div>
 </div>
 
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-12">
+            @include('partials._comments')
+        </div>
+    </div>
+</div>
 @endsection
