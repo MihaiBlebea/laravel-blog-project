@@ -1,9 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+@include('partials._social-buttons', ['position' => 'vertical'])
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 col-12">
+
+            @include('partials._profile-short-description', ['user' => $post->author])
 
             <h1 class="mb-5 mt-5 text-center">{{ $post->title }}</h1>
 
@@ -12,15 +17,9 @@
             @include('partials._breadcrumbs')
 
             <div class="mb-5">
-                <div class="d-sm-block d-none">
-                    @hasProfile($post->author)
 
-                        @include('partials._profile-short-description', ['user' => $post->author])
+                <p class="card-text font-article">{!! $post->content !!}</p>
 
-                    @endif
-                </div>
-
-                <p class="card-text">{!! $post->content !!}</p>
             </div>
 
             @include('partials._comments')

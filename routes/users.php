@@ -29,6 +29,4 @@ Route::group(['prefix' => 'admin/users', 'as' => 'user.', 'middleware' => ['auth
     Route::get('/update', 'UserController@getUpdate')->name('update');
     Route::post('/update', 'UserController@postUpdate')->name('update');
 
-    // Get user's subscriptions, if no user is provided, then use the logged in user
-    Route::get('/subscriptions/{user?}', 'UserController@getSubscriptions')->name('subscriptions');
 });

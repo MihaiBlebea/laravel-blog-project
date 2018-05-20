@@ -13,9 +13,12 @@ class UserObserver
             'slug' => strtolower($user->first_name) . '-' . strtolower($user->last_name) . '-' . $user->id
         ]);
 
-        Profile::create([
-            'user_id' => $user->id
-        ]);
+        if(!$user->profile)
+        {
+            Profile::create([
+                'user_id' => $user->id
+            ]);
+        }
     }
 
     public function deleting(User $user)

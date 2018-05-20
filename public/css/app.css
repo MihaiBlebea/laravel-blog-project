@@ -13604,6 +13604,12 @@ body {
   background-color: #F5F2ED;
 }
 
+.vertical-social-btn {
+  position: fixed;
+  top: 30%;
+  left: 10vw;
+}
+
 h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
@@ -13624,6 +13630,30 @@ h4 {
 
 a:hover {
   text-decoration: none;
+}
+
+.bg {
+  min-height: 150px;
+}
+
+.font-article {
+  font-size: 16px;
+}
+
+@media (min-width: 576px) {
+  .bg {
+    min-height: 250px;
+  }
+
+  .font-article {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 768px) {
+  .bg {
+    min-height: 350px;
+  }
 }
 
 .card {
@@ -13718,6 +13748,10 @@ a:hover {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+}
+
+.profile-img {
+  width: 100%;
 }
 
 .bg-img {

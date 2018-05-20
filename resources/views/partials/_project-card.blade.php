@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-body">
-        <h4>{{ $project->name }}</h4>
+        <h5>{{ $project->name }}</h5>
         <ul class="nav float-right">
             @role('admin')
                 <li class="nav-item">

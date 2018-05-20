@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
             'verified'   => 1
         ],
         [
-            'role_id'    => 2,
+            'role_id'    => 5,
             'first_name' => 'Horia',
             'last_name'  => 'Blebea',
             'email'      => 'horia@gmail.com',
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
             'verified'   => 1
         ],
         [
-            'role_id'    => 3,
+            'role_id'    => 5,
             'first_name' => 'Cristina',
             'last_name'  => 'Aliman',
             'email'      => 'cristinaliman@gmail.com',

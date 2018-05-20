@@ -19,3 +19,35 @@ h4 {
 a:hover {
     text-decoration: none;
 }
+
+@include media-breakpoint-up(xs) {
+    .bg {
+        min-height: 150px;
+    }
+    .font-article {
+        font-size: 16px;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .bg {
+        min-height: 250px;
+    }
+    .font-article {
+        font-size: 18px;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .bg {
+        min-height: 350px;
+    }
+}
+
+@include media-breakpoint-up(lg) {
+    //
+}
+
+@include media-breakpoint-up(xl) {
+    //
+}

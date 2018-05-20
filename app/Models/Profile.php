@@ -18,4 +18,9 @@ class Profile extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public function except()
+    {
+        return substr(strip_tags($this->short_description), 0, 200);
+    }
 }
