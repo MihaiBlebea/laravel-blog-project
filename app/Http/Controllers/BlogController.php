@@ -19,7 +19,7 @@ class BlogController extends Controller
     // Display all posts from one category
     public function category(Category $category)
     {
-        $posts = $category->posts()->where('published', true)->paginate(10);
+        $posts = $category->posts()->where('status', 'published')->paginate(10);
         return view('pages.blog.category')->with([
             'posts'      => $posts,
             'categories' => Category::all(),
@@ -30,7 +30,7 @@ class BlogController extends Controller
     // Display all posts for a user
     public function userPosts(User $user)
     {
-        $posts = $user->posts()->where('published', true)->paginate(10);
+        $posts = $user->posts()->where('status', 'published')->paginate(10);
         return view('pages.blog.category')->with([
             'posts' => $posts,
             'user'  => $user
