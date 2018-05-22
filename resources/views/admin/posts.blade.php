@@ -51,7 +51,7 @@
                             <a href="{{ route('post.publish', ['post' => $post->slug]) }}">{{ ($post->published == true) ? 'Unpublish' : 'Publish' }}</a>
                         </td>
                         <td>
-                            <a class="text-danger" href="{{ route('post.publish', ['post' => $post->slug]) }}">Delete</a>
+                            <a class="text-danger" href="{{ route('post.delete', ['post' => $post->slug]) }}">Delete</a>
                         </td>
                     </tr>
                 @endforeach
