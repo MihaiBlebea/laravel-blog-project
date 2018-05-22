@@ -14,19 +14,37 @@ use Storage;
 class PostController extends Controller
 {
     // Get all user's post for admin panel
-    public function index(User $user = null)
+    public function index(Request $request, User $user = null)
     {
+        // Check if the user is set or not
+        // If user is set display user's posts if not, display all posts
+        // dd($request->all());
+        $response = [];
         if($user == null)
         {
-            $posts = Post::paginate(10);
-            $response = ['posts' => $posts];
+            $schema = Post::query();
         } else {
-            $posts = $user->posts()->paginate(10);
-            $response = [
-                'posts' => $posts,
-                'user'  => $user
-            ];
+            $schema = $user->posts();
+            $response['user'] = $user;
         }
+
+        if($request->input('category'))
+        {
+            $schema->where('category_id', $request->input('category'));
+            $response['category'] = Category::find($request->input('category'));
+        }
+
+        // Check if the status param is set
+        if($request->input('status') && $request->input('status') !== 'all')
+        {
+            $schema->where('status', $request->input('status'));
+            $response['status'] = $request->input('status');
+        }
+
+        $posts = $schema->paginate(10);
+        $response['posts'] = $posts;
+        $response['categories'] = Category::all();
+
         return view('admin.posts')->with($response);
     }
 
@@ -62,30 +80,6 @@ class PostController extends Controller
         return redirect()->route('post.draft', ['post' => $post->slug]);
     }
 
-    // Send the payload to create a post
-    // public function postStore(PostFormRequest $request)
-    // {
-    //     $path = Storage::disk('public_upload')->put('feature-images', $request->file('feature_image'));
-    //     if(!$path)
-    //     {
-    //         throw new \Exception("Could Not Save The Imaage In The Storage", 1);
-    //     };
-    //
-    //     $post = Post::create([
-    //         'category_id'   => $request->input('category_id'),
-    //         'user_id'       => Auth::user()->id,
-    //         'title'         => $request->input('title'),
-    //         'feature_image' => $path,
-    //         'content'       => $request->input('content'),
-    //         'published'     => ($request->input('publish_mode') == 'publish') ? true : false
-    //     ]);
-    //
-    //     if($post)
-    //     {
-    //         return redirect()->back();
-    //     }
-    // }
-
     // Get the post update form page
     public function getUpdate(Post $post)
     {
@@ -112,6 +106,7 @@ class PostController extends Controller
             // 'slug'          => str_slug($request->input('title'), '-'),
             'title'         => $request->input('title'),
             'feature_image' => ($path) ? $path : null,
+            'intro'         => $request->input('intro'),
             'content'       => $request->input('content'),
         ]);
 

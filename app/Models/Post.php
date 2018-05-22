@@ -18,6 +18,7 @@ class Post extends Model
         'user_id',
         'title',
         'feature_image',
+        'intro',
         'content',
         'published',
         'publish_date'

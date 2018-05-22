@@ -23,7 +23,23 @@
 </div>
 
 <div class="form-group">
+    <label for="intro">Intro:</label>
+    <!-- <textarea class="form-control"
+              name="intro"
+              id="intro"
+              rows="6">{{ $post->intro or old('intro') }}</textarea> -->
+    <textarea-counter content-input="'{{ isset($post->intro) ? json_encode($post->intro) : '' }}'"
+                      max="300"></textarea-counter>
 
+    @if($errors->has('intro'))
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('intro') }}</strong>
+        </span>
+    @endif
+</div>
+
+<div class="form-group">
+    <label for="intro">Main content:</label>
     <!-- Rich text editor -->
     <vue-editor-wrapper :draft-id="'{{ json_encode($post->id) }}'"
                         :init-content="'{{ isset($post->content) ? $post->content : '' }}'"
@@ -50,10 +66,10 @@
     </div>
     <div class="col">
 
-        <label for="publish_mode">Publish?:</label>
-        <select name="publish_mode" class="form-control" id="publish_mode">
-            <option value="save">Save</option>
-            <option value="publish">Publish</option>
+        <label for="status">Save or publish:</label>
+        <select name="status" class="form-control" id="status">
+            <option value="draft" selected>Save draft</option>
+            <option value="published">Publish</option>
         </select>
         <!-- <input type="datetime-local" class="form-control" id="publish_date"> -->
 

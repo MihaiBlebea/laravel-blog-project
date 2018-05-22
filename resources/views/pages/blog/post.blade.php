@@ -17,7 +17,15 @@
 
             <div class="mb-5">
 
+                <!-- include intro section -->
+                @if(isset($post->intro))
+                    <p class="card-text font-article"><strong>{{ $post->intro }}</strong></p>
+                @endif
+                <!-- include intro section -->
+
+                <!-- include main content section -->
                 <p class="card-text font-article">{!! $post->content !!}</p>
+                <!-- include main content section -->
 
             </div>
         </div>

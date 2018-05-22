@@ -15,9 +15,9 @@ class CreatePostsTable extends Migration
             $table->string('slug')->unique();
             $table->string('title')->nullable();
             $table->string('feature_image')->nullable();
+            $table->mediumText('intro')->nullable();
             $table->longText('content')->nullable();
-            $table->boolean('published')->default(false);
-            $table->timestamp('publish_at')->nullable();
+            $table->enum('status', ['published', 'draft'])->default('draft');
             $table->timestamps();
         });
     }
