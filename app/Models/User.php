@@ -12,9 +12,11 @@ use App\Models\{
     Post,
     Social,
     Search,
-    Profile
+    Profile,
+    Image
 };
 use Jrean\UserVerification\Traits\UserVerification;
+
 
 class User extends Authenticatable
 {
@@ -74,6 +76,11 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->hasMany(Project::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(Image::class);
     }
 
     // Custom methods

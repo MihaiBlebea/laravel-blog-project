@@ -1,6 +1,6 @@
 <div class="card">
     <a href="{{ route('blog.post', [ 'category' => $post->category->slug, 'post' => $post->slug ]) }}">
-        <div class="bg" style="background-image: url('{{ public_upload_path($post->feature_image) }}');"></div>
+        <div class="bg" style="background-image: url('');"></div>
         <!-- <h2 class="card-title">{{ $post->title }}</h2> -->
     </a>
     <div class="card-body">

@@ -11,7 +11,7 @@
                     'subtitle' => '...the solution is just 2 clicks away'
                 ])
 
-                <img style="width:100%;" src="{{ public_upload_path('designs\homepage-design.png') }}">
+                <img style="width:100%;" src="{{ asset('images/cover.png') }}">
             </div>
 
             <div class="row">

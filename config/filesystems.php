@@ -55,12 +55,6 @@ return [
             'visibility' => 'public',
         ],
 
-        // Stores file in /public folder
-        'public_upload' => [
-            'driver' => 'local',
-            'root'   => public_path() . '/uploads',
-        ],
-
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

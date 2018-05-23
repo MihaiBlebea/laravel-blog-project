@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoryFormRequest;
 use App\Models\Category;
 use Storage;
+use App\services\ImageService;
 
 class CategoryController extends Controller
 {
@@ -27,19 +28,20 @@ class CategoryController extends Controller
 
     public function postStore(CategoryFormRequest $request)
     {
-        if($request->file('cover_image'))
-        {
-            $path = Storage::disk('public_upload')->put('cover_image', $request->file('cover_image'));
-            if(!$path)
-            {
-                throw new \Exception('The cover image could not be saved to storage' , 1);
-            };
-        }
+        // if($request->file('cover_image'))
+        // {
+        //     $path = Storage::disk('public_upload')->put('cover_image', $request->file('cover_image'));
+        //     if(!$path)
+        //     {
+        //         throw new \Exception('The cover image could not be saved to storage' , 1);
+        //     };
+        // }
+        $image = ImageService::store($request->file('cover_image'));
 
         Category::create([
             'name'        => $request->input('name'),
             'description' => $request->input('description'),
-            'cover_image' => isset($path) ? $path : null,
+            'image_id'    => $image->id,
         ]);
 
         return redirect()->back();
@@ -52,19 +54,12 @@ class CategoryController extends Controller
 
     public function postUpdate(CategoryFormRequest $request, Category $category)
     {
-        if($request->file('cover_image'))
-        {
-            $path = Storage::disk('public_upload')->put('cover_image', $request->file('cover_image'));
-            if(!$path)
-            {
-                throw new \Exception('The cover image could not be saved to storage' , 1);
-            };
-        }
+        $image = ImageService::store($request->file('cover_image'));
 
         $category->update([
             'name'        => $request->input('name'),
             'description' => $request->input('description'),
-            'cover_image' => isset($path) ? $path : null,
+            'image_id'    => $image->id,
         ]);
 
         return redirect()->route('category.index');

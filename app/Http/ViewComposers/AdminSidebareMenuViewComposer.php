@@ -52,6 +52,13 @@ class AdminSidebareMenuViewComposer
                 'roles'  => ['admin']
             ],
             [
+                'name'   => 'images',
+                'slug'   => 'admin/image/manage',
+                'route'  => 'image.manage',
+                'params' => [],
+                'roles'  => ['admin', 'user']
+            ],
+            [
                 'name'   => 'categories',
                 'slug'   => 'categories',
                 'route'  => 'category.manage',
