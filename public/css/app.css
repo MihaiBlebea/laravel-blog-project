@@ -8462,8 +8462,8 @@ button.bg-dark:focus {
 }
 
 .shadow {
-  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  -webkit-box-shadow: 1px 1px 3px #3b3b3b !important;
+          box-shadow: 1px 1px 3px #3b3b3b !important;
 }
 
 .shadow-lg {
@@ -13743,6 +13743,13 @@ a:hover {
 
 .profile-img {
   width: 100%;
+}
+
+.selected-img {
+  border: 3px solid #00b1b3;
+  -webkit-box-shadow: 1px 1px 3px #3b3b3b;
+          box-shadow: 1px 1px 3px #3b3b3b;
+  opacity: 0.5;
 }
 
 .bg-img {

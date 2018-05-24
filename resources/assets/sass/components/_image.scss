@@ -22,6 +22,12 @@
     width: 100%;
 }
 
+.selected-img {
+    border: 3px solid $primary;
+    box-shadow: $box_shadow;
+    opacity: 0.5;
+}
+
 
 @include media-breakpoint-up(xs) {
     .bg-img {

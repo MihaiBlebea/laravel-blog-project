@@ -16,4 +16,8 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
     Route::get('/tracking', 'ApiController@getTrackingData');
 
+    Route::get('/images/{user}', 'ApiController@getUserImages');
+
+    Route::post('/images/{user}', 'ApiController@storeUserImages');
+
 });

@@ -7,8 +7,10 @@ use App\Models\{
     Post,
     Project,
     Profile,
-    Track
+    Track,
+    User
 };
+use App\Services\ImageService;
 
 
 class ApiController extends Controller
@@ -52,5 +54,20 @@ class ApiController extends Controller
         return $total->sortBy(function($item, $key) {
             return $key;
         });
+    }
+
+    public function getUserImages(User $user)
+    {
+        return $images = $user->images;
+    }
+
+    public function storeUserImages(Request $request, User $user)
+    {
+        $image = ImageService::store($request->file('image-upload'), $user);
+        if($image)
+        {
+            return 200;
+        }
+        return 404;
     }
 }
