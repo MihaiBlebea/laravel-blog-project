@@ -23,7 +23,6 @@
 }
 
 .selected-img {
-    border: 3px solid $primary;
     box-shadow: $box_shadow;
     opacity: 0.5;
 }
@@ -32,18 +31,30 @@
 @include media-breakpoint-up(xs) {
     .bg-img {
         height: 200px;
+
+        &.small {
+            height: 80px;
+        }
     }
 }
 
 @include media-breakpoint-up(sm) {
     .bg-img {
         height: 300px;
+
+        &.small {
+            height: 100px;
+        }
     }
 }
 
 @include media-breakpoint-up(md) {
     .bg-img {
         height: 450px;
+
+        &.small {
+            height: 150px;
+        }
     }
 }
 

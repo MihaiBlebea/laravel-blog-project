@@ -8,7 +8,8 @@ use App\Models\{
     Project,
     Profile,
     Track,
-    User
+    User,
+    Image
 };
 use App\Services\ImageService;
 
@@ -69,5 +70,11 @@ class ApiController extends Controller
             return 200;
         }
         return 404;
+    }
+
+    public function delete(Image $image)
+    {
+        $image->delete();
+        return 200;
     }
 }

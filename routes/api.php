@@ -20,4 +20,6 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
     Route::post('/images/{user}', 'ApiController@storeUserImages');
 
+    Route::get('/image/delete/{image}', 'ApiController@delete');
+
 });

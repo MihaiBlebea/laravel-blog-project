@@ -54,6 +54,7 @@ class CategoryController extends Controller
 
     public function postUpdate(CategoryFormRequest $request, Category $category)
     {
+        dd($request->all());
         $image = ImageService::store($request->file('cover_image'));
 
         $category->update([

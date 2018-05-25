@@ -30,9 +30,10 @@
 
 <div class="form-group">
     <label for="cover_image">Cover image:</label>
-    
-    <image-modal :name="'cover_image'"
-                 :user="'{{ auth()->user()->slug }}'">
+
+    <image-modal multiple-img="false"
+                 name="cover_image"
+                 user="{{ auth()->user()->slug }}">
     </image-modal>
     <!-- <file-upload :name="'cover_image'"
                  :user="'{{ auth()->user()->slug }}'"></file-upload> -->

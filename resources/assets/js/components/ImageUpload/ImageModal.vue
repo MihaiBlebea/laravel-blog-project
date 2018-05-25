@@ -1,15 +1,16 @@
 <template>
     <div>
         <div v-if="selectedImage !== null" class="row">
-            <div class="col-md-4">
+            <div v-for="(image, index) in chosenImage" class="col-md-4 mb-2">
                 <img class="img-thumbnail"
-                     :src="path(selectedImage)"
-                     v-on:click="removeImage()">
+                     v-if="image !== null"
+                     :src="path(image)"
+                     v-on:click="removeImage(index)">
+
+                <input type="hidden" :name="name + ((multiple == true) ? '[]' : '')" v-model="image.id">
             </div>
-
-            <input type="hidden" name="image" v-model="selectedImage.id">
-
         </div>
+
         <button type="button"
                 class="btn btn-outline-secondary mt-3"
                 data-toggle="modal"
@@ -23,24 +24,43 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div class="row">
-                            <div v-if="imageList !== null"
+                            <div v-if="imageList.length > 0"
                                  v-for="(image, index) in imageList"
                                  :key="index"
                                  class="col-md-4">
 
-                                <img :src="path(image)"
-                                     v-on:click="selectImage(index)"
-                                     style="width:100%;"
-                                     class="mb-3"
-                                     v-bind:class="{ 'selected-img': isSelected(image) }">
+                                <image-card v-on:delete="onImageDelete(image.id)">
+                                    <div v-bind:style="{ 'background-image': 'url(' + path(image) + ')' }"
+                                         class="bg-img small"
+                                         style="cursor:pointer;"
+                                         v-on:click="selectImage(index)"
+                                         v-bind:class="{ 'selected-img': isSelected(image) }"></div>
+                                </image-card>
+
+                            </div>
+
+                            <div v-if="imageList.length == 0"
+                                 style="min-height: 30vh;"
+                                 class="col-12 d-flex align-items-center justify-content-center">
+                                <h4 class="text-muted">Please upload an image</h4>
                             </div>
                         </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <image-upload :user="user" v-on:image-uploaded="onUploadImage()"></image-upload>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                    <div class="modal-footer justify-content-between">
+
+                        <image-upload :user="user"
+                                      v-on:image-uploaded="onUploadImage()"></image-upload>
+                        <div class="col-md-6 p-0">
+                        <button type="button"
+                                v-on:click="removeImage()"
+                                class="btn btn-secondary float-right"
+                                data-dismiss="modal">Close</button>
+                        <button type="button"
+                                v-on:click="chooseImage()"
+                                class="btn btn-primary float-right mr-2"
+                                data-dismiss="modal">Select</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,12 +71,14 @@
 
 <script>
 export default {
-    props: ['user'],
+    props: ['user', 'name', 'multiple-img'],
     data: function()
     {
         return {
-            imageList: null,
-            selectedImage: null
+            multiple: (this.multipleImg == 'true') ? true : false,
+            imageList: [],
+            selectedImage: [],
+            chosenImage: [],
         }
     },
     methods:
@@ -75,11 +97,37 @@ export default {
         },
         selectImage: function(index)
         {
-            this.selectedImage = this.imageList[index];
+            if(this.isSelected(this.imageList[index]) == false)
+            {
+                if(!this.multiple && this.selectedImage.length == 1)
+                {
+                    // Do nothing
+                } else {
+                    this.selectedImage.push(this.imageList[index]);
+                }
+            } else {
+                var position = this.selectedImage.indexOf(this.imageList[index])
+                this.selectedImage.splice(position, 1);
+            }
         },
-        removeImage: function()
+        removeImage: function(index)
         {
-            this.selectedImage = null
+            this.selectedImage.splice(index, 1)
+        },
+        chooseImage: function()
+        {
+            this.chosenImage = this.selectedImage
+        },
+        onImageDelete: function(id)
+        {
+            axios.get(this.api + 'image/delete/' + id).then((result)=> {
+                if(result.data == 200)
+                {
+                    this.getImages();
+                }
+            }).catch((err)=> {
+                console.log(err)
+            })
         },
         onUploadImage: function()
         {
@@ -87,7 +135,10 @@ export default {
         },
         isSelected: function(image)
         {
-            return (this.selectedImage !== null && this.selectedImage.name == image.name) ? true : false
+            var names = this.selectedImage.map((item)=> {
+               return item.name;
+            });
+            return (names.includes(image.name)) ? true : false
         }
     },
     mounted()

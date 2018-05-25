@@ -13656,6 +13656,10 @@ a:hover {
   }
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .card {
   -webkit-box-shadow: 1px 1px 3px #3b3b3b;
           box-shadow: 1px 1px 3px #3b3b3b;
@@ -13746,7 +13750,6 @@ a:hover {
 }
 
 .selected-img {
-  border: 3px solid #00b1b3;
   -webkit-box-shadow: 1px 1px 3px #3b3b3b;
           box-shadow: 1px 1px 3px #3b3b3b;
   opacity: 0.5;
@@ -13756,15 +13759,27 @@ a:hover {
   height: 200px;
 }
 
+.bg-img.small {
+  height: 80px;
+}
+
 @media (min-width: 576px) {
   .bg-img {
     height: 300px;
+  }
+
+  .bg-img.small {
+    height: 100px;
   }
 }
 
 @media (min-width: 768px) {
   .bg-img {
     height: 450px;
+  }
+
+  .bg-img.small {
+    height: 150px;
   }
 }
 

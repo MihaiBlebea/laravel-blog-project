@@ -15,6 +15,7 @@ Vue.component('textarea-counter', require('./components/TextareaCounter.vue'));
 
 Vue.component('image-modal', require('./components/ImageUpload/ImageModal.vue'));
 Vue.component('image-upload', require('./components/ImageUpload/ImageUpload.vue'));
+Vue.component('image-card', require('./components/ImageUpload/ImageCard.vue'));
 
 // Setup global variables
 Vue.prototype.api = '/api/v1/';
