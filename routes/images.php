@@ -10,4 +10,8 @@ Route::group([
 
     Route::get('/image/{image}', 'ImageController@getImage')->name('get');
 
+    Route::post('/image/upload', 'ImageController@upload')->name('upload');
+
+    Route::get('/image/delete/{image}', 'ImageController@delete')->name('delete');
+
 });

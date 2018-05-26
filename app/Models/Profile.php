@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
+use App\Models\{
+    User,
+    Image
+};
 
 class Profile extends Model
 {
@@ -11,12 +14,17 @@ class Profile extends Model
         'user_id',
         'short_description',
         'description',
-        'profile_image'
+        'image_id'
     ];
 
     public function user()
     {
         return $this->hasOne(User::class);
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
     }
 
     public function except()

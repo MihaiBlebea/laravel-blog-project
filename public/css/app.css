@@ -13656,10 +13656,6 @@ a:hover {
   }
 }
 
-.pointer {
-  cursor: pointer;
-}
-
 .card {
   -webkit-box-shadow: 1px 1px 3px #3b3b3b;
           box-shadow: 1px 1px 3px #3b3b3b;
@@ -13738,6 +13734,19 @@ a:hover {
   height: 64px;
 }
 
+img.profile-img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+img.profile-img.large {
+  width: 400px;
+  height: 400px;
+}
+
 .bg-img {
   width: 100%;
   background-repeat: no-repeat;
@@ -13781,5 +13790,9 @@ a:hover {
   .bg-img.small {
     height: 150px;
   }
+}
+
+.pointer {
+  cursor: pointer;
 }
 

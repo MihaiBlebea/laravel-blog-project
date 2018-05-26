@@ -27,12 +27,12 @@
                             <div v-if="imageList.length > 0"
                                  v-for="(image, index) in imageList"
                                  :key="index"
-                                 class="col-md-4">
+                                 class="col-md-4 col-12">
 
-                                <image-card v-on:delete="onImageDelete(image.id)">
+                                <image-card v-on:delete="onImageDelete(image.id)"
+                                            :image="image">
                                     <div v-bind:style="{ 'background-image': 'url(' + path(image) + ')' }"
-                                         class="bg-img small"
-                                         style="cursor:pointer;"
+                                         class="bg-img small pointer"
                                          v-on:click="selectImage(index)"
                                          v-bind:class="{ 'selected-img': isSelected(image) }"></div>
                                 </image-card>
@@ -71,11 +71,12 @@
 
 <script>
 export default {
-    props: ['user', 'name', 'multiple-img'],
+    props: ['user', 'name', 'default-image', 'multiple-img'],
     data: function()
     {
         return {
             multiple: (this.multipleImg == 'true') ? true : false,
+            image: (this.defaultImage !== '') ? JSON.parse(this.defaultImage) : null,
             imageList: [],
             selectedImage: [],
             chosenImage: [],
@@ -93,7 +94,7 @@ export default {
         },
         path: function(image)
         {
-            return '/storage/' + image.path;
+            return '/' + image.path;
         },
         selectImage: function(index)
         {
@@ -101,10 +102,10 @@ export default {
             {
                 if(!this.multiple && this.selectedImage.length == 1)
                 {
-                    // Do nothing
-                } else {
-                    this.selectedImage.push(this.imageList[index]);
+                    this.selectedImage = [];
                 }
+                this.selectedImage.push(this.imageList[index]);
+
             } else {
                 var position = this.selectedImage.indexOf(this.imageList[index])
                 this.selectedImage.splice(position, 1);
@@ -144,6 +145,12 @@ export default {
     mounted()
     {
         this.getImages();
+
+        if(this.image !== null)
+        {
+            this.chosenImage.push(this.image)
+            this.selectedImage.push(this.image)
+        }
     }
 }
 </script>

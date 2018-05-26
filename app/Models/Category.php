@@ -14,7 +14,7 @@ class Category extends Model
         'slug',
         'name',
         'description',
-        'cover_image'
+        'image_id'
     ];
 
     public function getRouteKeyName()

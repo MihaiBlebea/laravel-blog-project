@@ -1,8 +1,7 @@
 <div class="card">
     <div class="card-body">
         <div class="media">
-            <div class="mini-featured-image mb-2 mr-3" style="background-image: url('{{ public_upload_path($comment->author->profile_image) }}');"></div>
-            <!-- <img class="mr-3 comment-user-image" src="{{ public_upload_path($comment->author->profile_image) }}" alt="profile image"> -->
+            <img class="profile-img mr-3" src="{{ asset($user->profile->image->path ?? 'images/profile-placeholder.jpg') }}">
             <div class="media-body">
                 <h5 class="mt-0">{{ $comment->author->first_name }} {{ $comment->author->last_name }} says:</h5>
                 {{ $comment->content }}

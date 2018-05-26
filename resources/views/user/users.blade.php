@@ -9,7 +9,7 @@
 
             @foreach($users as $user)
                 <div class="mb-3 animated fadeIn delay-1">
-                    @include('partials._user-card')
+                    @include('partials.cards._user-card')
                 </div>
             @endforeach
 

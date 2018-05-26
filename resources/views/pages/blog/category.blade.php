@@ -10,7 +10,7 @@
 
                 @include('partials._page-title', ['title' => $category->name, 'subtitle' => 'Read all about ' . $category->name])
 
-                @include('partials._nav-category')
+                @include('partials.navigations._category-nav')
 
             @elseif(isset($user))
 
@@ -20,7 +20,7 @@
 
                 @include('partials._page-title', ['title' => 'Posts', 'subtitle' => 'your dev library'])
 
-                @include('partials._nav-category')
+                @include('partials.navigations._category-nav')
 
             @endif
             <!-- Display different title based on if category or user models are set -->
@@ -30,14 +30,14 @@
                 @foreach($posts as $post)
 
                     <div class="mb-4 animated fadeIn delay-1">
-                        @include('partials._post-card')
+                        @include('partials.cards._post-card')
                     </div>
 
                 @endforeach
 
             @else
 
-                @include('partials._notification-card', [
+                @include('partials.cards._notification-card', [
                     'title' => 'Sorry!',
                     'content' => 'There are no published posts in this category, yet. Come back later!'
                 ])

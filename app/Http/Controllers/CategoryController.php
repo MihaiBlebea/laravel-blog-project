@@ -28,20 +28,12 @@ class CategoryController extends Controller
 
     public function postStore(CategoryFormRequest $request)
     {
-        // if($request->file('cover_image'))
-        // {
-        //     $path = Storage::disk('public_upload')->put('cover_image', $request->file('cover_image'));
-        //     if(!$path)
-        //     {
-        //         throw new \Exception('The cover image could not be saved to storage' , 1);
-        //     };
-        // }
-        $image = ImageService::store($request->file('cover_image'));
+        // $image = ImageService::store($request->file('cover_image'));
 
         Category::create([
             'name'        => $request->input('name'),
             'description' => $request->input('description'),
-            'image_id'    => $image->id,
+            'image_id'    => $request->input('cover_image'),
         ]);
 
         return redirect()->back();
@@ -54,13 +46,10 @@ class CategoryController extends Controller
 
     public function postUpdate(CategoryFormRequest $request, Category $category)
     {
-        dd($request->all());
-        $image = ImageService::store($request->file('cover_image'));
-
         $category->update([
             'name'        => $request->input('name'),
             'description' => $request->input('description'),
-            'image_id'    => $image->id,
+            'image_id'    => $request->input('cover_image'),
         ]);
 
         return redirect()->route('category.index');

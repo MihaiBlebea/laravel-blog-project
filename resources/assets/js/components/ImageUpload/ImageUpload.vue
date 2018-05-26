@@ -2,7 +2,7 @@
     <div>
         <!-- <input class="mb-3" :name="name" type="file" @change="onFileChanged"> -->
         <label class="btn btn-primary mb-0">
-            Browse <input type="file" hidden @change="onFileChanged">
+            Upload <input type="file" hidden @change="onFileChanged">
         </label>
     </div>
 </template>

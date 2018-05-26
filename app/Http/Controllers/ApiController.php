@@ -16,65 +16,44 @@ use App\Services\ImageService;
 
 class ApiController extends Controller
 {
-    public function autosavePost(Request $request)
-    {
-        $post = Post::find($request->input('draft_id'))->update([
-            'content' => $request->input('content')
-        ]);
-
-        return ($post) ? 200 : 400;
-    }
-
-    public function autosaveProject(Request $request)
-    {
-        $project = Project::find($request->input('draft_id'))->update([
-            'description' => $request->input('description')
-        ]);
-
-        return ($project) ? 200 : 400;
-    }
-
-    public function autosaveProfile(Request $request)
-    {
-        $profile = Profile::find($request->input('draft_id'))->update([
-            'description' => $request->input('description')
-        ]);
-
-        return ($profile) ? 200 : 400;
-    }
+    // public function autosavePost(Request $request)
+    // {
+    //     $post = Post::find($request->input('draft_id'))->update([
+    //         'content' => $request->input('content')
+    //     ]);
+    //
+    //     return ($post) ? 200 : 400;
+    // }
+    //
+    // public function autosaveProject(Request $request)
+    // {
+    //     $project = Project::find($request->input('draft_id'))->update([
+    //         'description' => $request->input('description')
+    //     ]);
+    //
+    //     return ($project) ? 200 : 400;
+    // }
+    //
+    // public function autosaveProfile(Request $request)
+    // {
+    //     $profile = Profile::find($request->input('draft_id'))->update([
+    //         'description' => $request->input('description')
+    //     ]);
+    //
+    //     return ($profile) ? 200 : 400;
+    // }
 
     // Tracking chart functions
-    public function getTrackingData(Request $request)
-    {
-        if($request->input('sort') == 'date')
-        {
-            $total = Track::total(Track::trackDate());
-        } else {
-            $total = Track::total(Track::trackPage());
-        }
-        return $total->sortBy(function($item, $key) {
-            return $key;
-        });
-    }
-
-    public function getUserImages(User $user)
-    {
-        return $images = $user->images;
-    }
-
-    public function storeUserImages(Request $request, User $user)
-    {
-        $image = ImageService::store($request->file('image-upload'), $user);
-        if($image)
-        {
-            return 200;
-        }
-        return 404;
-    }
-
-    public function delete(Image $image)
-    {
-        $image->delete();
-        return 200;
-    }
+    // public function getTrackingData(Request $request)
+    // {
+    //     if($request->input('sort') == 'date')
+    //     {
+    //         $total = Track::total(Track::trackDate());
+    //     } else {
+    //         $total = Track::total(Track::trackPage());
+    //     }
+    //     return $total->sortBy(function($item, $key) {
+    //         return $key;
+    //     });
+    // }
 }

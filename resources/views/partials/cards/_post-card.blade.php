@@ -1,7 +1,6 @@
 <div class="card">
     <a href="{{ route('blog.post', [ 'category' => $post->category->slug, 'post' => $post->slug ]) }}">
-        <div class="bg" style="background-image: url('');"></div>
-        <!-- <h2 class="card-title">{{ $post->title }}</h2> -->
+        <img style="max-width:100%" src="{{ asset($post->image->path ?? 'images/post-placeholder.png') }}">
     </a>
     <div class="card-body">
         <h2 class="card-title">{{ $post->title }}</h2>

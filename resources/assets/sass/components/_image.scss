@@ -11,6 +11,18 @@
     }
 }
 
+img.profile-img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+    &.large {
+        width: 400px;
+        height: 400px;
+    }
+}
+
 .bg-img {
     width: 100%;
     background-repeat: no-repeat;

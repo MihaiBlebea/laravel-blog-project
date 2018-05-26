@@ -44,7 +44,7 @@ class ImageService implements ImageServiceInterface
         $image = Image::create([
             'user_id' => auth()->user()->id ?? $user->id,
             'name' => self::$file_name,
-            'path' => $path
+            'path' => 'storage/' . $path
         ]);
         return $image;
     }

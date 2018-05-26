@@ -1,8 +1,9 @@
 <div class="card">
     <div class="card-body">
         <div class="media">
-            <div class="mini-featured-image mr-3"
-                 style="background-image: url('{{ public_upload_path( isset($user->profile) ? $user->profile->profile_image : null) }}');"></div>
+
+            <img class="profile-img mr-3" src="{{ asset($user->profile->image->path ?? 'images/profile-placeholder.jpg') }}">
+
             <div class="media-body">
                 <h5 class="mt-0">{{ $user->first_name }} {{ $user->last_name }}</h5>
                 <p>{{ $user->profile->short_description }}</p>

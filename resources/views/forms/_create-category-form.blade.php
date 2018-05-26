@@ -32,11 +32,11 @@
     <label for="cover_image">Cover image:</label>
 
     <image-modal multiple-img="false"
+                 default-image="{{ $category->image ?? '' }}"
                  name="cover_image"
                  user="{{ auth()->user()->slug }}">
     </image-modal>
-    <!-- <file-upload :name="'cover_image'"
-                 :user="'{{ auth()->user()->slug }}'"></file-upload> -->
+
 </div>
 
 <div class="mt-5">

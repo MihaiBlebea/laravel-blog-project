@@ -6,15 +6,13 @@
         <div class="col-md-8">
 
             @include('partials._page-title', [
-            'title'    => $user->first_name . ' ' . $user->last_name,
-            'subtitle' => $user->email
+                'title'    => $user->first_name . ' ' . $user->last_name,
+                'subtitle' => $user->email
             ])
 
             <div class="row">
-                <div class="col-md-4">
-                    <div class="profile-image-wrapper mb-2 mr-3" style="background-image: url('{{ public_upload_path($user->profile->profile_image) }}');"></div>
-                </div>
-                <div class="col-md-8">
+                <img class="profile-img mr-3" src="{{ asset($user->profile->image->path ?? 'images/profile-placeholder.jpg') }}">
+                <div class="col">
                     <strong>{{ $user->profile->short_description }}</strong>
                 </div>
             </div>
@@ -25,25 +23,57 @@
                     {!! $user->profile->description !!}
                 </div>
             </div>
-            <hr class="mb-4">
 
-            <h3>More information...</h3>
+            <!-- Content section -->
+            <h2 class="text-center mb-5 mt-5">Checkout my awesome posts</h2>
             <div class="row">
-                <div class="col-md-12">
-                    <p>Email: {{ $user->email }}</p>
+                <div class="col">
+                    @foreach($posts as $post)
+                        <div class="mb-3">
+                            @include('partials.cards._mini-post-card')
+                        </div>
+                    @endforeach
+
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col">
+                            {{ $posts->links() }}
+                        </div>
+                        <div class="col">
+                            <a href="{{ route('projects.index', ['user' => $user->slug]) }}">
+                                <p class="text-center float-right text-primary">Checkout all my posts</p>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            <!-- Content section -->
 
-    <div>
-        <h3>Read my posts...</h3>
-        <div class="row">
-            @foreach($user->posts as $post)
-                <div class="col-md-4">
-                    @include('partials._post-card')
+            <!-- Projects section -->
+            <h2 class="text-center mb-5 mt-5">Some of my greatest projects</h2>
+            <div class="row">
+                <div class="col">
+                    @foreach($projects as $lang => $items)
+                        <h4>{{ $lang }}</h4>
+                        <hr>
+                        <div class="mb-5">
+                            @foreach($items as $index => $project)
+                                <a href="{{ route('project.get', ['project' => $project->slug ]) }}">
+                                    <p>
+                                        <strong>{{ $index + 1 }}. {{ $project->name }}</strong>
+                                        <span class="float-right">Read more</span>
+                                    </p>
+                                </a>
+                            @endforeach
+                        </div>
+                    @endforeach
                 </div>
-            @endforeach
+            </div>
+
+            <!-- Contact section -->
+            <h2 class="text-center mb-5 mt-5">Contact</h2>
+
+            <!-- Contact section -->
+
         </div>
     </div>
 
