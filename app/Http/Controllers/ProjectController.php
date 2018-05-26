@@ -76,12 +76,18 @@ class ProjectController extends Controller
     public function postUpdate(ProjectFormRequest $request, Project $project)
     {
         $project->update([
-            'name' => $request->input('name'),
+            'name'              => $request->input('name'),
             'short_description' => $request->input('short_description'),
-            'description' => $request->input('description'),
-            'link' => $request->input('link'),
-            'status' => $request->input('status')
+            'description'       => $request->input('description'),
+            'link'              => $request->input('link'),
+            'language'          => $request->input('language'),
+            'status'            => $request->input('status')
         ]);
+
+        foreach($request->input('images') as $image)
+        {
+            $project->images()->attach($image);
+        }
 
         return redirect()->route('project.manage');
     }

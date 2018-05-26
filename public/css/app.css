@@ -13466,6 +13466,11 @@ a.text-dark:focus {
   clip: auto;
 }
 
+.delay-1:nth-child(0) {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s;
+}
+
 .delay-1:nth-child(1) {
   -webkit-animation-delay: 0.25s;
           animation-delay: 0.25s;

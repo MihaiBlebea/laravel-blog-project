@@ -7,7 +7,8 @@ use App\Models\{
     User,
     Category,
     Post,
-    Profile
+    Profile,
+    Projects
 };
 
 
@@ -37,6 +38,11 @@ class Image extends Model
     public function profile()
     {
         return $this->hasOne(Profile::class, 'image_id');
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_images')->withTimestamps();
     }
 
 }

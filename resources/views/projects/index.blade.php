@@ -9,7 +9,7 @@
 
             @foreach($projects as $project)
                 <div class="mb-3 animated fadeIn delay-1">
-                    @include('partials._project-card', ['project' => $project])
+                    @include('partials.cards._project-card', ['project' => $project])
                 </div>
             @endforeach
 
