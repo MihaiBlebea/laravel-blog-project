@@ -24,10 +24,7 @@
 
 <div class="form-group">
     <label for="intro">Intro:</label>
-    <!-- <textarea class="form-control"
-              name="intro"
-              id="intro"
-              rows="6">{{ $post->intro or old('intro') }}</textarea> -->
+
     <textarea-counter content-input="'{{ isset($post->intro) ? json_encode($post->intro) : '' }}'"
                       max="300"></textarea-counter>
 
@@ -41,10 +38,10 @@
 <div class="form-group">
     <label for="intro">Main content:</label>
     <!-- Rich text editor -->
-    <vue-editor-wrapper :draft-id="'{{ json_encode($post->id) }}'"
-                        :init-content="'{{ isset($post->content) ? $post->content : '' }}'"
-                        :api="'/api/v1/upload/post'"
-                        :name="'content'">
+    <vue-editor-wrapper draft-id="{{ json_encode($post->id) }}"
+                        init-content="{{ isset($post->content) ? $post->content : '' }}"
+                        api="/api/v1/upload/post"
+                        name="content">
     </vue-editor-wrapper>
     <!-- Rich text editor -->
 
@@ -57,8 +54,7 @@
         <select name="category_id" class="form-control" id="category">
             @foreach($categories as $category)
 
-                <option value="{{ $category->id }}"
-                        {{ (isset($post->category) && $post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                <option value="{{ $category->id }}" {{ (isset($post->category) && $post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
 
             @endforeach
         </select>
@@ -71,16 +67,19 @@
             <option value="draft" selected>Save draft</option>
             <option value="published">Publish</option>
         </select>
-        <!-- <input type="datetime-local" class="form-control" id="publish_date"> -->
 
     </div>
 </div>
 
 <div class="form-group">
     <label for="feature_image">Upload feature image:</label>
-    <div>
-        <file-upload :name="'feature_image'"></file-upload>
-    </div>
+
+    <image-modal multiple-img="false"
+                 default-image="{{ $post->image ?? '' }}"
+                 name="feature_image"
+                 user="{{ auth()->user()->slug }}">
+    </image-modal>
+
 </div>
 
 <div class="mt-5">

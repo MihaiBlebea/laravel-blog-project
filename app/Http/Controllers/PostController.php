@@ -92,22 +92,12 @@ class PostController extends Controller
     // Send the payload to upload a post
     public function postUpdate(PostFormRequest $request, Post $post)
     {
-        if($request->file('feature_image'))
-        {
-            $path = Storage::disk('public_upload')->put('feature-images', $request->file('feature_image'));
-            if(!$path)
-            {
-                throw new \Exception("Could Not Save The Imaage In The Storage", 1);
-            };
-        }
-
         $post->update([
-            'category_id'   => $request->input('category_id'),
-            // 'slug'          => str_slug($request->input('title'), '-'),
-            'title'         => $request->input('title'),
-            'feature_image' => ($path) ? $path : null,
-            'intro'         => $request->input('intro'),
-            'content'       => $request->input('content'),
+            'category_id' => $request->input('category_id'),
+            'title'       => $request->input('title'),
+            'image_id'    => $request->input('feature_image'),
+            'intro'       => $request->input('intro'),
+            'content'     => $request->input('content'),
         ]);
 
         return redirect()->route('post.index', ['user' => auth()->user()->slug]);
@@ -121,5 +111,7 @@ class PostController extends Controller
             $comment->delete();
         }
         $post->delete();
+
+        return redirect()->back();
     }
 }

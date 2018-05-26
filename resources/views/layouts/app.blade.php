@@ -25,7 +25,7 @@
 <body>
     <div id="app">
 
-        @include('partials._main-navigation')
+        @include('partials.navigations._main-nav')
 
         <main class="py-4">
 

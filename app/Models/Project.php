@@ -13,6 +13,7 @@ class Project extends Model
         'slug',
         'short_description',
         'description',
+        'language',
         'link',
         'status'
     ];

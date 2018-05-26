@@ -24,7 +24,11 @@ class UserController extends Controller
         {
             $user = auth()->user();
         }
-        return view('user.profile')->with('user', $user);
+        return view('user.profile')->with([
+            'user'     => $user,
+            'posts'    => $user->posts()->paginate(3),
+            'projects' => $user->projects->groupBy('language')
+        ]);
     }
 
     public function users()
@@ -53,15 +57,6 @@ class UserController extends Controller
     public function postUpdate(Request $request)
     {
         $user = auth()->user();
-        if($request->file('profile_image'))
-        {
-            $path = Storage::disk('public_upload')->put('profile_image', $request->file('profile_image'));
-            if(!$path)
-            {
-                throw new \Exception('The profile image could not be saved to storage' , 1);
-            };
-        }
-
         $user->update([
             'first_name'    => $request->input('first_name'),
             'last_name'     => $request->input('last_name'),
@@ -74,36 +69,36 @@ class UserController extends Controller
         ], [
             'short_description' => $request->input('short_description'),
             'description'       => $request->input('description'),
-            'profile_image'     => isset($path) ? $path : null
+            'image_id'          => $request->input('profile_image'),
         ]);
 
         return redirect()->back();
     }
 
-    public function subscribe(User $user)
-    {
-        Subscription::create([
-            'user_id'      => auth()->user()->id,
-            'subscribe_to' => $user->id
-        ]);
+    // public function subscribe(User $user)
+    // {
+    //     Subscription::create([
+    //         'user_id'      => auth()->user()->id,
+    //         'subscribe_to' => $user->id
+    //     ]);
+    //
+    //     return redirect()->back();
+    // }
 
-        return redirect()->back();
-    }
-
-    public function unsubscribe(User $user)
-    {
-        $subscription = auth()->user()->subscriptions()->where('subscribe_to', $user->id)->first();
-        $subscription->delete();
-        return redirect()->back();
-    }
-
-    public function getSubscriptions(User $user = null)
-    {
-        if(!isset($user))
-        {
-            $user = auth()->user();
-        }
-        $subscriptions = $user->subscriptions()->paginate(10);
-        return view('admin.subscriptions')->with('subscriptions', $subscriptions);
-    }
+    // public function unsubscribe(User $user)
+    // {
+    //     $subscription = auth()->user()->subscriptions()->where('subscribe_to', $user->id)->first();
+    //     $subscription->delete();
+    //     return redirect()->back();
+    // }
+    //
+    // public function getSubscriptions(User $user = null)
+    // {
+    //     if(!isset($user))
+    //     {
+    //         $user = auth()->user();
+    //     }
+    //     $subscriptions = $user->subscriptions()->paginate(10);
+    //     return view('admin.subscriptions')->with('subscriptions', $subscriptions);
+    // }
 }

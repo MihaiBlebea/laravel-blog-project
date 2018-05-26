@@ -1,16 +1,5 @@
 <?php
 
-if(!function_exists('public_upload_path'))
-{
-    function public_upload_path($file = null)
-    {
-        if($file == null)
-        {
-            return 'https://s3.amazonaws.com/FringeBucket/default-user.png';
-        }
-        return env('APP_URL') . '/uploads/' . $file;
-    }
-}
 
 if(!function_exists('random'))
 {

@@ -17,7 +17,7 @@ Route::group([
     Route::get('/update/{post}', 'PostController@getUpdate')->name('update');
     Route::post('/update/{post}', 'PostController@postUpdate')->name('update');
 
-    Route::delete('/delete/{post}', 'PostController@delete')->name('delete');
+    Route::get('/delete/{post}', 'PostController@delete')->name('delete');
 
     Route::get('/toggle/{post}', 'PostController@togglePublish')->name('publish');
 

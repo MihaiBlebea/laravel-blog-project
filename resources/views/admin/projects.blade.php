@@ -6,6 +6,13 @@
 
 <div class="card">
     <div class="card-body">
+
+        <ul class="nav mb-3">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('project.store') }}">New Project</a>
+            </li>
+        </ul>
+
         <table class="table">
             <thead>
                 <tr>
@@ -42,12 +49,6 @@
                 @endforeach
             </tbody>
         </table>
-
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('project.store') }}">New Project</a>
-            </li>
-        </ul>
     </div>
 </div>
 

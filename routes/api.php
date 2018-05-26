@@ -8,12 +8,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
-    Route::post('/upload/post', 'ApiController@autosavePost');
+    // Upload API routes
+    Route::post('/upload/post', 'Api\AutosaveController@autosavePost');
 
-    Route::post('/upload/project', 'ApiController@autosaveProject');
+    Route::post('/upload/project', 'Api\AutosaveController@autosaveProject');
 
-    Route::post('/upload/profile', 'ApiController@autosaveProfile');
+    Route::post('/upload/profile', 'Api\AutosaveController@autosaveProfile');
 
-    Route::get('/tracking', 'ApiController@getTrackingData');
+    // Tracking API routes
+    Route::get('/tracking', 'Api\TrackingController@getTrackingData');
+
+    // Images API routes
+    Route::get('/images/{user}', 'Api\ImageController@getUserImages');
+
+    Route::post('/images/{user}', 'Api\ImageController@storeUserImages');
+
+    Route::post('/image/update/{image}', 'Api\ImageController@update');
+
+    Route::get('/image/delete/{image}', 'Api\ImageController@delete');
 
 });

@@ -46,7 +46,7 @@ class BlogController extends Controller
     // Display all posts based on some rules
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::where('status', 'published')->paginate(10);
         return view('pages.blog.category')->with([
             'posts' => $posts,
             'categories' => Category::all()

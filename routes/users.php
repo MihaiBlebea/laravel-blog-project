@@ -10,9 +10,9 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
     Route::get('/profile/{user?}', 'UserController@profile')->name('profile');
 
     // Subscribe & unsubscribe a user from following a developer
-    Route::get('/subscribe/{user}', 'UserController@subscribe')->name('subscribe');
-
-    Route::get('/unsubscribe/{user}', 'UserController@unsubscribe')->name('unsubscribe');
+    // Route::get('/subscribe/{user}', 'UserController@subscribe')->name('subscribe');
+    //
+    // Route::get('/unsubscribe/{user}', 'UserController@unsubscribe')->name('unsubscribe');
 
 });
 

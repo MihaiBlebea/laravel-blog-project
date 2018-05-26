@@ -11,6 +11,18 @@
     }
 }
 
+img.profile-img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+    &.large {
+        width: 400px;
+        height: 400px;
+    }
+}
+
 .bg-img {
     width: 100%;
     background-repeat: no-repeat;
@@ -22,22 +34,39 @@
     width: 100%;
 }
 
+.selected-img {
+    box-shadow: $box_shadow;
+    opacity: 0.5;
+}
+
 
 @include media-breakpoint-up(xs) {
     .bg-img {
         height: 200px;
+
+        &.small {
+            height: 80px;
+        }
     }
 }
 
 @include media-breakpoint-up(sm) {
     .bg-img {
         height: 300px;
+
+        &.small {
+            height: 100px;
+        }
     }
 }
 
 @include media-breakpoint-up(md) {
     .bg-img {
         height: 450px;
+
+        &.small {
+            height: 150px;
+        }
     }
 }
 

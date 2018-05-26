@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Comment;
-use App\Models\Category;
+use App\Models\{
+    User,
+    Comment,
+    Category,
+    Image
+};
 use App\Traits\SearchableTrait;
 
 class Post extends Model
@@ -16,8 +19,8 @@ class Post extends Model
         'category_id',
         'slug',
         'user_id',
+        'image_id',
         'title',
-        'feature_image',
         'intro',
         'content',
         'published',
@@ -56,6 +59,11 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
     }
 
     // Custom methods

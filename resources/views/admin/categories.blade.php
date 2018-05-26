@@ -6,6 +6,13 @@
 
 <div class="card">
     <div class="card-body">
+
+        <ul class="nav mb-3">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('category.store') }}">New category</a>
+            </li>
+        </ul>
+
         <table class="table">
             <thead>
                 <tr>
@@ -31,11 +38,6 @@
             </tbody>
         </table>
 
-        <ul class="nav">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('category.store') }}">New category</a>
-            </li>
-        </ul>
     </div>
 </div>
 

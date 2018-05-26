@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Post;
+use App\Models\{
+    Post,
+    Image
+};
 
 class Category extends Model
 {
@@ -11,7 +14,7 @@ class Category extends Model
         'slug',
         'name',
         'description',
-        'cover_image'
+        'image_id'
     ];
 
     public function getRouteKeyName()
@@ -22,6 +25,11 @@ class Category extends Model
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function image()
+    {
+        return $this->belongsTo(Image::class);
     }
 
     // Mutators

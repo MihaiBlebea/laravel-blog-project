@@ -12,9 +12,9 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->integer('category_id');
             $table->integer('user_id');
+            $table->integer('image_id')->nullable();
             $table->string('slug')->unique();
             $table->string('title')->nullable();
-            $table->string('feature_image')->nullable();
             $table->mediumText('intro')->nullable();
             $table->longText('content')->nullable();
             $table->enum('status', ['published', 'draft'])->default('draft');

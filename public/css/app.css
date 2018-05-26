@@ -8462,8 +8462,8 @@ button.bg-dark:focus {
 }
 
 .shadow {
-  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-          box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  -webkit-box-shadow: 1px 1px 3px #3b3b3b !important;
+          box-shadow: 1px 1px 3px #3b3b3b !important;
 }
 
 .shadow-lg {
@@ -13734,6 +13734,19 @@ a:hover {
   height: 64px;
 }
 
+img.profile-img {
+  display: block;
+  width: 100px;
+  height: 100px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+img.profile-img.large {
+  width: 400px;
+  height: 400px;
+}
+
 .bg-img {
   width: 100%;
   background-repeat: no-repeat;
@@ -13745,13 +13758,27 @@ a:hover {
   width: 100%;
 }
 
+.selected-img {
+  -webkit-box-shadow: 1px 1px 3px #3b3b3b;
+          box-shadow: 1px 1px 3px #3b3b3b;
+  opacity: 0.5;
+}
+
 .bg-img {
   height: 200px;
+}
+
+.bg-img.small {
+  height: 80px;
 }
 
 @media (min-width: 576px) {
   .bg-img {
     height: 300px;
+  }
+
+  .bg-img.small {
+    height: 100px;
   }
 }
 
@@ -13759,5 +13786,13 @@ a:hover {
   .bg-img {
     height: 450px;
   }
+
+  .bg-img.small {
+    height: 150px;
+  }
+}
+
+.pointer {
+  cursor: pointer;
 }
 

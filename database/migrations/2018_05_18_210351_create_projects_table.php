@@ -16,6 +16,7 @@ class CreateProjectsTable extends Migration
             $table->text('short_description')->nullable();
             $table->text('description')->nullable();
             $table->string('link')->unique()->nullable();
+            $table->string('language');
             $table->enum('status', ['published', 'draft'])->default('draft');
             $table->timestamps();
         });

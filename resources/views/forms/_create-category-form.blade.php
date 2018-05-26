@@ -30,7 +30,13 @@
 
 <div class="form-group">
     <label for="cover_image">Cover image:</label>
-    <file-upload :name="'cover_image'"></file-upload>
+
+    <image-modal multiple-img="false"
+                 default-image="{{ $category->image ?? '' }}"
+                 name="cover_image"
+                 user="{{ auth()->user()->slug }}">
+    </image-modal>
+
 </div>
 
 <div class="mt-5">

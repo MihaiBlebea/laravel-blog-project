@@ -11,14 +11,14 @@
                     'subtitle' => '...the solution is just 2 clicks away'
                 ])
 
-                <img style="width:100%;" src="{{ public_upload_path('designs\homepage-design.png') }}">
+                <img style="width:100%;" src="{{ asset('images/cover.png') }}">
             </div>
 
             <div class="row">
                 @foreach($categories as $category)
 
                     <div class="col-md-{{ (!$loop->last && isOdd($categories->count())) ? '6' : '12' }} mb-3 animated fadeIn delay-1">
-                        @include('partials._category-card')
+                        @include('partials.cards._category-card')
                     </div>
 
                 @endforeach

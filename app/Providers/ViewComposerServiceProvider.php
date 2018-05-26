@@ -20,6 +20,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             'post.*',
             'category.*',
             'pages.index',
+            'images.image',
             'projects.store'
         ], \App\Http\ViewComposers\AdminSidebareMenuViewComposer::class);
 
