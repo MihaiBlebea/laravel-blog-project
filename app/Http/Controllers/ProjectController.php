@@ -22,17 +22,22 @@ class ProjectController extends Controller
 
         if($request->input('status') !== null && collect(['draft', 'published'])->contains($request->input('status')))
         {
-            $projects = $schema->where('status', $request->input('status'))->paginate(10);
+            $schema = $schema->where('status', $request->input('status'));
         } else {
-            $projects = $schema->paginate(10);
+            $schema = $schema->where('status', 'published');
         }
+        $projects = $schema->paginate(10);
 
         return view('projects.index')->with('projects', $projects);
     }
 
     public function get(Project $project)
     {
-        return view('projects.project')->with('project', $project);
+        $projects = $project->user->projects()->where('id', '!=', $project->id)->limit(3)->get();
+        return view('projects.project')->with([
+            'project' => $project,
+            'projects' => $projects
+        ]);
     }
 
     public function manage()
@@ -70,7 +75,24 @@ class ProjectController extends Controller
 
     public function getUpdate(Project $project)
     {
-        return view('projects.store')->with('project', $project);
+        $statuses = [
+            'published' => 'Publish',
+            'draft'     => 'Save for later'
+        ];
+        $languages = [
+            'php',
+            'javascript',
+            'python',
+            'go',
+            'swift',
+            'bash',
+            'css'
+        ];
+        return view('projects.store')->with([
+            'project'   => $project,
+            'statuses'  => $statuses,
+            'languages' => $languages
+        ]);
     }
 
     public function postUpdate(ProjectFormRequest $request, Project $project)

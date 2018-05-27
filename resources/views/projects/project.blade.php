@@ -2,30 +2,45 @@
 
 @section('content')
 <div class="container">
+
+    @include('partials.titles._page-title', ['title' => $project->name])
+
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials.titles._page-title', ['title' => $project->name])
+            @include('partials._profile-short-description', ['user' => $project->user])
 
-            <div class="row">
-                @foreach($project->images as $image)
+            <p class="font-article">
+                <strong>{{ $project->short_description }}</strong>
+            </p>
+        </div>
+    </div>
 
-                    <div class="col-md-4">
-                        <img class="profile-img lg"
-                             src="{{ asset($image->path ?? 'images/profile-placeholder.jpg') }}">
-                    </div>
+    @if($project->hasGallery())
+        <div class="mb-5 mt-5">
+            <masonry-wrapper project-slug="{{ $project->slug ?? null }}"></masonry-wrapper>
+        </div>
+    @endif
 
-                @endforeach
-            </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="font-article">{!! $project->description !!}</div>
 
-            <div class="card">
-                <div class="card-body p-4 p-md-5">
-                    {{ $project->short_description }}
-                    <hr>
-                    {!! $project->description !!}
-                </div>
+            <div class="mt-5">
+                @include('partials._profile-short-description', ['user' => $project->user])
             </div>
         </div>
     </div>
+
+    <div class="row mt-5 justify-content-center">
+        @foreach($projects as $project)
+
+            <div class="col-md-4 mb-4 animated fadeIn delay-1">
+                @include('partials.cards._project-card')
+            </div>
+
+        @endforeach
+    </div>
+
 </div>
 @endsection

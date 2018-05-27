@@ -148,8 +148,14 @@ export default {
 
         if(this.image !== null)
         {
-            this.chosenImage.push(this.image)
-            this.selectedImage.push(this.image)
+            if(this.multiple)
+            {
+                this.chosenImage = this.image
+                this.selectedImage = this.image
+            } else {
+                this.chosenImage.push(this.image)
+                this.selectedImage.push(this.image)
+            }
         }
     }
 }

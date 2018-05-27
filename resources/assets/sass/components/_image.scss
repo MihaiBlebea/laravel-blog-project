@@ -21,6 +21,11 @@ img.profile-img {
         width: 200px;
         height: 200px;
     }
+
+    &.xl {
+        width: 100%;
+        height: 300px;
+    }
 }
 
 .bg-img {
@@ -28,10 +33,6 @@ img.profile-img {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-}
-
-.profile-img {
-    width: 100%;
 }
 
 .selected-img {

@@ -25,6 +25,7 @@
             </div>
 
             <!-- Content section -->
+            @if($user->hasPosts())
             <h2 class="text-center mb-5 mt-5">Checkout my awesome posts</h2>
             <div class="row">
                 <div class="col">
@@ -46,9 +47,11 @@
                     </div>
                 </div>
             </div>
+            @endif
             <!-- Content section -->
 
             <!-- Projects section -->
+            @if($user->hasProjects())
             <h2 class="text-center mb-5 mt-5">Some of my greatest projects</h2>
             <div class="row">
                 <div class="col">
@@ -68,6 +71,8 @@
                     @endforeach
                 </div>
             </div>
+            @endif
+            <!-- Projects section -->
 
             <!-- Contact section -->
             <h2 class="text-center mb-5 mt-5">Contact</h2>

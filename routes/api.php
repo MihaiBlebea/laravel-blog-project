@@ -27,4 +27,7 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
     Route::get('/image/delete/{image}', 'Api\ImageController@delete');
 
+    // Project imagesy
+    Route::get('/images/project/{project}', 'Api\ProjectController@getProjectImages');
+
 });

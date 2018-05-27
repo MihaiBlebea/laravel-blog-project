@@ -8,8 +8,11 @@
             @include('partials.titles._page-title', ['title' => 'Projects', 'subtitle' => 'Projects showcase'])
 
             @foreach($projects as $project)
-                <div class="mb-3 animated fadeIn delay-1">
-                    @include('partials.cards._project-card', ['project' => $project])
+                <div class="mb-4 animated fadeIn delay-1">
+                    @include('partials.cards._project-card', [
+                        'project' => $project,
+                        'show_description' => true
+                    ])
                 </div>
             @endforeach
 

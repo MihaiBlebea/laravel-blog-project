@@ -65,8 +65,9 @@
 
         <label for="status">Status:</label>
         <select name="status" class="form-control" id="status">
-            <option value="draft">Save as draft</option>
-            <option value="published">Publish</option>
+            @foreach($statuses as $index => $status)
+                <option value="{{ $index }}" {{ ($project->hasStatus($index)) ? 'selected' : ''}}>{{ $status }}</option>
+            @endforeach
         </select>
 
     </div>
@@ -75,13 +76,9 @@
 <div class="form-group">
     <label for="language">Main language used:</label>
     <select name="language" class="form-control" id="language">
-        <option disabled selected>Choose a language</option>
-        <option value="javascript">Javascript</option>
-        <option value="php">PHP</option>
-        <option value="python">Python</option>
-        <option value="go">Got</option>
-        <option value="swift">Swift</option>
-        <option value="Java">java</option>
+        @foreach($languages as $language)
+            <option value="{{ $language }}" class="text-uppercase" {{ ($project->hasLanguage($language)) ? 'selected' : ''}}>{{ $language }}</option>
+        @endforeach
     </select>
 
     @if($errors->has('short_description'))
@@ -95,7 +92,7 @@
     <label for="feature_image">Upload feature image:</label>
 
     <image-modal multiple-img="true"
-                 default-image="{{ $post->image ?? '' }}"
+                 default-image="{{ $project->images ?? '' }}"
                  name="images"
                  user="{{ auth()->user()->slug }}">
     </image-modal>

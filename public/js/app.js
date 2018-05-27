@@ -32688,11 +32688,13 @@ module.exports = __webpack_require__(254);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_editor__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue2_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue2_editor__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_masonry_css__ = __webpack_require__(264);
 
 __webpack_require__(150);
 
 // Import Vue js
 window.Vue = __webpack_require__(172);
+
 
 
 
@@ -32708,8 +32710,13 @@ Vue.component('image-card', __webpack_require__(245));
 Vue.component('image-grid', __webpack_require__(248));
 Vue.component('image-details', __webpack_require__(251));
 
+Vue.component('masonry-wrapper', __webpack_require__(265));
+
 // Setup global variables
 Vue.prototype.api = '/api/v1/';
+
+// Link Vue with 'use' function
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_masonry_css__["a" /* default */]);
 
 var app = new Vue({
     el: '#app'
@@ -79790,8 +79797,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.getImages();
 
         if (this.image !== null) {
-            this.chosenImage.push(this.image);
-            this.selectedImage.push(this.image);
+            if (this.multiple) {
+                this.chosenImage = this.image;
+                this.selectedImage = this.image;
+            } else {
+                this.chosenImage.push(this.image);
+                this.selectedImage.push(this.image);
+            }
         }
     }
 });
@@ -80803,6 +80815,338 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/*!
+ * vue-masonry-css v1.0.1
+ * https://github.com/paulcollett/vue-masonry-css
+ * Released under the MIT License.
+ */
+
+var MasonryBreakpointValue = function (mixed, windowWidth) {
+  var valueAsNum = parseInt(mixed);
+
+  if(valueAsNum > -1) {
+    return mixed;
+  }else if(typeof mixed !== 'object') {
+    return 0;
+  }
+
+  var matchedBreakpoint = Infinity;
+  var matchedValue = mixed.default || 0;
+
+  for(var k in mixed) {
+    var breakpoint = parseInt(k);
+    var breakpointValRaw = mixed[breakpoint];
+    var breakpointVal = parseInt(breakpointValRaw);
+
+    if(isNaN(breakpoint) || isNaN(breakpointVal)) {
+      continue;
+    }
+
+    var isNewBreakpoint = windowWidth <= breakpoint && breakpoint < matchedBreakpoint;
+
+    if(isNewBreakpoint) {
+      matchedBreakpoint = breakpoint;
+      matchedValue = breakpointValRaw;
+    }
+  }
+
+  return matchedValue;
+};
+
+var MasonryComponent = {
+  props: {
+    tag: {
+      type: [String],
+      default: 'div'
+    },
+    cols: {
+      type: [Object, Number],
+      default: 2
+    },
+    gutter: {
+      type: [Object, Number, String],
+      default: 2
+    },
+    css: {
+      type: [Boolean],
+      default: true
+    }
+  },
+  data: function() {
+    return {
+      displayColumns: 2,
+      displayGutter: '0px'
+    }
+  },
+  mounted: function() {
+    this.$nextTick(function () {
+      this.reCalculate();
+    });
+
+    if(window) {
+      window.addEventListener('resize', this.reCalculate);
+    }
+  },
+  beforeDestroy: function() {
+    if(window) {
+      window.removeEventListener('resize', this.reCalculate);
+    }
+  },
+  methods: {
+    reCalculate: function() {
+      var windowWidth = (window ? window.innerWidth : null) || Infinity;
+
+      this.reCalculateColumnCount(windowWidth);
+
+      this.reCalculateGutterSize(windowWidth);
+    },
+    reCalculateGutterSize: function(windowWidth) {
+      this.displayGutter = MasonryBreakpointValue(this.gutter, windowWidth);
+    },
+    reCalculateColumnCount: function(windowWidth) {
+      var newColumns = MasonryBreakpointValue(this.cols, windowWidth);
+
+      // final bit of making sure its a correct value
+      newColumns = Math.max(1, newColumns * 1 || 0);
+
+      this.displayColumns = newColumns;
+    },
+    itemsInColumns: function() {
+      var currentColumnCount = this.displayColumns;
+      var itemsInColumns = new Array(currentColumnCount);
+      var items = this.$slots.default || [];
+
+      // This component does not work with a child <transition-group /> ..yet,
+      // so for now we think it may be helpful to ignore and skip it for hopefull future support
+      if(items.length === 1 && items[0].componentOptions && items[0].componentOptions.tag == 'transition-group') {
+        items = items[0].componentOptions.children;
+      }
+
+      for (var i = 0, visibleItemI = 0; i < items.length; i++, visibleItemI++) {
+        // skip vues empty whitespace elements unless first item
+        if(!items[i].tag && items[i].text == ' ' && visibleItemI > 0) {
+          visibleItemI--;
+        }
+
+        var columnIndex = visibleItemI % currentColumnCount;
+
+        if(!itemsInColumns[columnIndex]) {
+          itemsInColumns[columnIndex] = [];
+        }
+
+        itemsInColumns[columnIndex].push(items[i]);
+      }
+
+      return itemsInColumns;
+    }
+  },
+  render: function (createElement) {
+    var this$1 = this;
+
+    var childrenInColumns = this.itemsInColumns();
+    var columns = [];
+    var gutterSize = parseInt(this.displayGutter) === this.displayGutter * 1 ?
+      (this.displayGutter + 'px') : this.displayGutter;
+
+    for(var i = 0; i < childrenInColumns.length; i++) {
+      var column = createElement('div', {
+        //class: 'my-masonry_column',
+        key: i + '-' + childrenInColumns.length,
+        style: {
+          boxSizing: 'border-box',
+          backgroundClip: 'padding-box',
+          width: (100 / this$1.displayColumns) + '%',
+          border: '0 solid transparent',
+          borderLeftWidth: gutterSize
+        }
+      }, childrenInColumns[i]);
+
+      columns.push(column);
+    }
+
+    this.prevColumns = childrenInColumns;
+
+    var wrapper = createElement(
+      this.tag, // tag name
+      this.css ? {
+        //class: 'my-masonry',
+        style: {
+          display: ['-webkit-box', '-ms-flexbox', 'flex'],
+          marginLeft: '-' + gutterSize
+        }
+      } : null,
+      columns // array of children
+    );
+
+    return wrapper;
+  }
+};
+
+var Plugin = function () {};
+
+Plugin.install = function (Vue, options) {
+  if (Plugin.installed) {
+    return;
+  }
+
+  Vue.component((options && options.name) || 'masonry', MasonryComponent);
+};
+
+if (typeof window !== 'undefined' && window.Vue) {
+  window.Vue.use(Plugin);
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Plugin);
+
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(266)
+/* template */
+var __vue_template__ = __webpack_require__(267)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/MasonryWrapper.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3e8f74f6", Component.options)
+  } else {
+    hotAPI.reload("data-v-3e8f74f6", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 266 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['project-slug'],
+    data: function data() {
+        return {
+            images: []
+        };
+    },
+    methods: {
+        getMasonryImages: function getMasonryImages() {
+            var _this = this;
+
+            axios.get(this.api + 'images/project/' + this.projectSlug).then(function (result) {
+                _this.images = result.data;
+            }).catch(function (err) {
+                console.log(err);
+            });
+        },
+        path: function path(image) {
+            return '/' + image.path;
+        }
+    },
+    mounted: function mounted() {
+        this.getMasonryImages();
+    }
+});
+
+/***/ }),
+/* 267 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "masonry",
+        {
+          attrs: {
+            cols: { default: 3, 1000: 3, 700: 2, 400: 1 },
+            gutter: { default: "30px", 700: "15px" }
+          }
+        },
+        _vm._l(_vm.images, function(image, index) {
+          return _c("div", { key: index }, [
+            _c("img", {
+              staticClass: "mb-3 card",
+              staticStyle: { width: "100%" },
+              attrs: { src: _vm.path(image) }
+            })
+          ])
+        })
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3e8f74f6", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

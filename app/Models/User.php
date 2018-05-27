@@ -91,10 +91,18 @@ class User extends Authenticatable
 
     public function getGitHubToken()
     {
-        if($this->hasGitHub())
-        {
-            return $this->social->github_token;
-        }
-        return null;
+        return ($this->hasGitHub()) ? $this->social->github_token : null;
     }
+
+    public function hasPosts()
+    {
+        return ($this->posts->count() > 0) ? true : false;
+    }
+
+    public function hasProjects()
+    {
+        return ($this->projects->count() > 0) ? true : false;
+    }
+
+
 }

@@ -41,4 +41,19 @@ class Project extends Model
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = str_slug($value, '-');
     }
+
+    public function hasGallery()
+    {
+        return (count($this->images) > 0) ? true : false;
+    }
+
+    public function hasStatus(String $status)
+    {
+        return ($this->status === $status) ? true : false;
+    }
+
+    public function hasLanguage(String $language)
+    {
+        return ($this->language === $language) ? true : false;
+    }
 }
