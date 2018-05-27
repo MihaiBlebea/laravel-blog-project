@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials._page-title', ['title' => 'Projects', 'subtitle' => 'Projects showcase'])
+            @include('partials.titles._page-title', ['title' => 'Projects', 'subtitle' => 'Projects showcase'])
 
             @foreach($projects as $project)
                 <div class="mb-3 animated fadeIn delay-1">

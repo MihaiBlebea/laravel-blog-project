@@ -4,20 +4,16 @@ namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
 use App\Models\{
-    User,
-    Category
+    User
 };
 
-class HomePageViewComposer
+class AboutPageViewComposer
 {
     public function compose(View $view)
     {
         $user = User::find(1);
-        $categories = Category::all();
         $view->with([
-            'categories' => $categories,
-            'user'       => $user,
-            'projects'   => $user->projects
+            'projects' => $user->projects
         ]);
     }
 }

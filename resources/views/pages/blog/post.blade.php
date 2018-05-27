@@ -10,7 +10,7 @@
             @include('partials._profile-short-description', ['user' => $post->author])
 
             <h1 class="mb-5 mt-5 text-center">{{ $post->title }}</h1>
-            
+
             <img style="max-width:100%" src="{{ asset($post->image->path ?? 'images/post-placeholder.png') }}">
             @include('partials._breadcrumbs')
 

@@ -20,6 +20,13 @@ a:hover {
     text-decoration: none;
 }
 
+.text-elipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
 @include media-breakpoint-up(xs) {
     .bg {
         min-height: 150px;

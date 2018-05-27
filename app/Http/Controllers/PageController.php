@@ -32,7 +32,7 @@ class PageController extends Controller
         return view('admin.pages')->with('pages', $pages);
     }
 
-    public function page(String $type, Page $page)
+    public function page(Page $page, String $type = null)
     {
         if(view()->exists($page->view) == false)
         {

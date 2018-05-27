@@ -2,7 +2,7 @@
 
 @section('admin_panel')
 
-@include('partials._page-title', ['title' => 'Tracking', 'subtitle' => 'See how many views you had today'])
+@include('partials.titles._page-title', ['title' => 'Tracking', 'subtitle' => 'See how many views you had today'])
 
 <div class="card">
     <div class="card-body">

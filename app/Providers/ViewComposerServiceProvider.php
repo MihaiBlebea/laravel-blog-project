@@ -14,6 +14,9 @@ class ViewComposerServiceProvider extends ServiceProvider
         // Homepage
         View::composer('pages.page.home', \App\Http\ViewComposers\HomePageViewComposer::class);
 
+        // About us
+        View::composer('pages.page.about', \App\Http\ViewComposers\AboutPageViewComposer::class);
+
         // Admin sidebar navigation
         View::composer([
             'admin.*',

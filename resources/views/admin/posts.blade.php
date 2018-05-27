@@ -48,7 +48,7 @@
                         <td>{{ $post->created_at->diffForHumans() }}</td>
                         <td><a href="{{ route('post.update', ['post' => $post->slug]) }}">Update</a></td>
                         <td>
-                            <a href="{{ route('post.publish', ['post' => $post->slug]) }}">{{ ($post->published == true) ? 'Unpublish' : 'Publish' }}</a>
+                            <a href="{{ route('post.publish', ['post' => $post->slug]) }}">{{ ($post->status == 'published') ? 'Unpublish' : 'Publish' }}</a>
                         </td>
                         <td>
                             <a class="text-danger" href="{{ route('post.delete', ['post' => $post->slug]) }}">Delete</a>

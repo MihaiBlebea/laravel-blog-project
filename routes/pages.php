@@ -1,11 +1,8 @@
 <?php
 
-Route::get('/home', 'PageController@homePage');
+// Route::get('/home', 'PageController@homePage');
 
 Route::get('/', 'PageController@homePage')->name('home');
-
-Route::get('/{type}/{page}', 'PageController@page')->name('page.get');
-
 
 Route::group([
     'prefix' => 'admin/pages',
@@ -19,3 +16,5 @@ Route::group([
     Route::get('/toggle/{page}', 'PageController@togglePublish')->name('publish');
 
 });
+
+Route::get('/{page}', 'PageController@page')->name('page.get');

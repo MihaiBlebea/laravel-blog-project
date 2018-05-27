@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials._page-title', ['title' => 'Categories', 'subtitle' => 'Select your favourite category'])
+            @include('partials.titles._page-title', ['title' => 'Categories', 'subtitle' => 'Select your favourite category'])
 
             <div class="row">
 

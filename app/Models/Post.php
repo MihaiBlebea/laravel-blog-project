@@ -23,8 +23,7 @@ class Post extends Model
         'title',
         'intro',
         'content',
-        'published',
-        'publish_date'
+        'status'
     ];
 
     private static $search_fileds = [

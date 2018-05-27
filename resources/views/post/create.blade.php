@@ -2,7 +2,7 @@
 
 @section('admin_panel')
 
-    @include('partials._page-title', ['title' => 'New post', 'subtitle' => 'show your skills'])
+    @include('partials.titles._page-title', ['title' => 'New post', 'subtitle' => 'show your skills'])
 
     <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
         @csrf

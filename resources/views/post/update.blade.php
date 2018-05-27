@@ -2,7 +2,7 @@
 
 @section('admin_panel')
 
-    @include('partials._page-title', ['title' => 'Update post'])
+    @include('partials.titles._page-title', ['title' => 'Update post'])
 
     <form action="{{ route('post.update', [ 'post' => $post->slug ]) }}" method="POST" enctype="multipart/form-data">
         @csrf

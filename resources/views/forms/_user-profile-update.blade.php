@@ -4,11 +4,11 @@
     <div class="col-md-6">
         <input id="first_name"
                type="text"
-               class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}"
+               class="form-control {{ $errors->has('first_name') ? 'is-invalid' : '' }}"
                name="first_name"
                value="{{ $user->first_name or old('first_name') }}" required>
 
-        @if ($errors->has('first_name'))
+        @if($errors->has('first_name'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('first_name') }}</strong>
             </span>
@@ -27,7 +27,7 @@
                value="{{ $user->last_name or old('last_name') }}"
                required>
 
-        @if ($errors->has('last_name'))
+        @if($errors->has('last_name'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('last_name') }}</strong>
             </span>
@@ -43,10 +43,10 @@
                type="email"
                class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
                name="email"
-               value="{{ $user->email or old('email') }}" 
+               value="{{ $user->email or old('email') }}"
                required>
 
-        @if ($errors->has('email'))
+        @if($errors->has('email'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('email') }}</strong>
             </span>
@@ -60,7 +60,7 @@
     <div class="col-md-6">
         <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
-        @if ($errors->has('password'))
+        @if($errors->has('password'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('password') }}</strong>
             </span>

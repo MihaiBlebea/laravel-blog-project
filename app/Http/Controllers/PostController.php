@@ -58,7 +58,7 @@ class PostController extends Controller
     public function togglePublish(Post $post)
     {
         $post->update([
-            'status' => ($post->status == 'draft') ? 'published' : 'draft',
+            'status' => ($post->status === 'draft') ? 'published' : 'draft',
         ]);
         return redirect()->back();
     }

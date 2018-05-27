@@ -22,7 +22,7 @@ class SocialiteAuthController extends Controller
     {
         $social_user = Socialite::driver($driver_name)->user();
         $split_name = Social::splitName($social_user->name);
-    
+
         // Get or create User model
         $user = User::firstOrCreate([
             'email' => $social_user->getEmail()
@@ -40,7 +40,7 @@ class SocialiteAuthController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect()->route('home');
+        return redirect(config('auth.redirect_after_login'));
     }
 
 }

@@ -2,7 +2,7 @@
 
 @section('admin_panel')
 
-@include('partials._page-title', ['title' => 'Images', 'subtitle' => 'Manage your images'])
+@include('partials.titles._page-title', ['title' => 'Images', 'subtitle' => 'Manage your images'])
 
 <image-grid user="{{ auth()->user()->slug }}"></image-grid>
 

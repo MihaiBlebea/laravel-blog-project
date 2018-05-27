@@ -2,7 +2,7 @@
 
 @section('admin_panel')
 
-@include('partials._page-title', ['title' => 'Projects', 'subtitle' => 'Manage projects'])
+@include('partials.titles._page-title', ['title' => 'Projects', 'subtitle' => 'Manage projects'])
 
 <div class="card">
     <div class="card-body">

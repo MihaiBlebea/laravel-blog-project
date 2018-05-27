@@ -27,7 +27,4 @@ Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post')-
 // Display results for blog search (will have to change this)
 Route::post('/search', 'SearchController@search')->name('search');
 
-Route::get('/test', function() {
-
-    dd($result);
-});
+Route::post('/message/send', 'MessageController@send')->name('message.send');

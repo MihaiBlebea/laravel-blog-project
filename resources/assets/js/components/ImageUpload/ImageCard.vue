@@ -2,12 +2,17 @@
     <div class="card mb-3">
         <slot></slot>
         <div class="card-body p-2">
-            <p v-if="confirm == false">
-                <span>{{ image.name }}</span>
+            <div class="row" v-if="confirm == false">
+                <div class="col-sm-9 text-elipsis">
+                    <span>{{ image.name }}</span>
+                </div>
 
-                <span v-on:click="toggleConfirm()"
-                      class="text-danger mb-0 pointer float-right">Delete</span>
-            </p>
+                <div v-on:click="toggleConfirm()" class="col-sm-3 text-danger">
+                    <span class="pointer float-right">
+                        Delete
+                    </span>
+                </div>
+            </div>
 
             <p v-if="confirm == true" class="mb-0">
                 Are you sure?

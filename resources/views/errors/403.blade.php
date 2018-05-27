@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials._page-title', ['title' => '403 Error'])
+            @include('partials.titles._page-title', ['title' => '403 Error'])
 
             <div class="card">
                 <div class="card-body">

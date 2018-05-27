@@ -3,7 +3,7 @@
 
 @section('admin_panel')
 
-    @include('partials._page-title', ['title' => 'Update profile'])
+    @include('partials.titles._page-title', ['title' => 'Update profile'])
 
     <form action="{{ route('user.update') }}" method="POST" enctype="multipart/form-data">
         @csrf

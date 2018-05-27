@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials._page-title', [
+            @include('partials.titles._page-title', [
                 'title'    => $user->first_name . ' ' . $user->last_name,
                 'subtitle' => $user->email
             ])

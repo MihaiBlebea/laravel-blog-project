@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials._page-title', ['title' => 'Results', 'subtitle' => 'We found ' . $results->count() . ' results'])
+            @include('partials.titles._page-title', ['title' => 'Results', 'subtitle' => 'We found ' . $results->count() . ' results'])
 
             @foreach($results as $post)
 

@@ -13615,6 +13615,11 @@ body {
   left: 10vw;
 }
 
+.section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
 h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;
@@ -13635,6 +13640,13 @@ h4 {
 
 a:hover {
   text-decoration: none;
+}
+
+.text-elipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .bg {
@@ -13747,9 +13759,9 @@ img.profile-img {
      object-fit: cover;
 }
 
-img.profile-img.large {
-  width: 400px;
-  height: 400px;
+img.profile-img.lg {
+  width: 200px;
+  height: 200px;
 }
 
 .bg-img {

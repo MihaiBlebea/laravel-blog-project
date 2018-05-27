@@ -2,6 +2,8 @@
 
 return [
 
+    'redirect_after_login' => '/admin/users/dashboard',
+    
     /*
     |--------------------------------------------------------------------------
     | Authentication Defaults
