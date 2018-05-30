@@ -1,24 +1,56 @@
 <template>
     <div>
-        <div class="container-fluid">
-
-            <header>
-                <h4 class="display-4 mb-4 text-center">{{ monthList[month].name }} {{ year }}</h4>
-                <div class="row d-none d-sm-flex p-1 bg-dark text-white">
-                    <h5 v-for="day in weekDays" class="col-sm p-1 text-center">{{ day.name }}</h5>
+        <button v-on:click="addAppointment()">add</button>
+        <div class="row no-gutters">
+            <div class="col" v-for="(day, index) in days">
+                <div class="p-2 bg-primary text-white">{{ day.name }}</div>
+                <div v-for="(hour, key) in day.hours">
+                    <div class="p-2"
+                         v-on:click="select(index, key)"
+                         v-bind:class="hasSchedule(hour)"
+                         data-toggle="modal"
+                         data-target="#appointment-modal">
+                        {{ hour.name }}:00
+                    </div>
                 </div>
-            </header>
-
-            <div v-for="(week) in monthCalendar" class="row border border-right-0 border-bottom-0">
-
-                <div v-for="(day, index) in week"
-                     class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-sm-inline-block text-muted"
-                     v-bind:class="{'bg-white': day.active}">
-                    <vue-day :day="day" :week-days="weekDays" :index="index"></vue-day>
-                </div>
-
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="appointment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div v-if="selected !== null">
+                            <div v-for="(appointment, index) in selected.appointments">
+
+                                <div class="mb-2 bg-primary text-white p-2" v-on:click="removeAppointment(index)">
+                                    {{ appointment.name }}
+                                </div>
+
+                            </div>
+
+                            <hr>
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect2">Select social channel:</label>
+                                <select class="form-control">
+                                    <option v-for="social in socials">{{ social.name }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">Select minute:</label>
+                                <input type="time" class="form-control" :min="'0' + selected.hour + ':00'" :max="'0' + selected.hour + ':59'">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" v-on:click="addAppointment()">Add schedule</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
 
     </div>
 </template>
@@ -29,117 +61,113 @@ export default {
     data: function()
     {
         return {
-            date: null,
-            monthList: [
-                {name: 'January'},
-                {name: 'February'},
-                {name: 'March'},
-                {name: 'April'},
-                {name: 'May'},
-                {name: 'June'},
-                {name: 'July'},
-                {name: 'August'},
-                {name: 'September'},
-                {name: 'October'},
-                {name: 'November'},
-                {name: 'December'}
+            days: [
+                { name: 'Monday', hours: [
+                    { name:7, appointments: [] },
+                    { name:8, appointments: [] },
+                    { name:9, appointments: [] },
+                    { name:10, appointments: [] },
+                    { name:11, appointments: [] },
+                    { name:12, appointments: [] },
+                    { name:13, appointments: [] }
+                ]},
+                { name: 'Thursday', hours: [
+                    { name:7, appointments: [] },
+                    { name:8, appointments: [] },
+                    { name:9, appointments: [] },
+                    { name:10, appointments: [] },
+                    { name:11, appointments: [] },
+                    { name:12, appointments: [] },
+                    { name:13, appointments: [] }
+                ]},
+                { name: 'Wednesday', hours: [
+                    { name:7, appointments: [] },
+                    { name:8, appointments: [] },
+                    { name:9, appointments: [] },
+                    { name:10, appointments: [] },
+                    { name:11, appointments: [] },
+                    { name:12, appointments: [] },
+                    { name:13, appointments: [] }
+                ]},
+                { name: 'Tuesday', hours: [
+                    { name:7, appointments: [] },
+                    { name:8, appointments: [] },
+                    { name:9, appointments: [] },
+                    { name:10, appointments: [] },
+                    { name:11, appointments: [] },
+                    { name:12, appointments: [] },
+                    { name:13, appointments: [] }
+                ]},
+                { name: 'Friday', hours: [
+                    { name:7, appointments: [] },
+                    { name:8, appointments: [] },
+                    { name:9, appointments: [] },
+                    { name:10, appointments: [] },
+                    { name:11, appointments: [] },
+                    { name:12, appointments: [] },
+                    { name:13, appointments: [] }
+                ]},
+                { name: 'Saturday', hours: [
+                    { name:7, appointments: [] },
+                    { name:8, appointments: [] },
+                    { name:9, appointments: [] },
+                    { name:10, appointments: [] },
+                    { name:11, appointments: [] },
+                    { name:12, appointments: [] },
+                    { name:13, appointments: [] }
+                ]},
+                { name: 'Sunday', hours: [
+                    { name:7, appointments: [] },
+                    { name:8, appointments: [] },
+                    { name:9, appointments: [] },
+                    { name:10, appointments: [] },
+                    { name:11, appointments: [] },
+                    { name:12, appointments: [] },
+                    { name:13, appointments: [] }
+                ]}
             ],
-            weekDays: [
-                {name: 'Sunday'},
-                {name: 'Monday'},
-                {name: 'Tuesday'},
-                {name: 'Wednesday'},
-                {name: 'Thursday'},
-                {name: 'Friday'},
-                {name: 'Saturday'}
+            selected: null,
+            tempAppointment: null,
+            socials: [
+                { name: 'twitter' },
+                { name: 'facebook' },
+                { name: 'linkedin' }
             ]
         }
     },
-    computed: {
-        today: function()
+    methods: {
+        hasSchedule: function(hour)
         {
-            return (new Date).getDate();
+            return (hour.appointments.length > 0) ? 'bg-primary text-white' : 'bg-white';
         },
-        month: function()
+        select: function(day, hour)
         {
-            return (new Date).getMonth();
+            this.selected = {
+                appointments: this.days[day].hours[hour].appointments,
+                day: day,
+                hour: hour
+            }
         },
-        year: function()
+        addAppointment: function()
         {
-            return (new Date).getFullYear();
+            let day = this.selected.day;
+            let hour = this.selected.hour;
+            this.days[day].hours[hour].appointments.push(this.createAppointment(day, hour, 40, 'Dentist appointment'))
         },
-        appendDays: function()
+        removeAppointment: function(index)
         {
-            let numberOfDays = 6 - this.dayName(this.daysInMonth(this.month, this.year), this.month, this.year);
-            let result = [];
-            for(let i = 1; i <= numberOfDays; i++)
-            {
-                result.push({number: i, active: false});
-            }
-            return result;
+            let day = this.selected.day;
+            let hour = this.selected.hour;
+            this.days[day].hours[hour].appointments.splice(index, 1);
         },
-        prependDays: function()
+        createAppointment: function(day, hour, minute, name)
         {
-            let lastMonth = this.month - 1;
-            let year = this.year;
-            if(this.month == 0)
-            {
-                lastMonth = 11;
-                year = this.year - 1;
-            }
-            let lastMonthLastDay = this.daysInMonth(lastMonth, year)
-            let numberOfDays = this.dayName(1, this.month, this.year);
-
-            let result = [];
-            for(let i = numberOfDays - 1; i >= 0; i--)
-            {
-                result.push({number: lastMonthLastDay - i, active: false});
-            }
-            return result;
-        },
-        monthCalendar: function()
-        {
-            var daysInMonth = this.prependDays
-            for(let i = 0; i < this.daysInMonth(this.month, this.year); i++)
-            {
-                daysInMonth.push({number: i + 1, active: true});
-            }
-            for(let i = 0; i < this.appendDays.length; i++)
-            {
-                daysInMonth.push(this.appendDays[i])
-            }
-            let week = 0;
-            let new_array = []
-            let weeksNumber = daysInMonth.length / 7;
-            for(let i = 0; i < daysInMonth.length; i++)
-            {
-                if(i == (daysInMonth.length / weeksNumber) * week)
-                {
-                    week++;
-                    new_array[week] = []
-                }
-                if(i < (daysInMonth.length / weeksNumber) * week)
-                {
-                    new_array[week].push(daysInMonth[i])
-                }
-            }
-            new_array.splice(0,1);
-            return new_array
+            return { name: name, day: day, hour: hour, minute: minute }
         }
     },
-    methods: {
-        dayName: function(day, month, year)
-        {
-            return new Date(year, month, day).getDay();
-        },
-        daysInMonth: function(month, year)
-        {
-            return (new Date(year, month + 1, 0)).getDate();
-        },
-    },
-    mounted() {
-        console.log("Schedule component is mounted")
-        this.date = new Date();
+    created()
+    {
+        //
     }
 }
 </script>

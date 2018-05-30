@@ -4920,115 +4920,6 @@ module.exports = {
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports) {
-
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
-}
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5147,6 +5038,115 @@ helpers.extend(Element.prototype, {
 Element.extend = helpers.inherits;
 
 module.exports = Element;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
 
 
 /***/ }),
@@ -32677,7 +32677,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(149);
-module.exports = __webpack_require__(261);
+module.exports = __webpack_require__(258);
 
 
 /***/ }),
@@ -32712,8 +32712,8 @@ Vue.component('image-details', __webpack_require__(252));
 
 Vue.component('masonry-wrapper', __webpack_require__(255));
 
-Vue.component('vue-schedule', __webpack_require__(258));
-Vue.component('vue-day', __webpack_require__(271));
+Vue.component('vue-schedule', __webpack_require__(269));
+Vue.component('vue-appointment', __webpack_require__(275));
 
 // Setup global variables
 Vue.prototype.api = '/api/v1/';
@@ -66149,7 +66149,7 @@ if (typeof window !== 'undefined' && window.Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(178)
 /* template */
@@ -66359,7 +66359,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(181)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(186)
 /* template */
@@ -67072,7 +67072,7 @@ Chart.helpers = __webpack_require__(1);
 __webpack_require__(195)(Chart);
 
 Chart.defaults = __webpack_require__(2);
-Chart.Element = __webpack_require__(5);
+Chart.Element = __webpack_require__(4);
 Chart.elements = __webpack_require__(6);
 Chart.Interaction = __webpack_require__(22);
 Chart.layouts = __webpack_require__(8);
@@ -69635,7 +69635,7 @@ module.exports = {
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 var helpers = __webpack_require__(1);
 
 defaults._set('global', {
@@ -69749,7 +69749,7 @@ module.exports = Element.extend({
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 var helpers = __webpack_require__(1);
 
 var globalDefaults = defaults.global;
@@ -69847,7 +69847,7 @@ module.exports = Element.extend({
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 var helpers = __webpack_require__(1);
 
 var defaultColor = defaults.global.defaultColor;
@@ -69960,7 +69960,7 @@ module.exports = Element.extend({
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 
 defaults._set('global', {
 	elements: {
@@ -70670,7 +70670,7 @@ helpers.removeEvent = removeEventListener;
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 var helpers = __webpack_require__(1);
 
 defaults._set('global', {
@@ -72192,7 +72192,7 @@ module.exports = function(Chart) {
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 var helpers = __webpack_require__(1);
 var Ticks = __webpack_require__(9);
 
@@ -73135,7 +73135,7 @@ module.exports = function(Chart) {
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 var helpers = __webpack_require__(1);
 
 defaults._set('global', {
@@ -78826,7 +78826,7 @@ module.exports = {
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 var helpers = __webpack_require__(1);
 var layouts = __webpack_require__(8);
 
@@ -79409,7 +79409,7 @@ module.exports = {
 
 
 var defaults = __webpack_require__(2);
-var Element = __webpack_require__(5);
+var Element = __webpack_require__(4);
 var helpers = __webpack_require__(1);
 var layouts = __webpack_require__(8);
 
@@ -79665,7 +79665,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(238)
 /* template */
@@ -79803,7 +79803,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(241)
 /* template */
@@ -80215,7 +80215,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(244)
 /* template */
@@ -80334,7 +80334,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(247)
 /* template */
@@ -80520,7 +80520,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(250)
 /* template */
@@ -80772,7 +80772,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(253)
 /* template */
@@ -81007,7 +81007,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(256)
 /* template */
@@ -81138,14 +81138,30 @@ if (false) {
 
 /***/ }),
 /* 258 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(259)
+var __vue_script__ = __webpack_require__(270)
 /* template */
-var __vue_template__ = __webpack_require__(260)
+var __vue_template__ = __webpack_require__(271)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -81184,11 +81200,43 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 259 */
+/* 270 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81219,85 +81267,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: [''],
     data: function data() {
         return {
-            date: null,
-            monthList: [{ name: 'January' }, { name: 'February' }, { name: 'March' }, { name: 'April' }, { name: 'May' }, { name: 'June' }, { name: 'July' }, { name: 'August' }, { name: 'September' }, { name: 'October' }, { name: 'November' }, { name: 'December' }],
-            weekDays: [{ name: 'Sunday' }, { name: 'Monday' }, { name: 'Tuesday' }, { name: 'Wednesday' }, { name: 'Thursday' }, { name: 'Friday' }, { name: 'Saturday' }]
+            days: [{ name: 'Monday', hours: [{ name: 7, appointments: [] }, { name: 8, appointments: [] }, { name: 9, appointments: [] }, { name: 10, appointments: [] }, { name: 11, appointments: [] }, { name: 12, appointments: [] }, { name: 13, appointments: [] }] }, { name: 'Thursday', hours: [{ name: 7, appointments: [] }, { name: 8, appointments: [] }, { name: 9, appointments: [] }, { name: 10, appointments: [] }, { name: 11, appointments: [] }, { name: 12, appointments: [] }, { name: 13, appointments: [] }] }, { name: 'Wednesday', hours: [{ name: 7, appointments: [] }, { name: 8, appointments: [] }, { name: 9, appointments: [] }, { name: 10, appointments: [] }, { name: 11, appointments: [] }, { name: 12, appointments: [] }, { name: 13, appointments: [] }] }, { name: 'Tuesday', hours: [{ name: 7, appointments: [] }, { name: 8, appointments: [] }, { name: 9, appointments: [] }, { name: 10, appointments: [] }, { name: 11, appointments: [] }, { name: 12, appointments: [] }, { name: 13, appointments: [] }] }, { name: 'Friday', hours: [{ name: 7, appointments: [] }, { name: 8, appointments: [] }, { name: 9, appointments: [] }, { name: 10, appointments: [] }, { name: 11, appointments: [] }, { name: 12, appointments: [] }, { name: 13, appointments: [] }] }, { name: 'Saturday', hours: [{ name: 7, appointments: [] }, { name: 8, appointments: [] }, { name: 9, appointments: [] }, { name: 10, appointments: [] }, { name: 11, appointments: [] }, { name: 12, appointments: [] }, { name: 13, appointments: [] }] }, { name: 'Sunday', hours: [{ name: 7, appointments: [] }, { name: 8, appointments: [] }, { name: 9, appointments: [] }, { name: 10, appointments: [] }, { name: 11, appointments: [] }, { name: 12, appointments: [] }, { name: 13, appointments: [] }] }],
+            selected: null,
+            tempAppointment: null,
+            socials: [{ name: 'twitter' }, { name: 'facebook' }, { name: 'linkedin' }]
         };
     },
-    computed: {
-        today: function today() {
-            return new Date().getDate();
-        },
-        month: function month() {
-            return new Date().getMonth();
-        },
-        year: function year() {
-            return new Date().getFullYear();
-        },
-        appendDays: function appendDays() {
-            var numberOfDays = 6 - this.dayName(this.daysInMonth(this.month, this.year), this.month, this.year);
-            var result = [];
-            for (var i = 1; i <= numberOfDays; i++) {
-                result.push({ number: i, active: false });
-            }
-            return result;
-        },
-        prependDays: function prependDays() {
-            var lastMonth = this.month - 1;
-            var year = this.year;
-            if (this.month == 0) {
-                lastMonth = 11;
-                year = this.year - 1;
-            }
-            var lastMonthLastDay = this.daysInMonth(lastMonth, year);
-            var numberOfDays = this.dayName(1, this.month, this.year);
-
-            var result = [];
-            for (var i = numberOfDays - 1; i >= 0; i--) {
-                result.push({ number: lastMonthLastDay - i, active: false });
-            }
-            return result;
-        },
-        monthCalendar: function monthCalendar() {
-            var daysInMonth = this.prependDays;
-            for (var i = 0; i < this.daysInMonth(this.month, this.year); i++) {
-                daysInMonth.push({ number: i + 1, active: true });
-            }
-            for (var _i = 0; _i < this.appendDays.length; _i++) {
-                daysInMonth.push(this.appendDays[_i]);
-            }
-            var week = 0;
-            var new_array = [];
-            var weeksNumber = daysInMonth.length / 7;
-            for (var _i2 = 0; _i2 < daysInMonth.length; _i2++) {
-                if (_i2 == daysInMonth.length / weeksNumber * week) {
-                    week++;
-                    new_array[week] = [];
-                }
-                if (_i2 < daysInMonth.length / weeksNumber * week) {
-                    new_array[week].push(daysInMonth[_i2]);
-                }
-            }
-            new_array.splice(0, 1);
-            return new_array;
-        }
-    },
     methods: {
-        dayName: function dayName(day, month, year) {
-            return new Date(year, month, day).getDay();
+        hasSchedule: function hasSchedule(hour) {
+            return hour.appointments.length > 0 ? 'bg-primary text-white' : 'bg-white';
         },
-        daysInMonth: function daysInMonth(month, year) {
-            return new Date(year, month + 1, 0).getDate();
+        select: function select(day, hour) {
+            this.selected = {
+                appointments: this.days[day].hours[hour].appointments,
+                day: day,
+                hour: hour
+            };
+        },
+        addAppointment: function addAppointment() {
+            var day = this.selected.day;
+            var hour = this.selected.hour;
+            this.days[day].hours[hour].appointments.push(this.createAppointment(day, hour, 40, 'Dentist appointment'));
+        },
+        removeAppointment: function removeAppointment(index) {
+            var day = this.selected.day;
+            var hour = this.selected.hour;
+            this.days[day].hours[hour].appointments.splice(index, 1);
+        },
+        createAppointment: function createAppointment(day, hour, minute, name) {
+            return { name: name, day: day, hour: hour, minute: minute };
         }
     },
-    mounted: function mounted() {
-        console.log("Schedule component is mounted");
-        this.date = new Date();
+    created: function created() {
+        //
     }
 });
 
 /***/ }),
-/* 260 */
+/* 271 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -81306,51 +81313,182 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c(
+      "button",
+      {
+        on: {
+          click: function($event) {
+            _vm.addAppointment()
+          }
+        }
+      },
+      [_vm._v("add")]
+    ),
+    _vm._v(" "),
+    _c(
       "div",
-      { staticClass: "container-fluid" },
-      [
-        _c("header", [
-          _c("h4", { staticClass: "display-4 mb-4 text-center" }, [
-            _vm._v(
-              _vm._s(_vm.monthList[_vm.month].name) + " " + _vm._s(_vm.year)
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "row d-none d-sm-flex p-1 bg-dark text-white" },
-            _vm._l(_vm.weekDays, function(day) {
-              return _c("h5", { staticClass: "col-sm p-1 text-center" }, [
-                _vm._v(_vm._s(day.name))
+      { staticClass: "row no-gutters" },
+      _vm._l(_vm.days, function(day, index) {
+        return _c(
+          "div",
+          { staticClass: "col" },
+          [
+            _c("div", { staticClass: "p-2 bg-primary text-white" }, [
+              _vm._v(_vm._s(day.name))
+            ]),
+            _vm._v(" "),
+            _vm._l(day.hours, function(hour, key) {
+              return _c("div", [
+                _c(
+                  "div",
+                  {
+                    staticClass: "p-2",
+                    class: _vm.hasSchedule(hour),
+                    attrs: {
+                      "data-toggle": "modal",
+                      "data-target": "#appointment-modal"
+                    },
+                    on: {
+                      click: function($event) {
+                        _vm.select(index, key)
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(hour.name) +
+                        ":00\n                "
+                    )
+                  ]
+                )
               ])
             })
-          )
-        ]),
-        _vm._v(" "),
-        _vm._l(_vm.monthCalendar, function(week) {
-          return _c(
-            "div",
-            { staticClass: "row border border-right-0 border-bottom-0" },
-            _vm._l(week, function(day, index) {
-              return _c(
-                "div",
-                {
-                  staticClass:
-                    "day col-sm p-2 border border-left-0 border-top-0 text-truncate d-sm-inline-block text-muted",
-                  class: { "bg-white": day.active }
-                },
-                [
-                  _c("vue-day", {
-                    attrs: { day: day, "week-days": _vm.weekDays, index: index }
-                  })
-                ],
-                1
-              )
-            })
-          )
-        })
-      ],
-      2
+          ],
+          2
+        )
+      })
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "appointment-modal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-body" }, [
+                _vm.selected !== null
+                  ? _c(
+                      "div",
+                      [
+                        _vm._l(_vm.selected.appointments, function(
+                          appointment,
+                          index
+                        ) {
+                          return _c("div", [
+                            _c(
+                              "div",
+                              {
+                                staticClass: "mb-2 bg-primary text-white p-2",
+                                on: {
+                                  click: function($event) {
+                                    _vm.removeAppointment(index)
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                                " +
+                                    _vm._s(appointment.name) +
+                                    "\n                            "
+                                )
+                              ]
+                            )
+                          ])
+                        }),
+                        _vm._v(" "),
+                        _c("hr"),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "exampleFormControlSelect2" } },
+                            [_vm._v("Select social channel:")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            { staticClass: "form-control" },
+                            _vm._l(_vm.socials, function(social) {
+                              return _c("option", [_vm._v(_vm._s(social.name))])
+                            })
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c(
+                            "label",
+                            { attrs: { for: "exampleFormControlInput1" } },
+                            [_vm._v("Select minute:")]
+                          ),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "time",
+                              min: "0" + _vm.selected.hour + ":00",
+                              max: "0" + _vm.selected.hour + ":59"
+                            }
+                          })
+                        ])
+                      ],
+                      2
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Close")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.addAppointment()
+                      }
+                    }
+                  },
+                  [_vm._v("Add schedule")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
     )
   ])
 }
@@ -81365,30 +81503,18 @@ if (false) {
 }
 
 /***/ }),
-/* 261 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(272)
+var __vue_script__ = __webpack_require__(276)
 /* template */
-var __vue_template__ = __webpack_require__(273)
+var __vue_template__ = __webpack_require__(277)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -81405,7 +81531,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/Schedule/VueDay.vue"
+Component.options.__file = "resources/assets/js/components/Schedule/VueAppointment.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -81414,9 +81540,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6cfe1a32", Component.options)
+    hotAPI.createRecord("data-v-5b3aa32c", Component.options)
   } else {
-    hotAPI.reload("data-v-6cfe1a32", Component.options)
+    hotAPI.reload("data-v-5b3aa32c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -81427,7 +81553,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 272 */
+/* 276 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -81452,7 +81578,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 273 */
+/* 277 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -81481,7 +81607,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-6cfe1a32", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-5b3aa32c", module.exports)
   }
 }
 
