@@ -22,9 +22,7 @@ Vue.component('image-details', require('./components/ImageUpload/ImageDetails.vu
 
 Vue.component('masonry-wrapper', require('./components/MasonryWrapper.vue'));
 
-
 Vue.component('vue-schedule', require('./components/Schedule/VueSchedule.vue'));
-Vue.component('vue-appointment', require('./components/Schedule/VueAppointment.vue'));
 
 // Setup global variables
 Vue.prototype.api = '/api/v1/';

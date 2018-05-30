@@ -1,6 +1,5 @@
 <template>
     <div>
-        <button v-on:click="addAppointment()">add</button>
         <div class="row no-gutters">
             <div class="col" v-for="(day, index) in days">
                 <div class="p-2 bg-primary text-white">{{ day.name }}</div>
