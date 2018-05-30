@@ -7,6 +7,7 @@ window.Vue = require('vue');
 import { VueEditor } from 'vue2-editor';
 import VueMasonry from 'vue-masonry-css'
 
+
 // Init Vue js components
 Vue.component('vue-editor', VueEditor);
 Vue.component('vue-editor-wrapper', require('./components/VueEditorWrapper.vue'));
@@ -21,11 +22,14 @@ Vue.component('image-details', require('./components/ImageUpload/ImageDetails.vu
 
 Vue.component('masonry-wrapper', require('./components/MasonryWrapper.vue'));
 
+Vue.component('vue-schedule', require('./components/Schedule/VueSchedule.vue'));
+
 // Setup global variables
 Vue.prototype.api = '/api/v1/';
 
 // Link Vue with 'use' function
 Vue.use(VueMasonry);
+
 
 const app = new Vue({
     el: '#app'

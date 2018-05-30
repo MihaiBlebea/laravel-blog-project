@@ -79,6 +79,13 @@ class AdminSidebareMenuViewComposer
                 'params' => [],
                 'roles'  => ['admin']
             ],
+            [
+                'name'   => 'schedule',
+                'slug'   => 'admin/tracking/manage',
+                'route'  => 'schedule.manage',
+                'params' => [],
+                'roles'  => ['admin', 'user']
+            ],
         ];
         $view->with([
             'sidebar_nav' => $menu,
