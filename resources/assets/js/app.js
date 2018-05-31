@@ -6,7 +6,7 @@ window.Vue = require('vue');
 
 import { VueEditor } from 'vue2-editor';
 import VueMasonry from 'vue-masonry-css'
-
+import vSelect from 'vue-select'
 
 // Init Vue js components
 Vue.component('vue-editor', VueEditor);
@@ -23,6 +23,7 @@ Vue.component('image-details', require('./components/ImageUpload/ImageDetails.vu
 Vue.component('masonry-wrapper', require('./components/MasonryWrapper.vue'));
 
 Vue.component('vue-schedule', require('./components/Schedule/VueSchedule.vue'));
+Vue.component('v-select', vSelect)
 
 // Setup global variables
 Vue.prototype.api = '/api/v1/';

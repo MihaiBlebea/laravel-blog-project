@@ -1,44 +1,70 @@
 <template>
     <div>
-        <div class="row no-gutters">
+        <div class="row no-gutters mb-4">
             <div class="col" v-for="(day, index) in days">
                 <div class="p-2 bg-primary text-white">{{ day.name }}</div>
                 <div v-for="(hour, key) in day.hours">
-                    <div class="p-2"
+                    <div class="p-2 pointer appointment"
                          v-on:click="select(index, key)"
                          v-bind:class="hasSchedule(hour)"
                          data-toggle="modal"
                          data-target="#appointment-modal">
                         {{ hour.name }}:00
+                        <span class="float-right" v-if="hour.appointments.length > 0">x{{ hour.appointments.length }}</span>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <button v-on:click="saveSchedule()" class="btn btn-primary btn-block">Save schedule</button>
+            </div>
+        </div>
+
         <!-- Modal -->
-        <div class="modal fade" id="appointment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal fade"
+             id="appointment-modal"
+             tabindex="-1"
+             role="dialog"
+             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-body">
                         <div v-if="selected !== null">
                             <div v-for="(appointment, index) in selected.appointments">
 
-                                <div class="mb-2 bg-primary text-white p-2" v-on:click="removeAppointment(index)">
-                                    {{ appointment.name }}
+                                <div class="mb-2 bg-primary text-white p-2"
+                                     v-on:click="removeAppointment(index)">
+                                    {{ appointment.name }} <span class="float-right">{{ appointment.minute }}</span>
                                 </div>
 
                             </div>
 
                             <hr>
                             <div class="form-group">
-                                <label for="exampleFormControlSelect2">Select social channel:</label>
-                                <select class="form-control">
-                                    <option v-for="social in socials">{{ social.name }}</option>
-                                </select>
+                                <label>Select post:</label>
+                                <v-select v-model="selectedPost"
+                                          :label="'title'"
+                                          :options="posts">
+                                </v-select>
+
                             </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlInput1">Select minute:</label>
-                                <input type="time" class="form-control" :min="'0' + selected.hour + ':00'" :max="'0' + selected.hour + ':59'">
+                            <div class="row">
+                                <div class="col">
+                                    <label>Select social channel:</label>
+                                    <select class="form-control" v-model="selectedChannel">
+                                        <option v-for="social in socials">{{ social.name }}</option>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <label>Select minute:</label>
+                                    <input type="time"
+                                           class="form-control"
+                                           :min="minHour"
+                                           :max="maxHour"
+                                           v-model="selectedMinute">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,7 +82,7 @@
 
 <script>
 export default {
-    props: [''],
+    props: ['user-id'],
     data: function()
     {
         return {
@@ -126,12 +152,29 @@ export default {
                 ]}
             ],
             selected: null,
-            tempAppointment: null,
+
             socials: [
                 { name: 'twitter' },
                 { name: 'facebook' },
                 { name: 'linkedin' }
-            ]
+            ],
+
+            posts: null,
+            selectedPost: null,
+            selectedChannel: null,
+            selectedMinute: null
+        }
+    },
+    computed: {
+        minHour: function()
+        {
+            let hour = this.days[this.selected.day].hours[this.selected.hour].name;
+            return ((hour.toString().length > 1) ? hour : '0' + hour) + ':00'
+        },
+        maxHour: function()
+        {
+            let hour = this.days[this.selected.day].hours[this.selected.hour].name;
+            return ((hour.toString().length > 1) ? hour : '0' + hour) + ':59'
         }
     },
     methods: {
@@ -151,7 +194,8 @@ export default {
         {
             let day = this.selected.day;
             let hour = this.selected.hour;
-            this.days[day].hours[hour].appointments.push(this.createAppointment(day, hour, 40, 'Dentist appointment'))
+            this.days[day].hours[hour].appointments.push(this.createAppointment(day, hour, this.selectedMinute, this.selectedChannel, this.selectedPost.title))
+            this.clearSelectedAppointment()
         },
         removeAppointment: function(index)
         {
@@ -159,14 +203,49 @@ export default {
             let hour = this.selected.hour;
             this.days[day].hours[hour].appointments.splice(index, 1);
         },
-        createAppointment: function(day, hour, minute, name)
+        createAppointment: function(day, hour, minute, channel, name)
         {
-            return { name: name, day: day, hour: hour, minute: minute }
+            return {
+                name: name,
+                day: day,
+                hour: hour,
+                channel: channel,
+                minute: minute
+            }
+        },
+        clearSelectedAppointment: function()
+        {
+            this.selectedChannel = null;
+            this.selectedPost = null;
+            this.selectedMinute = null;
+        },
+        getPosts: function()
+        {
+            axios.get(this.api + 'posts/user/' + this.userId).then((result)=> {
+                this.posts = result.data;
+            }).catch((err)=> {
+                console.log(err)
+            })
+        },
+        saveSchedule: function()
+        {
+            axios.post(this.api + 'posts/user/' + this.userId, this.days).then((result)=> {
+                console.log(result.data)
+            }).catch((err)=> {
+                console.log(err)
+            })
         }
     },
     created()
     {
-        //
+        // Get all posts by user
+        this.getPosts();
     }
 }
 </script>
+
+<style scoped>
+.appointment:hover {
+    filter: brightness(85%);
+}
+</style>

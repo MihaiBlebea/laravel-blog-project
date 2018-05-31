@@ -30,4 +30,9 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
     // Project imagesy
     Route::get('/images/project/{project}', 'Api\ProjectController@getProjectImages');
 
+    // Get posts by user
+    Route::get('/posts/user/{user}', 'Api\PostController@getUserPosts');
+
+    Route::post('/posts/user/{user}', 'Api\PostController@storeSchedule');
+
 });

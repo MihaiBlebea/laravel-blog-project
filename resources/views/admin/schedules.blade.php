@@ -4,6 +4,6 @@
 
 @include('partials.titles._page-title', ['title' => 'Schedule'])
 
-<vue-schedule></vue-schedule>
+<vue-schedule user-id="{{ auth()->user()->slug }}"></vue-schedule>
 
 @endsection
