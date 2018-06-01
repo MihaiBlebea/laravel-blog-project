@@ -14,25 +14,31 @@ class ScheduleController extends Controller
 {
     public function storeSchedule(Request $request, User $user)
     {
-        foreach($request->all() as $days)
+        foreach($request->all() as $appointment)
         {
-            foreach($days['hours'] as $hour)
+            $post = Post::where('title', $appointment['name'])->first();
+            $app_id = $appointment['id'];
+
+            if($app_id == null)
             {
-                if(count($hour['appointments']) > 0)
-                {
-                    foreach($hour['appointments'] as $appointment)
-                    {
-                        $post = Post::where('title', $appointment['name'])->first();
-                        Schedule::create([
-                            'user_id' => $user->id,
-                            'post_id' => $post->id,
-                            'date'    => $appointment['day'],
-                            'hour'    => $appointment['hour'],
-                            'minute'  => $appointment['minute'],
-                            'channel' => $appointment['channel']
-                        ]);
-                    }
-                }
+                Schedule::create([
+                    'user_id' => $user->id,
+                    'post_id' => $post->id,
+                    'date'    => $appointment['day'],
+                    'hour'    => $appointment['hour'],
+                    'minute'  => $appointment['minute'],
+                    'channel' => $appointment['channel']
+                ]);
+            } else {
+                $schedule = Schedule::find($app_id);
+                $schedule->update([
+                    'user_id' => $user->id,
+                    'post_id' => $post->id,
+                    'date'    => $appointment['day'],
+                    'hour'    => $appointment['hour'],
+                    'minute'  => $appointment['minute'],
+                    'channel' => $appointment['channel']
+                ]);
             }
         }
         return $request->all();

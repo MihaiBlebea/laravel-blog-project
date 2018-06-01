@@ -81350,11 +81350,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         maxHour: function maxHour() {
             var hour = this.days[this.selected.day].hours[this.selected.hour].name;
             return (hour.toString().length > 1 ? hour : '0' + hour) + ':59';
+        },
+        getHourFromIndex: function getHourFromIndex() {
+            return this.days[this.selected.day].hours[this.selected.hour].name;
+        },
+        extractAppsFromCalendar: function extractAppsFromCalendar() {
+            var result = [];
+            this.days.forEach(function (day) {
+                day.hours.forEach(function (hour) {
+                    if (hour.appointments.length > 0) {
+                        hour.appointments.forEach(function (appointment) {
+                            result.push(appointment);
+                        });
+                    }
+                });
+            });
+            return result;
         }
     },
     methods: {
         hasSchedule: function hasSchedule(hour) {
-            return hour.appointments.length > 0 ? 'bg-primary text-white' : 'bg-white';
+            return hour.appointments.length > 0 ? 'bg-primary text-white' : '';
         },
         select: function select(day, hour) {
             this.selected = {
@@ -81374,8 +81390,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var hour = this.selected.hour;
             this.days[day].hours[hour].appointments.splice(index, 1);
         },
-        createAppointment: function createAppointment(day, hour, minute, channel, name) {
+        createAppointment: function createAppointment(day, hour, minute, channel, name, appointmentId) {
+            console.log('Appointemnt id', appointmentId);
             return {
+                id: appointmentId !== undefined ? appointmentId : null,
                 name: name,
                 day: day,
                 hour: hour,
@@ -81388,17 +81406,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.selectedPost = null;
             this.selectedMinute = null;
         },
-        getPosts: function getPosts() {
+        getPosts: function getPosts(callback) {
             var _this = this;
 
             axios.get(this.api + 'posts/user/' + this.userId).then(function (result) {
                 _this.posts = result.data;
+                callback();
             }).catch(function (err) {
                 console.log(err);
             });
         },
         saveSchedule: function saveSchedule() {
-            axios.post(this.api + 'schedule/user/' + this.userId, this.days).then(function (result) {
+            axios.post(this.api + 'schedule/user/' + this.userId, this.extractAppsFromCalendar).then(function (result) {
                 console.log(result.data);
             }).catch(function (err) {
                 console.log(err);
@@ -81408,14 +81427,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             axios.get(this.api + 'schedule/user/' + this.userId).then(function (result) {
-                console.log(result.data);
                 var schedules = result.data;
 
                 var _loop = function _loop(i) {
                     var post = _this2.posts.find(function (post) {
                         return post.id == schedules[i].post_id;
                     });
-                    _this2.days[schedules[i].date].hours[schedules[i].hour].appointments.push(_this2.createAppointment(schedules[i].date, schedules[i].hour, schedules[i].minute, schedules[i].channel, post.title));
+                    _this2.days[schedules[i].date].hours[schedules[i].hour].appointments.push(_this2.createAppointment(schedules[i].date, schedules[i].hour, schedules[i].minute, schedules[i].channel, post.title, schedules[i].id));
                 };
 
                 for (var i = 0; i < schedules.length; i++) {
@@ -81427,9 +81445,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
+        var _this3 = this;
+
         // Get all posts by user
-        this.getPosts();
-        this.getInitialSchedules();
+        this.getPosts(function () {
+            _this3.getInitialSchedules();
+        });
     }
 });
 
@@ -81552,11 +81573,15 @@ var render = function() {
                               [
                                 _vm._v(
                                   "\n                                " +
+                                    _vm._s(_vm.getHourFromIndex) +
+                                    ":" +
+                                    _vm._s(appointment.minute) +
+                                    " - " +
                                     _vm._s(appointment.name) +
                                     " "
                                 ),
                                 _c("span", { staticClass: "float-right" }, [
-                                  _vm._v(_vm._s(appointment.minute))
+                                  _vm._v(_vm._s(appointment.channel))
                                 ])
                               ]
                             )

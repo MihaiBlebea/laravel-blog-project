@@ -36,7 +36,7 @@
 
                                 <div class="mb-2 bg-primary text-white p-2"
                                      v-on:click="removeAppointment(index)">
-                                    {{ appointment.name }} <span class="float-right">{{ appointment.minute }}</span>
+                                    {{ getHourFromIndex }}:{{ appointment.minute }} - {{ appointment.name }} <span class="float-right">{{ appointment.channel }}</span>
                                 </div>
 
                             </div>
@@ -175,12 +175,31 @@ export default {
         {
             let hour = this.days[this.selected.day].hours[this.selected.hour].name;
             return ((hour.toString().length > 1) ? hour : '0' + hour) + ':59'
+        },
+        getHourFromIndex: function()
+        {
+            return this.days[this.selected.day].hours[this.selected.hour].name;
+        },
+        extractAppsFromCalendar: function()
+        {
+            let result = [];
+            this.days.forEach((day)=> {
+                day.hours.forEach((hour)=> {
+                    if(hour.appointments.length > 0)
+                    {
+                        hour.appointments.forEach((appointment)=> {
+                            result.push(appointment)
+                        })
+                    }
+                })
+            });
+            return result;
         }
     },
     methods: {
         hasSchedule: function(hour)
         {
-            return (hour.appointments.length > 0) ? 'bg-primary text-white' : 'bg-white';
+            return (hour.appointments.length > 0) ? 'bg-primary text-white' : '';
         },
         select: function(day, hour)
         {
@@ -203,9 +222,11 @@ export default {
             let hour = this.selected.hour;
             this.days[day].hours[hour].appointments.splice(index, 1);
         },
-        createAppointment: function(day, hour, minute, channel, name)
+        createAppointment: function(day, hour, minute, channel, name, appointmentId)
         {
+            console.log('Appointemnt id', appointmentId)
             return {
+                id: (appointmentId !== undefined) ? appointmentId : null,
                 name: name,
                 day: day,
                 hour: hour,
@@ -219,17 +240,18 @@ export default {
             this.selectedPost = null;
             this.selectedMinute = null;
         },
-        getPosts: function()
+        getPosts: function(callback)
         {
             axios.get(this.api + 'posts/user/' + this.userId).then((result)=> {
                 this.posts = result.data;
+                callback()
             }).catch((err)=> {
                 console.log(err)
             })
         },
         saveSchedule: function()
         {
-            axios.post(this.api + 'schedule/user/' + this.userId, this.days).then((result)=> {
+            axios.post(this.api + 'schedule/user/' + this.userId, this.extractAppsFromCalendar).then((result)=> {
                 console.log(result.data)
             }).catch((err)=> {
                 console.log(err)
@@ -238,14 +260,13 @@ export default {
         getInitialSchedules: function()
         {
             axios.get(this.api + 'schedule/user/' + this.userId).then((result)=> {
-                console.log(result.data)
                 let schedules = result.data;
                 for(let i = 0; i < schedules.length; i++)
                 {
                     let post = this.posts.find((post)=> {
                         return post.id == schedules[i].post_id
                     })
-                    this.days[schedules[i].date].hours[schedules[i].hour].appointments.push(this.createAppointment(schedules[i].date, schedules[i].hour, schedules[i].minute, schedules[i].channel, post.title))
+                    this.days[schedules[i].date].hours[schedules[i].hour].appointments.push(this.createAppointment(schedules[i].date, schedules[i].hour, schedules[i].minute, schedules[i].channel, post.title, schedules[i].id))
                 }
             }).catch((err)=> {
                 console.log(err)
@@ -255,8 +276,7 @@ export default {
     created()
     {
         // Get all posts by user
-        this.getPosts();
-        this.getInitialSchedules();
+        this.getPosts(()=> { this.getInitialSchedules(); });
     }
 }
 </script>
