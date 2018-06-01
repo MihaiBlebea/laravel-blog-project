@@ -13,7 +13,8 @@ use App\Models\{
     Social,
     Search,
     Profile,
-    Image
+    Image,
+    Schedule
 };
 use Jrean\UserVerification\Traits\UserVerification;
 
@@ -81,6 +82,11 @@ class User extends Authenticatable
     public function images()
     {
         return $this->hasMany(Image::class);
+    }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
     }
 
     // Custom methods

@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label>Select post:</label>
                                 <v-select v-model="selectedPost"
-                                          :label="'title'"
+                                          label="title"
                                           :options="posts">
                                 </v-select>
 
@@ -210,7 +210,7 @@ export default {
                 day: day,
                 hour: hour,
                 channel: channel,
-                minute: minute
+                minute: (minute.includes(':')) ? minute.split(":")[1] : minute
             }
         },
         clearSelectedAppointment: function()
@@ -229,8 +229,24 @@ export default {
         },
         saveSchedule: function()
         {
-            axios.post(this.api + 'posts/user/' + this.userId, this.days).then((result)=> {
+            axios.post(this.api + 'schedule/user/' + this.userId, this.days).then((result)=> {
                 console.log(result.data)
+            }).catch((err)=> {
+                console.log(err)
+            })
+        },
+        getInitialSchedules: function()
+        {
+            axios.get(this.api + 'schedule/user/' + this.userId).then((result)=> {
+                console.log(result.data)
+                let schedules = result.data;
+                for(let i = 0; i < schedules.length; i++)
+                {
+                    let post = this.posts.find((post)=> {
+                        return post.id == schedules[i].post_id
+                    })
+                    this.days[schedules[i].date].hours[schedules[i].hour].appointments.push(this.createAppointment(schedules[i].date, schedules[i].hour, schedules[i].minute, schedules[i].channel, post.title))
+                }
             }).catch((err)=> {
                 console.log(err)
             })
@@ -240,6 +256,7 @@ export default {
     {
         // Get all posts by user
         this.getPosts();
+        this.getInitialSchedules();
     }
 }
 </script>

@@ -33,6 +33,8 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
     // Get posts by user
     Route::get('/posts/user/{user}', 'Api\PostController@getUserPosts');
 
-    Route::post('/posts/user/{user}', 'Api\PostController@storeSchedule');
+    Route::post('/schedule/user/{user}', 'Api\ScheduleController@storeSchedule');
+
+    Route::get('/schedule/user/{user}', 'Api\ScheduleController@getUserSchedule');
 
 });
