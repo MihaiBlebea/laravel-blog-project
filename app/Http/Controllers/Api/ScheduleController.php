@@ -48,4 +48,9 @@ class ScheduleController extends Controller
     {
         return $user->schedules;
     }
+
+    public function removeSchedule(Schedule $schedule)
+    {
+        $schedule->delete();
+    }
 }

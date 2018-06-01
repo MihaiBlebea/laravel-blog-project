@@ -81370,7 +81370,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         hasSchedule: function hasSchedule(hour) {
-            return hour.appointments.length > 0 ? 'bg-primary text-white' : '';
+            return hour.appointments.length > 0 ? 'bg-primary text-white' : 'bg-white';
         },
         select: function select(day, hour) {
             this.selected = {
@@ -81379,19 +81379,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 hour: hour
             };
         },
+        validateAppointment: function validateAppointment() {
+            var result = true;
+            if (this.selected == null) {
+                result = false;
+            }
+            if (this.selectedMinute == null) {
+                result = false;
+            }
+            if (this.selectedChannel == null) {
+                result = false;
+            }
+            if (this.selectedPost == null) {
+                result = false;
+            }
+            return result;
+        },
         addAppointment: function addAppointment() {
-            var day = this.selected.day;
-            var hour = this.selected.hour;
-            this.days[day].hours[hour].appointments.push(this.createAppointment(day, hour, this.selectedMinute, this.selectedChannel, this.selectedPost.title));
-            this.clearSelectedAppointment();
+            if (this.validateAppointment()) {
+                var day = this.selected.day;
+                var hour = this.selected.hour;
+                this.days[day].hours[hour].appointments.push(this.createAppointment(day, hour, this.selectedMinute, this.selectedChannel, this.selectedPost.title));
+                this.clearSelectedAppointment();
+            }
         },
         removeAppointment: function removeAppointment(index) {
             var day = this.selected.day;
             var hour = this.selected.hour;
+
+            // Check if the appointment has id or not
+            if (this.days[day].hours[hour].appointments[index].id !== null) {
+                this.removeScheduleFromDatabase(this.days[day].hours[hour].appointments[index]);
+            }
             this.days[day].hours[hour].appointments.splice(index, 1);
         },
         createAppointment: function createAppointment(day, hour, minute, channel, name, appointmentId) {
-            console.log('Appointemnt id', appointmentId);
             return {
                 id: appointmentId !== undefined ? appointmentId : null,
                 name: name,
@@ -81418,6 +81440,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         saveSchedule: function saveSchedule() {
             axios.post(this.api + 'schedule/user/' + this.userId, this.extractAppsFromCalendar).then(function (result) {
+                console.log(result.data);
+            }).catch(function (err) {
+                console.log(err);
+            });
+        },
+        removeScheduleFromDatabase: function removeScheduleFromDatabase(schedule) {
+            axios.get(this.api + 'schedule/remove/' + schedule.id).then(function (result) {
                 console.log(result.data);
             }).catch(function (err) {
                 console.log(err);

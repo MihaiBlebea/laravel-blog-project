@@ -199,7 +199,7 @@ export default {
     methods: {
         hasSchedule: function(hour)
         {
-            return (hour.appointments.length > 0) ? 'bg-primary text-white' : '';
+            return (hour.appointments.length > 0) ? 'bg-primary text-white' : 'bg-white';
         },
         select: function(day, hour)
         {
@@ -209,22 +209,39 @@ export default {
                 hour: hour
             }
         },
+        validateAppointment: function()
+        {
+            let result = true;
+            if(this.selected == null) { result = false }
+            if(this.selectedMinute == null) { result = false }
+            if(this.selectedChannel == null) { result = false }
+            if(this.selectedPost == null) { result = false }
+            return result;
+        },
         addAppointment: function()
         {
-            let day = this.selected.day;
-            let hour = this.selected.hour;
-            this.days[day].hours[hour].appointments.push(this.createAppointment(day, hour, this.selectedMinute, this.selectedChannel, this.selectedPost.title))
-            this.clearSelectedAppointment()
+            if(this.validateAppointment())
+            {
+                let day = this.selected.day;
+                let hour = this.selected.hour;
+                this.days[day].hours[hour].appointments.push(this.createAppointment(day, hour, this.selectedMinute, this.selectedChannel, this.selectedPost.title))
+                this.clearSelectedAppointment()
+            }
         },
         removeAppointment: function(index)
         {
             let day = this.selected.day;
             let hour = this.selected.hour;
+
+            // Check if the appointment has id or not
+            if(this.days[day].hours[hour].appointments[index].id !== null)
+            {
+                this.removeScheduleFromDatabase(this.days[day].hours[hour].appointments[index])
+            }
             this.days[day].hours[hour].appointments.splice(index, 1);
         },
         createAppointment: function(day, hour, minute, channel, name, appointmentId)
         {
-            console.log('Appointemnt id', appointmentId)
             return {
                 id: (appointmentId !== undefined) ? appointmentId : null,
                 name: name,
@@ -257,6 +274,15 @@ export default {
                 console.log(err)
             })
         },
+        removeScheduleFromDatabase: function(schedule)
+        {
+            axios.get(this.api + 'schedule/remove/' + schedule.id).then((result)=> {
+                console.log(result.data)
+            }).catch((err)=> {
+                console.log(err)
+            })
+
+        },
         getInitialSchedules: function()
         {
             axios.get(this.api + 'schedule/user/' + this.userId).then((result)=> {
@@ -276,7 +302,9 @@ export default {
     created()
     {
         // Get all posts by user
-        this.getPosts(()=> { this.getInitialSchedules(); });
+        this.getPosts(()=> {
+            this.getInitialSchedules();
+        });
     }
 }
 </script>

@@ -37,4 +37,7 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
     Route::get('/schedule/user/{user}', 'Api\ScheduleController@getUserSchedule');
 
+    // Remove schedule from database 
+    Route::get('/schedule/remove/{schedule}', 'Api\ScheduleController@removeSchedule');
+
 });

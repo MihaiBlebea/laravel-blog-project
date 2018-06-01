@@ -9,7 +9,7 @@
         @csrf
 
         <div class="form-group">
-            @include('partials._chapter-title', ['title' => 'Contact details'])
+            @include('partials.titles._chapter-title', ['title' => 'Contact details'])
         </div>
 
         <div class="form-group">
@@ -63,7 +63,7 @@
         </div>
 
         <div class="form-group">
-            @include('partials._chapter-title', ['title' => 'Profile information'])
+            @include('partials.titles._chapter-title', ['title' => 'Profile information'])
         </div>
 
         <div class="form-group">
