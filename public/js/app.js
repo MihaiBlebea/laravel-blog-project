@@ -81601,6 +81601,12 @@ var render = function() {
                   ? _c(
                       "div",
                       [
+                        _vm.selected.appointments.length == 0
+                          ? _c("p", { staticClass: "text-muted" }, [
+                              _vm._v("No schedules for today")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
                         _vm._l(_vm.selected.appointments, function(
                           appointment,
                           index

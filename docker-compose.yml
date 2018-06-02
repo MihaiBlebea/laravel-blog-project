@@ -4,6 +4,12 @@
 version: "3.1"
 services:
 
+    cron:
+        image: morbz/docker-cron
+        environment:
+            - CRON_MINUTE=* * * * * root echo "Hello minute"
+            - CRON_HOUR=0 * * * * root echo "Hello hour"
+
     mysql:
       image: mysql:5.7
       container_name: laravel-blog-project-mysql

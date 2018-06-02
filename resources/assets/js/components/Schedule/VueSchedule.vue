@@ -32,13 +32,13 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div v-if="selected !== null">
-                            <div v-for="(appointment, index) in selected.appointments">
+                            <p v-if="selected.appointments.length == 0" class="text-muted">No schedules for today</p>
 
+                            <div v-for="(appointment, index) in selected.appointments">
                                 <div class="mb-2 bg-primary text-white p-2"
                                      v-on:click="removeAppointment(index)">
                                     {{ getHourFromIndex }}:{{ appointment.minute }} - {{ appointment.name }} <span class="float-right">{{ appointment.channel }}</span>
                                 </div>
-
                             </div>
 
                             <hr>
