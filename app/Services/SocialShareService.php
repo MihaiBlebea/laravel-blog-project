@@ -4,18 +4,28 @@ namespace App\Services;
 
 use App\Interfaces\SocialShareServiceInterface;
 use Happyr\LinkedIn\LinkedIn;
-use JonathanTorres\MediumSdk\Medium;
-use App\Models\Post;
 use Twitter;
-use Exception;
+use App\Models\{
+    Post,
+    User
+};
 use File;
 
 class SocialShareService implements SocialShareServiceInterface
 {
-    public static function shareLinkedin(Post $post)
+    private static function urlToPost($category_slug, $post_slug)
     {
+        return '/blog/' . $category_slug . '/' . $post_slug;
+    }
+
+    public static function shareLinkedin(Post $post, User $user = null)
+    {
+        if($user == null)
+        {
+            $user = auth()->user();
+        }
         $linkedIn = new LinkedIn(config('linkedin.api_key'), config('linkedin.api_secret'));
-        $linkedIn->setAccessToken(auth()->user()->social->linkedin_token);
+        $linkedIn->setAccessToken($user->social->linkedin_token);
 
         $options = [ "json" =>
             [
@@ -23,8 +33,8 @@ class SocialShareService implements SocialShareServiceInterface
                 "content" => [
                     "title" => $post->title,
                     "description" => $post->except(),
-                    "submitted-url" => '/blog/' . $post->category->slug . '/' . $post->slug,
-                    "submitted-image-url" => public_upload_path($post->feature_image)
+                    "submitted-url" => self::urlToPost($post->category->slug, $post->slug),
+                    "submitted-image-url" => public_path($post->image->path ?? null)
                 ],
                 "visibility" => [
                     "code" => "anyone"
@@ -34,54 +44,34 @@ class SocialShareService implements SocialShareServiceInterface
 
         $result = $linkedIn->post('v1/people/~/shares', $options);
 
-        return true;
+        return $result;
     }
 
-    public static function shareMedium(Post $post)
+    public static function shareTwitter(Post $post, User $user = null)
     {
-        $medium = new Medium();
-        $medium->connect(auth()->user()->social->medium_token);
+        // $request_token = [
+		// 	'token'  => '958085783994404864-00ylFG39pkYztjtcEsvzgUXuiwjkgg9',
+		// 	'secret' => 'ZZwBSdhFI0pXey8PqKMaCLtjK8AUSjX1cKVntSQofdSCc',
+		// ];
+        //
+		// Twitter::reconfig($request_token);
 
-        // Store image on Medium and insert into post
-        // TODO have a service to upload images
-        // Find the curl method in helpers.php file
-        $image_data = curl('http://167.99.88.74/uploads/feature-images/d5R5wqe0tGi29Bbcu0OLqcInToW0Qsp7ldiWaYV9.jpeg');
-        $image = $medium->uploadImage($image_data, 'image-filename.jpeg');
+        // Check if post has image
+        if($post->image)
+        {
+            $uploaded_media = Twitter::uploadMedia(['media' => File::get(public_path($post->image->path))]);
+    	    $result = Twitter::postTweet([
+                'status' => 'Laravel is beautiful',
+                'media_ids' => $uploaded_media->media_id_string
+            ]);
+        } else {
+            $result = Twitter::postTweet(['status' => 'Laravel is beautiful', 'format' => 'json']);
+        }
 
-        $user = $medium->getAuthenticatedUser();
-        $data = [
-            'title' => $post->title,
-            'contentFormat' => 'html',
-            'content' => '<img src="' . $image->data->url . '">' . $post->title,
-            'publishStatus' => 'draft',
-        ];
-
-        $post = $medium->createPost($user->data->id, $data);
-
-        return true;
+        return $result;
     }
 
-    public static function shareTwitter(Post $post)
-    {
-        $request_token = [
-			'token'  => 'token',
-			'secret' => 'token',
-		];
-
-		Twitter::reconfig($request_token);
-
-        // Twitter::postTweet(['status' => 'Laravel is beautiful', 'format' => 'json']);
-
-        $uploaded_media = Twitter::uploadMedia(['media' => File::get(public_path('filename.jpg'))]);
-	    Twitter::postTweet([
-            'status' => 'Laravel is beautiful',
-            'media_ids' => $uploaded_media->media_id_string
-        ]);
-
-        return true;
-    }
-
-    public static function shareFacebook(Post $post)
+    public static function shareFacebook(Post $post, User $user = null)
     {
         //
         return true;

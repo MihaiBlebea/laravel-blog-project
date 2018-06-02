@@ -26,6 +26,10 @@
                 <p class="card-text font-article">{!! $post->content !!}</p>
                 <!-- include main content section -->
 
+                <!-- Include end author description -->
+                @include('partials._profile-short-description', ['user' => $post->author])
+                <!-- Include end author description -->
+                
             </div>
         </div>
     </div>

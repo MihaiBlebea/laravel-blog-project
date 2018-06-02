@@ -2,15 +2,16 @@
 
 namespace App\Interfaces;
 
-use App\Models\Post;
+use App\Models\{
+    Post,
+    User
+};
 
 interface SocialShareServiceInterface
 {
-    public static function shareLinkedin(Post $post);
+    public static function shareLinkedin(Post $post, User $user = null);
 
-    public static function shareMedium(Post $post);
+    public static function shareTwitter(Post $post, User $user = null);
 
-    public static function shareTwitter(Post $post);
-
-    public static function shareFacebook(Post $post);
+    public static function shareFacebook(Post $post, User $user = null);
 }
