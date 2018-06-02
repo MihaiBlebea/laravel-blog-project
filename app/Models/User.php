@@ -14,7 +14,8 @@ use App\Models\{
     Search,
     Profile,
     Image,
-    Schedule
+    Schedule,
+    SocialToken
 };
 use Jrean\UserVerification\Traits\UserVerification;
 
@@ -89,6 +90,11 @@ class User extends Authenticatable
         return $this->hasMany(Schedule::class);
     }
 
+    public function socialTokens()
+    {
+        return $this->hasMany(SocialToken::class);
+    }
+
     // Custom methods
     public function hasGitHub()
     {
@@ -110,5 +116,9 @@ class User extends Authenticatable
         return ($this->projects->count() > 0) ? true : false;
     }
 
-
+    public function hasSocialToken(String $channel_name)
+    {
+        $channel = $this->socialTokens()->where('channel', $channel_name)->first();
+        return ($channel) ? $channel : false;
+    }
 }

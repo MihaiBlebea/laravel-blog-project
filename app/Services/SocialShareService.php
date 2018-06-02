@@ -49,12 +49,23 @@ class SocialShareService implements SocialShareServiceInterface
 
     public static function shareTwitter(Post $post, User $user = null)
     {
-        // $request_token = [
-		// 	'token'  => '958085783994404864-00ylFG39pkYztjtcEsvzgUXuiwjkgg9',
-		// 	'secret' => 'ZZwBSdhFI0pXey8PqKMaCLtjK8AUSjX1cKVntSQofdSCc',
-		// ];
-        //
-		// Twitter::reconfig($request_token);
+        if($user == null)
+        {
+            $user = auth()->user();
+        }
+        $client_tokens = $user->hasSocialToken('twitter');
+        if(!$client_tokens)
+        {
+            throw new \Exception("User doesn't have linked Twitter account", 1);
+        }
+        $request_token = [
+            'consumer_key'    => config('services.twitter.client_id'),
+            'consumer_secret' => config('services.twitter.client_secret'),
+			'token'           => $client_tokens->token,
+			'secret'          => $client_tokens->token_secret,
+		];
+
+		Twitter::reconfig($request_token);
 
         // Check if post has image
         if($post->image)
