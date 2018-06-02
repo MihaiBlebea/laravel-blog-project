@@ -2,7 +2,7 @@
     <div>
         <div class="row no-gutters mb-4">
             <div class="col" v-for="(day, index) in days">
-                <div class="p-2 bg-primary text-white">{{ day.name }}</div>
+                <div class="p-2 bg-secondary text-white">{{ day.name }}</div>
                 <div v-for="(hour, key) in day.hours">
                     <div class="p-2 pointer appointment"
                          v-on:click="select(index, key)"
@@ -44,18 +44,19 @@
                             <hr>
                             <div class="form-group">
                                 <label>Select post:</label>
-                                <v-select v-model="selectedPost"
-                                          label="title"
-                                          :options="posts">
-                                </v-select>
+                                <v-multiselect v-model="selectedPost"
+                                               track-by="title"
+                                               label="title"
+                                               :options="posts">
+                                </v-multiselect>
 
                             </div>
                             <div class="row">
                                 <div class="col">
                                     <label>Select social channel:</label>
-                                    <select class="form-control" v-model="selectedChannel">
-                                        <option v-for="social in socials">{{ social.name }}</option>
-                                    </select>
+                                    <v-multiselect v-model="selectedChannel"
+                                                   :options="socials">
+                                    </v-multiselect>
                                 </div>
                                 <div class="col">
                                     <label>Select minute:</label>
@@ -153,11 +154,7 @@ export default {
             ],
             selected: null,
 
-            socials: [
-                { name: 'twitter' },
-                { name: 'facebook' },
-                { name: 'linkedin' }
-            ],
+            socials: [],
 
             posts: null,
             selectedPost: null,
@@ -248,7 +245,7 @@ export default {
                 day: day,
                 hour: hour,
                 channel: channel,
-                minute: (minute.includes(':')) ? minute.split(":")[1] : minute
+                minute: (typeof minute == 'string' && minute.includes(':')) ? minute.split(":")[1] : minute
             }
         },
         clearSelectedAppointment: function()
@@ -281,7 +278,6 @@ export default {
             }).catch((err)=> {
                 console.log(err)
             })
-
         },
         getInitialSchedules: function()
         {
@@ -297,6 +293,16 @@ export default {
             }).catch((err)=> {
                 console.log(err)
             })
+        },
+        getUserSocialChannels: function()
+        {
+            axios.get(this.api + 'schedule/social-channels/user/' + this.userId).then((result)=> {
+                this.socials = result.data.map((channel)=> {
+                    return channel.channel
+                });
+            }).catch((err)=> {
+                console.log(err);
+            })
         }
     },
     created()
@@ -304,6 +310,7 @@ export default {
         // Get all posts by user
         this.getPosts(()=> {
             this.getInitialSchedules();
+            this.getUserSocialChannels();
         });
     }
 }

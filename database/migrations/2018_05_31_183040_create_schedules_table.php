@@ -12,9 +12,9 @@ class CreateSchedulesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('post_id');
-            $table->string('date');
-            $table->string('hour');
-            $table->string('minute');
+            $table->integer('date');
+            $table->integer('hour');
+            $table->integer('minute');
             $table->string('channel');
             $table->timestamps();
         });

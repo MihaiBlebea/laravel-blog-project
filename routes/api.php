@@ -37,7 +37,10 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
     Route::get('/schedule/user/{user}', 'Api\ScheduleController@getUserSchedule');
 
-    // Remove schedule from database 
+    // Remove schedule from database
     Route::get('/schedule/remove/{schedule}', 'Api\ScheduleController@removeSchedule');
+
+    // Get user social channels
+    Route::get('/schedule/social-channels/user/{user}', 'Api\ScheduleController@getUserSocialChannels');
 
 });

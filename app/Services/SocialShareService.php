@@ -72,11 +72,14 @@ class SocialShareService implements SocialShareServiceInterface
         {
             $uploaded_media = Twitter::uploadMedia(['media' => File::get(public_path($post->image->path))]);
     	    $result = Twitter::postTweet([
-                'status' => 'Laravel is beautiful',
+                'status'    => $post->except(),
                 'media_ids' => $uploaded_media->media_id_string
             ]);
         } else {
-            $result = Twitter::postTweet(['status' => 'Laravel is beautiful', 'format' => 'json']);
+            $result = Twitter::postTweet([
+                'status' => $post->except(), 
+                'format' => 'json'
+            ]);
         }
 
         return $result;

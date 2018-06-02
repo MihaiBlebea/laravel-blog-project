@@ -7,11 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Models\{
     User,
     Schedule,
-    Post
+    Post,
+    SocialToken
 };
 
 class ScheduleController extends Controller
 {
+    public function getUserSocialChannels(User $user)
+    {
+        return $user->socialTokens;
+    }
+
     public function storeSchedule(Request $request, User $user)
     {
         foreach($request->all() as $appointment)
