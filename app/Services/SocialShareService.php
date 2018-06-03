@@ -10,6 +10,7 @@ use App\Models\{
     User
 };
 use File;
+use Log;
 
 class SocialShareService implements SocialShareServiceInterface
 {
@@ -77,7 +78,7 @@ class SocialShareService implements SocialShareServiceInterface
             ]);
         } else {
             $result = Twitter::postTweet([
-                'status' => $post->except(), 
+                'status' => $post->except(),
                 'format' => 'json'
             ]);
         }
@@ -89,5 +90,17 @@ class SocialShareService implements SocialShareServiceInterface
     {
         //
         return true;
+    }
+
+    public static function shareFake(Post $post, User $user = null)
+    {
+        if($user == null)
+        {
+            $user = auth()->user();
+        }
+        $message = 'User ' . $user->first_name . ' ' . $user->last_name .
+                   ' posted "' . $post->title . '" to Fake Social Channel';
+        Log::debug($message);
+        return $message;
     }
 }
