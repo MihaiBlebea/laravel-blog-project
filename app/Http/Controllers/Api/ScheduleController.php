@@ -10,6 +10,7 @@ use App\Models\{
     Post,
     SocialToken
 };
+use Carbon\Carbon;
 
 class ScheduleController extends Controller
 {
@@ -20,34 +21,35 @@ class ScheduleController extends Controller
 
     public function storeSchedule(Request $request, User $user)
     {
-        foreach($request->all() as $appointment)
-        {
-            $post = Post::where('title', $appointment['name'])->first();
-            $app_id = $appointment['id'];
+        // TODO validate data coming from Vue Component
 
-            if($app_id == null)
-            {
-                Schedule::create([
-                    'user_id' => $user->id,
-                    'post_id' => $post->id,
-                    'date'    => $appointment['day'],
-                    'hour'    => $appointment['hour'],
-                    'minute'  => $appointment['minute'],
-                    'channel' => $appointment['channel']
-                ]);
-            } else {
-                $schedule = Schedule::find($app_id);
-                $schedule->update([
-                    'user_id' => $user->id,
-                    'post_id' => $post->id,
-                    'date'    => $appointment['day'],
-                    'hour'    => $appointment['hour'],
-                    'minute'  => $appointment['minute'],
-                    'channel' => $appointment['channel']
-                ]);
-            }
+        $post = Post::where('title', $request->input('name'))->first();
+        $app_id = $request->input('id');
+
+        // Transform date before saving in the database
+        $date = Carbon::parse($request->input('date'));
+
+        if($app_id == null)
+        {
+            Schedule::create([
+                'user_id' => $user->id,
+                'post_id' => $post->id,
+                'date'     => $date,
+                'hour'    => $request->input('hour'),
+                'minute'  => $request->input('minute'),
+                'channel' => $request->input('channel')
+            ]);
+        } else {
+            $schedule = Schedule::find($app_id);
+            $schedule->update([
+                'user_id' => $user->id,
+                'post_id' => $post->id,
+                'date'    => $date,
+                'hour'    => $request->input('hour'),
+                'minute'  => $request->input('minute'),
+                'channel' => $request->input('channel')
+            ]);
         }
-        return $request->all();
     }
 
     public function getUserSchedule(User $user)
@@ -58,5 +60,6 @@ class ScheduleController extends Controller
     public function removeSchedule(Schedule $schedule)
     {
         $schedule->delete();
+        return 200;
     }
 }
