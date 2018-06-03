@@ -81,7 +81,7 @@ class AdminSidebareMenuViewComposer
             ],
             [
                 'name'   => 'schedule',
-                'slug'   => 'admin/tracking/manage',
+                'slug'   => 'admin/schedule/manage',
                 'route'  => 'schedule.manage',
                 'params' => [],
                 'roles'  => ['admin', 'user']

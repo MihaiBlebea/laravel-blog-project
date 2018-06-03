@@ -2,7 +2,7 @@
 
 @section('admin_panel')
 
-@include('partials._page-title', ['title' => 'Posts', 'subtitle' => 'Manage posts'])
+@include('partials.titles._page-title', ['title' => 'Posts', 'subtitle' => 'Manage posts'])
 
 <div class="card">
     <div class="card-body">

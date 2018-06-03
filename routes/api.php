@@ -30,4 +30,17 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
     // Project imagesy
     Route::get('/images/project/{project}', 'Api\ProjectController@getProjectImages');
 
+    // Get posts by user
+    Route::get('/posts/user/{user}', 'Api\PostController@getUserPosts');
+
+    Route::post('/schedule/user/{user}', 'Api\ScheduleController@storeSchedule');
+
+    Route::get('/schedule/user/{user}', 'Api\ScheduleController@getUserSchedule');
+
+    // Remove schedule from database
+    Route::get('/schedule/remove/{schedule}', 'Api\ScheduleController@removeSchedule');
+
+    // Get user social channels
+    Route::get('/schedule/social-channels/user/{user}', 'Api\ScheduleController@getUserSocialChannels');
+
 });
