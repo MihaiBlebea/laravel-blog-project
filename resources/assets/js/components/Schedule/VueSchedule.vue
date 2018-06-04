@@ -50,23 +50,6 @@ export default {
             initSchedules: []
         }
     },
-    computed: {
-        // extractAppsFromCalendar: function()
-        // {
-        //     let result = [];
-        //     this.days.forEach((day)=> {
-        //         day.hours.forEach((hour)=> {
-        //             if(hour.appointments.length > 0)
-        //             {
-        //                 hour.appointments.forEach((appointment)=> {
-        //                     result.push(appointment)
-        //                 })
-        //             }
-        //         })
-        //     });
-        //     return result;
-        // }
-    },
     methods: {
         // Events
         onAppointmentSelected: function(event)

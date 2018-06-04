@@ -81307,23 +81307,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             initSchedules: []
         };
     },
-    computed: {
-        // extractAppsFromCalendar: function()
-        // {
-        //     let result = [];
-        //     this.days.forEach((day)=> {
-        //         day.hours.forEach((hour)=> {
-        //             if(hour.appointments.length > 0)
-        //             {
-        //                 hour.appointments.forEach((appointment)=> {
-        //                     result.push(appointment)
-        //                 })
-        //             }
-        //         })
-        //     });
-        //     return result;
-        // }
-    },
     methods: {
         // Events
         onAppointmentSelected: function onAppointmentSelected(event) {
@@ -81620,10 +81603,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var post = _this.initialPosts.find(function (post) {
                     return post.id == schedules[i].post_id;
                 });
-                // Get index of the this.days from date stored in object
+                // Get index of the the day and hour
                 var dayIndex = _this.getDayIndexByDate(schedules[i].date);
+                var hourIndex = _this.getHourIndexByRealHour(schedules[i].hour);
+
                 var appointment = _this.createAppointment(_this.days[dayIndex].name, schedules[i].hour, schedules[i].minute, schedules[i].channel, post.title, schedules[i].id);
-                _this.days[dayIndex].hours[schedules[i].hour].appointments.push(appointment);
+                _this.days[dayIndex].hours[hourIndex].appointments.push(appointment);
             };
 
             for (var i = 0; i < schedules.length; i++) {
@@ -81675,6 +81660,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit('appointment-selected', {
                 day: day_index,
                 hour: hour_index,
+                realHour: this.days[day_index].hours[hour_index].name,
                 date: this.days[day_index].date,
                 appointments: this.days[day_index].hours[hour_index].appointments
             });
@@ -81696,6 +81682,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             date = __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).format('DD-MM-YYYY');
             for (var i in this.days) {
                 if (this.days[i].date == date) {
+                    return i;
+                }
+            }
+        },
+        getHourIndexByRealHour: function getHourIndexByRealHour(hour) {
+            for (var i in this.days[0].hours) {
+                if (this.days[0].hours[i].name == hour) {
                     return i;
                 }
             }
@@ -82048,6 +82041,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 name: name,
                 day: day,
                 hour: hour,
+                realHour: this.selectedSchedule.realHour,
                 date: date,
                 channel: channel,
                 minute: typeof minute == 'string' && minute.includes(':') ? minute.split(":")[1] : minute

@@ -34,8 +34,8 @@ class ScheduleController extends Controller
             Schedule::create([
                 'user_id' => $user->id,
                 'post_id' => $post->id,
-                'date'     => $date,
-                'hour'    => $request->input('hour'),
+                'date'    => $date,
+                'hour'    => $request->input('realHour'),
                 'minute'  => $request->input('minute'),
                 'channel' => $request->input('channel')
             ]);
@@ -45,7 +45,7 @@ class ScheduleController extends Controller
                 'user_id' => $user->id,
                 'post_id' => $post->id,
                 'date'    => $date,
-                'hour'    => $request->input('hour'),
+                'hour'    => $request->input('realHour'),
                 'minute'  => $request->input('minute'),
                 'channel' => $request->input('channel')
             ]);

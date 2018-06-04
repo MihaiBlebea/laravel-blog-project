@@ -128,6 +128,7 @@ export default {
                 name: name,
                 day: day,
                 hour: hour,
+                realHour: this.selectedSchedule.realHour,
                 date: date,
                 channel: channel,
                 minute: (typeof minute == 'string' && minute.includes(':')) ? minute.split(":")[1] : minute

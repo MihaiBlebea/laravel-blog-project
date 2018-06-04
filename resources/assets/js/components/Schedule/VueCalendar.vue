@@ -73,15 +73,17 @@ export default {
                 let post = this.initialPosts.find((post)=> {
                     return post.id == schedules[i].post_id
                 })
-                // Get index of the this.days from date stored in object
+                // Get index of the the day and hour
                 let dayIndex = this.getDayIndexByDate(schedules[i].date);
+                let hourIndex = this.getHourIndexByRealHour(schedules[i].hour);
+
                 let appointment = this.createAppointment(this.days[dayIndex].name,
                                                          schedules[i].hour,
                                                          schedules[i].minute,
                                                          schedules[i].channel,
                                                          post.title,
                                                          schedules[i].id)
-                this.days[dayIndex].hours[schedules[i].hour].appointments.push(appointment)
+                this.days[dayIndex].hours[hourIndex].appointments.push(appointment)
             }
             // Update selected Modal
             if(this.storeOpenedModal.day !== null && this.storeOpenedModal.hour !== null)
@@ -136,6 +138,7 @@ export default {
             this.$emit('appointment-selected', {
                 day: day_index,
                 hour: hour_index,
+                realHour: this.days[day_index].hours[hour_index].name,
                 date: this.days[day_index].date,
                 appointments: this.days[day_index].hours[hour_index].appointments
             });
@@ -161,6 +164,16 @@ export default {
             for(let i in this.days)
             {
                 if(this.days[i].date == date)
+                {
+                    return i;
+                }
+            }
+        },
+        getHourIndexByRealHour: function(hour)
+        {
+            for(let i in this.days[0].hours)
+            {
+                if(this.days[0].hours[i].name == hour)
                 {
                     return i;
                 }
