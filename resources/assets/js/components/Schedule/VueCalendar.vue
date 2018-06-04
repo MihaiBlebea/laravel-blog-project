@@ -12,19 +12,25 @@
         <!-- Week controller -->
 
         <div class="row no-gutters mb-4">
-            <div class="col" v-for="(day, index) in computedDays">
-                <div class="p-2 bg-secondary text-white">{{ dayName[index] }}</div>
-                <div v-for="(hour, key) in day.hours">
-                    <div v-on:click="selectAppointmentForEdit(index, key)"
-                         v-bind:class="hasSchedule(hour)"
-                         class="p-2 pointer appointment"
-                         data-toggle="modal"
-                         data-target="#appointment-modal">
-                        {{ hour.name }}:00
-                         <span class="float-right" v-if="hour.appointments.length > 0">x{{ hour.appointments.length }}</span>
+            <template v-for="(day, index) in days">
+                <div class="col" v-show="showWeek(index)">
+                    <div class="p-2 bg-secondary text-white">
+                        {{ dayName[index] }}<br>
+                        {{ day.date }}
+                    </div>
+
+                    <div v-for="(hour, key) in day.hours">
+                        <div v-on:click="selectAppointmentForEdit(index, key)"
+                             v-bind:class="hasSchedule(hour)"
+                             class="p-2 pointer appointment"
+                             data-toggle="modal"
+                             data-target="#appointment-modal">
+                            {{ hour.name }}:00
+                             <span class="float-right" v-if="hour.appointments.length > 0">x{{ hour.appointments.length }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </template>
         </div>
     </div>
 </template>
@@ -103,6 +109,18 @@ export default {
         toggleWeeks: function()
         {
             this.week = (this.week == 0) ? 1 : 0;
+        },
+        showWeek: function(index)
+        {
+            if(this.week == 0)
+            {
+                return (index < 7) ? true : false
+            }
+
+            if(this.week == 1)
+            {
+                return (index < 7) ? false : true
+            }
         },
         selectAppointmentForEdit: function(day_index, hour_index)
         {

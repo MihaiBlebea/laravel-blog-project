@@ -81584,6 +81584,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -81647,6 +81653,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // Helper methods
         toggleWeeks: function toggleWeeks() {
             this.week = this.week == 0 ? 1 : 0;
+        },
+        showWeek: function showWeek(index) {
+            if (this.week == 0) {
+                return index < 7 ? true : false;
+            }
+
+            if (this.week == 1) {
+                return index < 7 ? false : true;
+            }
         },
         selectAppointmentForEdit: function selectAppointmentForEdit(day_index, hour_index) {
             this.storeOpenedModal = {
@@ -81762,51 +81777,72 @@ var render = function() {
     _c(
       "div",
       { staticClass: "row no-gutters mb-4" },
-      _vm._l(_vm.computedDays, function(day, index) {
-        return _c(
-          "div",
-          { staticClass: "col" },
-          [
-            _c("div", { staticClass: "p-2 bg-secondary text-white" }, [
-              _vm._v(_vm._s(_vm.dayName[index]))
-            ]),
-            _vm._v(" "),
-            _vm._l(day.hours, function(hour, key) {
-              return _c("div", [
-                _c(
-                  "div",
+      [
+        _vm._l(_vm.days, function(day, index) {
+          return [
+            _c(
+              "div",
+              {
+                directives: [
                   {
-                    staticClass: "p-2 pointer appointment",
-                    class: _vm.hasSchedule(hour),
-                    attrs: {
-                      "data-toggle": "modal",
-                      "data-target": "#appointment-modal"
-                    },
-                    on: {
-                      click: function($event) {
-                        _vm.selectAppointmentForEdit(index, key)
-                      }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(hour.name) +
-                        ":00\n                     "
-                    ),
-                    hour.appointments.length > 0
-                      ? _c("span", { staticClass: "float-right" }, [
-                          _vm._v("x" + _vm._s(hour.appointments.length))
-                        ])
-                      : _vm._e()
-                  ]
-                )
-              ])
-            })
-          ],
-          2
-        )
-      })
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.showWeek(index),
+                    expression: "showWeek(index)"
+                  }
+                ],
+                staticClass: "col"
+              },
+              [
+                _c("div", { staticClass: "p-2 bg-secondary text-white" }, [
+                  _vm._v("\n                    " + _vm._s(_vm.dayName[index])),
+                  _c("br"),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(day.date) +
+                      "\n                "
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(day.hours, function(hour, key) {
+                  return _c("div", [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "p-2 pointer appointment",
+                        class: _vm.hasSchedule(hour),
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#appointment-modal"
+                        },
+                        on: {
+                          click: function($event) {
+                            _vm.selectAppointmentForEdit(index, key)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(hour.name) +
+                            ":00\n                         "
+                        ),
+                        hour.appointments.length > 0
+                          ? _c("span", { staticClass: "float-right" }, [
+                              _vm._v("x" + _vm._s(hour.appointments.length))
+                            ])
+                          : _vm._e()
+                      ]
+                    )
+                  ])
+                })
+              ],
+              2
+            )
+          ]
+        })
+      ],
+      2
     )
   ])
 }
