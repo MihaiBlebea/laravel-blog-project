@@ -81304,23 +81304,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             initSocials: [],
             initPosts: null,
-            initSchedules: null
+            initSchedules: []
         };
     },
     computed: {
-        extractAppsFromCalendar: function extractAppsFromCalendar() {
-            var result = [];
-            this.days.forEach(function (day) {
-                day.hours.forEach(function (hour) {
-                    if (hour.appointments.length > 0) {
-                        hour.appointments.forEach(function (appointment) {
-                            result.push(appointment);
-                        });
-                    }
-                });
-            });
-            return result;
-        }
+        // extractAppsFromCalendar: function()
+        // {
+        //     let result = [];
+        //     this.days.forEach((day)=> {
+        //         day.hours.forEach((hour)=> {
+        //             if(hour.appointments.length > 0)
+        //             {
+        //                 hour.appointments.forEach((appointment)=> {
+        //                     result.push(appointment)
+        //                 })
+        //             }
+        //         })
+        //     });
+        //     return result;
+        // }
     },
     methods: {
         // Events
@@ -81591,7 +81593,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             days: [],
             dayName: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-            week: 0
+            week: 0,
+
+            storeOpenedModal: {
+                day: null,
+                hour: null
+            }
         };
     },
     watch: {
@@ -81599,7 +81606,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             // Restart calendar, to delete garbage appointments left behind after delete
-            // this.days = this.generateCalendar()
+            this.days = this.generateCalendar();
 
             var schedules = this.initialSchedules;
 
@@ -81615,6 +81622,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             for (var i = 0; i < schedules.length; i++) {
                 _loop(i);
+            }
+            // Update selected Modal
+            if (this.storeOpenedModal.day !== null && this.storeOpenedModal.hour !== null) {
+                this.selectAppointmentForEdit(this.storeOpenedModal.day, this.storeOpenedModal.hour);
             }
         }
     },
@@ -81638,6 +81649,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.week = this.week == 0 ? 1 : 0;
         },
         selectAppointmentForEdit: function selectAppointmentForEdit(day_index, hour_index) {
+            this.storeOpenedModal = {
+                day: day_index,
+                hour: hour_index
+            };
+
             this.$emit('appointment-selected', {
                 day: day_index,
                 hour: hour_index,

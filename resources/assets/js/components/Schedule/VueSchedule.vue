@@ -47,25 +47,25 @@ export default {
 
             initSocials: [],
             initPosts: null,
-            initSchedules: null
+            initSchedules: []
         }
     },
     computed: {
-        extractAppsFromCalendar: function()
-        {
-            let result = [];
-            this.days.forEach((day)=> {
-                day.hours.forEach((hour)=> {
-                    if(hour.appointments.length > 0)
-                    {
-                        hour.appointments.forEach((appointment)=> {
-                            result.push(appointment)
-                        })
-                    }
-                })
-            });
-            return result;
-        }
+        // extractAppsFromCalendar: function()
+        // {
+        //     let result = [];
+        //     this.days.forEach((day)=> {
+        //         day.hours.forEach((hour)=> {
+        //             if(hour.appointments.length > 0)
+        //             {
+        //                 hour.appointments.forEach((appointment)=> {
+        //                     result.push(appointment)
+        //                 })
+        //             }
+        //         })
+        //     });
+        //     return result;
+        // }
     },
     methods: {
         // Events

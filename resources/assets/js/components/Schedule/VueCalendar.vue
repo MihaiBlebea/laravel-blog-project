@@ -48,13 +48,18 @@ export default {
                 'Sunday',
             ],
             week: 0,
+
+            storeOpenedModal: {
+                day: null,
+                hour: null
+            }
         }
     },
     watch: {
         initialSchedules: function()
         {
             // Restart calendar, to delete garbage appointments left behind after delete
-            // this.days = this.generateCalendar()
+            this.days = this.generateCalendar()
 
             let schedules = this.initialSchedules;
             for(let i = 0; i < schedules.length; i++)
@@ -71,6 +76,11 @@ export default {
                                                          post.title,
                                                          schedules[i].id)
                 this.days[dayIndex].hours[schedules[i].hour].appointments.push(appointment)
+            }
+            // Update selected Modal
+            if(this.storeOpenedModal.day !== null && this.storeOpenedModal.hour !== null)
+            {
+                this.selectAppointmentForEdit(this.storeOpenedModal.day, this.storeOpenedModal.hour)
             }
         }
     },
@@ -96,6 +106,11 @@ export default {
         },
         selectAppointmentForEdit: function(day_index, hour_index)
         {
+            this.storeOpenedModal = {
+                day: day_index,
+                hour: hour_index
+            }
+
             this.$emit('appointment-selected', {
                 day: day_index,
                 hour: hour_index,
