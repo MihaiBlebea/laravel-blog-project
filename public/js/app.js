@@ -81654,6 +81654,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         toggleWeeks: function toggleWeeks() {
             this.week = this.week == 0 ? 1 : 0;
         },
+        displayDayName: function displayDayName(index) {
+            return this.week == 0 ? this.dayName[index] : this.dayName[index - 7];
+        },
         showWeek: function showWeek(index) {
             if (this.week == 0) {
                 return index < 7 ? true : false;
@@ -81687,7 +81690,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
         },
         hasSchedule: function hasSchedule(hour) {
-            return hour.appointments.length > 0 ? 'bg-primary text-white' : 'bg-white';
+            return hour.appointments.length > 0 ? 'bg-primary text-white border border-right' : 'bg-white';
         },
         getDayIndexByDate: function getDayIndexByDate(date) {
             date = __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).format('DD-MM-YYYY');
@@ -81794,15 +81797,25 @@ var render = function() {
                 staticClass: "col"
               },
               [
-                _c("div", { staticClass: "p-2 bg-secondary text-white" }, [
-                  _vm._v("\n                    " + _vm._s(_vm.dayName[index])),
-                  _c("br"),
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(day.date) +
-                      "\n                "
-                  )
-                ]),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "p-2 bg-secondary text-white border border-right"
+                  },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.displayDayName(index))
+                    ),
+                    _c("br"),
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(day.date) +
+                        "\n                "
+                    )
+                  ]
+                ),
                 _vm._v(" "),
                 _vm._l(day.hours, function(hour, key) {
                   return _c("div", [

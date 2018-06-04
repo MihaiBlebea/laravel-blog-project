@@ -14,8 +14,8 @@
         <div class="row no-gutters mb-4">
             <template v-for="(day, index) in days">
                 <div class="col" v-show="showWeek(index)">
-                    <div class="p-2 bg-secondary text-white">
-                        {{ dayName[index] }}<br>
+                    <div class="p-2 bg-secondary text-white border border-right">
+                        {{ displayDayName(index) }}<br>
                         {{ day.date }}
                     </div>
 
@@ -110,6 +110,10 @@ export default {
         {
             this.week = (this.week == 0) ? 1 : 0;
         },
+        displayDayName: function(index)
+        {
+            return (this.week == 0) ? this.dayName[index] : this.dayName[index - 7]
+        },
         showWeek: function(index)
         {
             if(this.week == 0)
@@ -149,7 +153,7 @@ export default {
         },
         hasSchedule: function(hour)
         {
-            return (hour.appointments.length > 0) ? 'bg-primary text-white' : 'bg-white';
+            return (hour.appointments.length > 0) ? 'bg-primary text-white border border-right' : 'bg-white';
         },
         getDayIndexByDate: function(date)
         {
