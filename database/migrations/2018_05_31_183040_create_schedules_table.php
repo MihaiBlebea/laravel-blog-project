@@ -16,6 +16,7 @@ class CreateSchedulesTable extends Migration
             $table->integer('hour');
             $table->integer('minute');
             $table->string('channel');
+            $table->boolean('posted')->default(false);
             $table->timestamps();
         });
     }

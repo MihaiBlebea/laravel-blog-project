@@ -53,12 +53,35 @@ class ManagePostQueueService implements ManagePostQueueServiceInterface
             {
                 SocialShareService::shareLinkedin($post, $user);
             }
-            
+
             // TODO Find better solution for testing
             if($schedule->channel === 'test')
             {
                 SocialShareService::shareFake($post, $user);
             }
+
+            self::markAsPosted($schedule);
+        }
+    }
+
+    public static function markAsPosted(Schedule $schedule)
+    {
+        $schedule->update([
+            'posted' => true
+        ]);
+    }
+
+    public static function deletedSchedule(Schedule $schedule)
+    {
+        $schedule->delete();
+    }
+
+    public static function deletePosted()
+    {
+        $schedules = Schedule::where('posted', true)->get();
+        foreach($schedules as $schedule)
+        {
+            self::deletedSchedule();
         }
     }
 }

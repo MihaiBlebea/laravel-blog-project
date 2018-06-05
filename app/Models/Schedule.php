@@ -16,7 +16,8 @@ class Schedule extends Model
         'date',
         'hour',
         'minute',
-        'channel'
+        'channel',
+        'posted'
     ];
 
     public function user()
