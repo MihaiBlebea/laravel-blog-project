@@ -44,18 +44,18 @@ class ManagePostQueueService implements ManagePostQueueServiceInterface
             $post = $schedule->post;
             $user = $schedule->user;
 
-            if($schedule->channel == 'twitter')
+            if($schedule->channel === 'twitter')
             {
                 SocialShareService::shareTwitter($post, $user);
             }
 
-            if($schedule->channel == 'linkedin')
+            if($schedule->channel === 'linkedin')
             {
                 SocialShareService::shareLinkedin($post, $user);
             }
-
+            
             // TODO Find better solution for testing
-            if($schedule->channel == 'test')
+            if($schedule->channel === 'test')
             {
                 SocialShareService::shareFake($post, $user);
             }

@@ -100,6 +100,7 @@ class SocialShareService implements SocialShareServiceInterface
         }
         $message = 'User ' . $user->first_name . ' ' . $user->last_name .
                    ' posted "' . $post->title . '" to Fake Social Channel';
+
         Log::debug($message);
         return $message;
     }
