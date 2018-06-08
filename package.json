@@ -18,6 +18,7 @@
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
         "chart.js": "^2.7.2",
+        "create-ssl-certificate": "^2.0.4",
         "font-awesome": "^4.7.0",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
