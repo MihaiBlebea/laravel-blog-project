@@ -16,10 +16,14 @@ class SocialiteAuthController extends Controller
     public function redirectToProvider(String $driver_name)
     {
         $driver = Socialite::driver($driver_name);
-        if($driver_name == 'linkedid')
+        if($driver_name == 'linkedin')
         {
             $driver->scopes(['w_share']);
         }
+        // if($driver_name == 'facebook')
+        // {
+        //     $driver->scopes(['user_posts']);
+        // }
         return $driver->redirect();
     }
 
