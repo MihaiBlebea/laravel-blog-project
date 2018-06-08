@@ -27,9 +27,11 @@
                 <!-- include main content section -->
 
                 <!-- Include end author description -->
-                @include('partials._profile-short-description', ['user' => $post->author])
+                <div class="mt-5">
+                    @include('partials._profile-short-description', ['user' => $post->author])
+                </div>
                 <!-- Include end author description -->
-                
+
             </div>
         </div>
     </div>

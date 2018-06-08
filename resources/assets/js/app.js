@@ -24,7 +24,9 @@ Vue.component('image-details', require('./components/ImageUpload/ImageDetails.vu
 Vue.component('masonry-wrapper', require('./components/MasonryWrapper.vue'));
 
 Vue.component('vue-schedule', require('./components/Schedule/VueSchedule.vue'));
-Vue.component('v-select', vSelect)
+Vue.component('vue-calendar', require('./components/Schedule/VueCalendar.vue'));
+Vue.component('vue-modal', require('./components/Schedule/VueModal.vue'));
+
 Vue.component('v-multiselect', Multiselect)
 
 // Setup global variables
