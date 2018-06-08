@@ -16,7 +16,7 @@ class SocialShareService implements SocialShareServiceInterface
 {
     private static function urlToPost($category_slug, $post_slug)
     {
-        return '/blog/' . $category_slug . '/' . $post_slug;
+        return url('/blog/' . $category_slug . '/' . $post_slug);
     }
 
     public static function shareLinkedin(Post $post, User $user = null)
@@ -26,11 +26,18 @@ class SocialShareService implements SocialShareServiceInterface
             $user = auth()->user();
         }
         $linkedIn = new LinkedIn(config('linkedin.api_key'), config('linkedin.api_secret'));
-        $linkedIn->setAccessToken($user->social->linkedin_token);
+        $linkedin_token = $user->hasSocialToken('linkedin');
+
+        if($linkedin_token == null || $linkedin_token->token == null)
+        {
+            throw new \Exception("User does not have Linkedin token", 1);
+        }
+
+        $linkedIn->setAccessToken($linkedin_token->token);
 
         $options = [ "json" =>
             [
-                "comment" => 'Check my new article',
+                "comment" => $post->except(),
                 "content" => [
                     "title" => $post->title,
                     "description" => $post->except(),
@@ -42,7 +49,6 @@ class SocialShareService implements SocialShareServiceInterface
                 ]
             ]
         ];
-
         $result = $linkedIn->post('v1/people/~/shares', $options);
 
         return $result;
