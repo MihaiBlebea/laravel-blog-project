@@ -6,7 +6,7 @@ window.Vue = require('vue');
 
 import { VueEditor } from 'vue2-editor';
 import VueMasonry from 'vue-masonry-css'
-import vSelect from 'vue-select'
+
 import Multiselect from 'vue-multiselect'
 
 // Init Vue js components
