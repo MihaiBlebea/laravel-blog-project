@@ -31,6 +31,4 @@ Route::post('/message/send', 'MessageController@send')->name('message.send');
 
 
 // Test routes
-Route::get('/test', function() {
-    dd(url('/blog'));
-});
+Route::get('/test/twitter', 'TestController@socialPost');
