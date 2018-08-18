@@ -38,6 +38,14 @@
                 </div>
             </div>
         </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="{{ route('blog') }}" class="btn btn-primary text-capitalize btn-block">
+                    Go to blog
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 <!-- Second section -->
@@ -48,10 +56,18 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @include('partials.titles._page-subtitle', ['title' => 'About us'])
+                @include('partials.titles._page-subtitle', ['title' => 'About me'])
                 <div class="row">
                     <div class="col">
                         <p class="lead text-center">{{ $user->profile->short_description }}</p>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-4">
+                        <a href="{{ route('page.get', [ 'page' => 'about' ]) }}" class="btn btn-primary text-capitalize btn-block">
+                            Find out more
+                        </a>
                     </div>
                 </div>
             </div>

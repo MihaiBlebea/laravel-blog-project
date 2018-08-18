@@ -8,12 +8,7 @@ Route::group(['prefix' => 'user', 'as' => 'user.'], function() {
 
     // Get a specific user's profile
     Route::get('/profile/{user?}', 'UserController@profile')->name('profile');
-
-    // Subscribe & unsubscribe a user from following a developer
-    // Route::get('/subscribe/{user}', 'UserController@subscribe')->name('subscribe');
-    //
-    // Route::get('/unsubscribe/{user}', 'UserController@unsubscribe')->name('unsubscribe');
-
+    
 });
 
 Route::get('/admin', 'UserController@adminPanel')->name('admin.panel')->middleware(['auth', 'role:user,admin']);

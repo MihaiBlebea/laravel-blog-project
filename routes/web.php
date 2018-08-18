@@ -28,9 +28,3 @@ Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post')-
 Route::post('/search', 'SearchController@search')->name('search');
 
 Route::post('/message/send', 'MessageController@send')->name('message.send');
-
-
-// Test routes
-Route::get('/test', function() {
-    dd(url('/blog'));
-});
