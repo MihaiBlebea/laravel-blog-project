@@ -13620,6 +13620,10 @@ body {
   padding-bottom: 50px;
 }
 
+.h-80 {
+  height: 80vh !important;
+}
+
 h1 {
   font-family: 'Oswald', sans-serif;
   font-weight: 700;

@@ -27,7 +27,7 @@
 
         @include('partials.navigations._main-nav')
 
-        <main class="py-4">
+        <main class="py-4 h-80">
 
             @if(Session::has('message'))
 
