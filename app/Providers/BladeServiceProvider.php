@@ -30,6 +30,11 @@ class BladeServiceProvider extends ServiceProvider
         Blade::if('hasProfile', function(User $user) {
             return (bool) isset($user->profile) && $user->profile()->count();
         });
+
+        // Transform markdown to Html
+        Blade::directive('toHtml', function($content) {
+            return "<?php echo Markdown::convertToHtml(" . $content . ") ?>";
+        });
     }
 
     public function register()

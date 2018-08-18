@@ -66,18 +66,9 @@ class PostController extends Controller
     // Get the create post form page
     public function getStore()
     {
-        // Find the first category
-        $first_category = Category::first();
-
-        // Generate random slug
-        $post = Post::create([
-            'slug'        => str_random(10),
-            'category_id' => ($first_category) ? $first_category->id : 0,
-            'user_id'     => auth()->user()->id
+        return view('post.create')->with([
+            'categories' => Category::all()
         ]);
-
-        // Redirect to upload page with the new generated slug
-        return redirect()->route('post.draft', ['post' => $post->slug]);
     }
 
     // Get the post update form page
@@ -89,6 +80,20 @@ class PostController extends Controller
         ]);
     }
 
+    // Send payload to store a new post
+    public function postStore(PostFormRequest $request)
+    {
+        $post = Post::create([
+            'user_id'     => auth()->user()->id,
+            'category_id' => $request->input('category_id'),
+            'title'       => $request->input('title'),
+            'image_id'    => $request->input('feature_image'),
+            'content'     => $request->input('content'),
+        ]);
+
+        return redirect()->back();
+    }
+
     // Send the payload to upload a post
     public function postUpdate(PostFormRequest $request, Post $post)
     {
@@ -96,7 +101,6 @@ class PostController extends Controller
             'category_id' => $request->input('category_id'),
             'title'       => $request->input('title'),
             'image_id'    => $request->input('feature_image'),
-            'intro'       => $request->input('intro'),
             'content'     => $request->input('content'),
         ]);
 

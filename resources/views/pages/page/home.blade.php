@@ -31,11 +31,9 @@
                 @include('partials.titles._page-subtitle', ['title' => 'Choose your journey'])
                 <div class="row">
                     @foreach($categories as $category)
-
-                        <div class="col-md-{{ (!$loop->last && isOdd($categories->count())) ? '6' : '12' }} mb-4 animated fadeIn delay-1">
+                        <div class="col-md-{{ ($loop->last && isOdd($categories->count())) ? '12' : '6' }} mb-4 animated fadeIn delay-1">
                             @include('partials.cards._category-card')
                         </div>
-
                     @endforeach
                 </div>
             </div>

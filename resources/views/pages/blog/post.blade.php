@@ -3,6 +3,7 @@
 @section('content')
 
 @include('partials._social-buttons', ['position' => 'vertical'])
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8 col-12">
@@ -23,7 +24,9 @@
                 <!-- include intro section -->
 
                 <!-- include main content section -->
-                <p class="card-text font-article">{!! $post->content !!}</p>
+                <p class="card-text font-article">
+                    @toHtml($post->content)
+                </p>
                 <!-- include main content section -->
 
                 <!-- Include end author description -->
@@ -31,6 +34,8 @@
                     @include('partials._profile-short-description', ['user' => $post->author])
                 </div>
                 <!-- Include end author description -->
+
+                @include('partials._related-posts')
 
             </div>
         </div>

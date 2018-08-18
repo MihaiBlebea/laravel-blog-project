@@ -21,11 +21,7 @@ class ImageController extends Controller
     public function storeUserImages(Request $request, User $user)
     {
         $image = ImageService::store($request->file('image-upload'), $user);
-        if($image)
-        {
-            return 200;
-        }
-        return 404;
+        return ($image) ? 200 : 404;
     }
 
     public function update(Request $request, Image $image)
@@ -33,7 +29,6 @@ class ImageController extends Controller
         $image->update([
             'name' => $request->input('name')
         ]);
-
         return 200;
     }
 

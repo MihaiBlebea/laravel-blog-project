@@ -2,15 +2,8 @@
 /public/hot
 /public/storage
 /public/js/app.js
-cron_log.txt
 /public/css/app.css
-/storage/*.key
+cron_log.txt
+/storage/
 /vendor
-/.idea
-/.vscode
-/.vagrant
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
 .env

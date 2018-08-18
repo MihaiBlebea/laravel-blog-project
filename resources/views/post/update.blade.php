@@ -4,7 +4,7 @@
 
     @include('partials.titles._page-title', ['title' => 'Update post'])
 
-    <form action="{{ route('post.update', [ 'post' => $post->slug ]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('post.update', [ 'post' => $post->slug ]) }}" method="POST">
         @csrf
 
         @include('forms._create-post-form')

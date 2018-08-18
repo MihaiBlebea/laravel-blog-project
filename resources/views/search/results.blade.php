@@ -10,7 +10,7 @@
             @foreach($results as $post)
 
                 <div class="mb-3">
-                    @include('partials._post-card')
+                    @include('partials.cards._post-card')
                 </div>
 
             @endforeach

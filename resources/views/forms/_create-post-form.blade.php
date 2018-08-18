@@ -1,10 +1,8 @@
 <div class="form-group">
-    <label for="title">Title:</label>
+    <label>Title:</label>
     <input type="text"
            name="title"
            class="form-control"
-           id="title"
-           aria-describedby="title"
            placeholder="Create title"
            value="{{ $post->title or old('title') }}">
 
@@ -14,35 +12,14 @@
         </span>
     @endif
 
-    <p class="mt-3">
-        <strong>Preview:</strong>
-        <a target="_blank" href="{{ route('post.preview', ['post' => $post->slug]) }}">
-            <span class="text-primary">{{ config('app.url') . '/blog/' . $post->category->slug . '/' . $post->slug }}</span>
-        </a>
-    </p>
-</div>
-
-<div class="form-group">
-    <label for="intro">Intro:</label>
-
-    <textarea-counter content-input="'{{ isset($post->intro) ? json_encode($post->intro) : '' }}'"
-                      max="300"></textarea-counter>
-
-    @if($errors->has('intro'))
-        <span class="invalid-feedback">
-            <strong>{{ $errors->first('intro') }}</strong>
-        </span>
-    @endif
 </div>
 
 <div class="form-group">
     <label for="intro">Main content:</label>
     <!-- Rich text editor -->
-    <vue-editor-wrapper draft-id="{{ json_encode($post->id) }}"
-                        init-content="{{ isset($post->content) ? $post->content : '' }}"
-                        api="/api/v1/upload/post"
-                        name="content">
-    </vue-editor-wrapper>
+    <markdown-editor input-name="content"
+                     input-content="{{ isset($post) ? $post->content : null }}">
+    </markdown-editor>
     <!-- Rich text editor -->
 
 </div>
@@ -50,11 +27,11 @@
 <div class="row form-group">
     <div class="col">
 
-        <label for="category">Select category:</label>
-        <select name="category_id" class="form-control" id="category">
+        <label>Select category:</label>
+        <select name="category_id" class="form-control">
             @foreach($categories as $category)
 
-                <option value="{{ $category->id }}" {{ (isset($post->category) && $post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
+                <option value="{{ $category->id }}" {{ (isset($post) && $post->category->id === $category->id) ? 'selected' : '' }}>{{ $category->name }}</option>
 
             @endforeach
         </select>
@@ -62,8 +39,8 @@
     </div>
     <div class="col">
 
-        <label for="status">Save or publish:</label>
-        <select name="status" class="form-control" id="status">
+        <label>Save or publish:</label>
+        <select name="status" class="form-control">
             <option value="draft" selected>Save draft</option>
             <option value="published">Publish</option>
         </select>
@@ -72,10 +49,10 @@
 </div>
 
 <div class="form-group">
-    <label for="feature_image">Upload feature image:</label>
+    <label>Upload feature image:</label>
 
     <image-modal multiple-img="false"
-                 default-image="{{ $post->image ?? '' }}"
+                 default-image="{{ isset($post) ? $post->image : '' }}"
                  name="feature_image"
                  user="{{ auth()->user()->slug }}">
     </image-modal>

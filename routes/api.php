@@ -8,13 +8,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
-    // Upload API routes
-    Route::post('/upload/post', 'Api\AutosaveController@autosavePost');
-
-    Route::post('/upload/project', 'Api\AutosaveController@autosaveProject');
-
-    Route::post('/upload/profile', 'Api\AutosaveController@autosaveProfile');
-
     // Tracking API routes
     Route::get('/tracking', 'Api\TrackingController@getTrackingData');
 

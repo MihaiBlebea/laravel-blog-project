@@ -156,6 +156,7 @@ return [
         Jrean\UserVerification\UserVerificationServiceProvider::class,
         JonathanTorres\LaravelMediumSdk\LaravelMediumSdkServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -221,6 +222,7 @@ return [
         'LinkedIn'  => \Artesaos\LinkedIn\Facades\LinkedIn::class,
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
         'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
+        'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
     ],
 
 ];

@@ -16,8 +16,7 @@ class PostFormRequest extends FormRequest
         return [
             'title'         => 'required|string|max:255',
             'content'       => 'required',
-            'category_id'   => 'required|integer',
-            'intro'         => 'string|max:300'
+            'category_id'   => 'required|integer'
         ];
     }
 }

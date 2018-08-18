@@ -40,7 +40,10 @@ class BlogController extends Controller
     // Display one specific post
     public function post(Category $category, Post $post)
     {
-        return view('pages.blog.post')->with('post', $post);
+        return view('pages.blog.post')->with([
+            'post' => $post,
+            'related_posts' => Post::take(3)->get()
+        ]);
     }
 
     // Display all posts based on some rules

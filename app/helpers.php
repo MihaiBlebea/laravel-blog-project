@@ -17,7 +17,7 @@ if(!function_exists('isOdd'))
 {
     function isOdd(Int $number)
     {
-        return (bool) $number % 2 !== 0;
+        return ($number % 2 !== 0) ? true : false;
     }
 }
 

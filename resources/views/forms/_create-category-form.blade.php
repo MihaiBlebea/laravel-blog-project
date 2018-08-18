@@ -1,10 +1,8 @@
 <div class="form-group">
-    <label for="name">Name:</label>
+    <label>Name:</label>
     <input type="text"
            name="name"
            class="form-control"
-           id="name"
-           aria-describedby="name"
            value="{{ $category->name or old('name') }}">
 
     @if($errors->has('name'))
@@ -15,11 +13,10 @@
 </div>
 
 <div class="form-group">
-    <label for="description">Description:</label>
+    <label>Description:</label>
     <textarea class="form-control"
               name="description"
-              id="description"
-              rows="10">{{ $category->description or old('description') }}</textarea>
+              rows="6">{{ $category->description or old('description') }}</textarea>
 
     @if($errors->has('description'))
         <span class="invalid-feedback">
@@ -29,7 +26,7 @@
 </div>
 
 <div class="form-group">
-    <label for="cover_image">Cover image:</label>
+    <label>Cover image:</label>
 
     <image-modal multiple-img="false"
                  default-image="{{ $category->image ?? '' }}"
