@@ -89,6 +89,7 @@ class PostController extends Controller
             'title'       => $request->input('title'),
             'image_id'    => $request->input('feature_image'),
             'content'     => $request->input('content'),
+            'status'      => $request->input('status')
         ]);
 
         return redirect()->back();
@@ -102,6 +103,7 @@ class PostController extends Controller
             'title'       => $request->input('title'),
             'image_id'    => $request->input('feature_image'),
             'content'     => $request->input('content'),
+            'status'      => $request->input('status')
         ]);
 
         return redirect()->route('post.index', ['user' => auth()->user()->slug]);

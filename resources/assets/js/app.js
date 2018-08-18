@@ -27,6 +27,8 @@ Vue.component('vue-modal', require('./components/Schedule/VueModal.vue'))
 
 Vue.component('v-multiselect', Multiselect)
 
+Vue.component('search-box', require('./components/SearchBox/SearchBox.vue'))
+
 // Setup global variables
 Vue.prototype.api = '/api/v1/'
 
