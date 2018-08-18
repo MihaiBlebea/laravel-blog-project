@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\SearchFormRequest;
-use App\Models\Post;
-use App\Models\Search;
+use App\Models\{
+    Post,
+    Search
+};
+use App\Services\SearchLogService;
+
 
 class SearchController extends Controller
 {
@@ -13,11 +17,8 @@ class SearchController extends Controller
     {
         $results = Post::search($request->input('search_term'));
 
-        // Store search in the database
-        Search::create([
-            'term'          => $request->input('search_term'),
-            'results_count' => $results->count()
-        ]);
+        // Log the search, create new or update the search count
+        SearchLogService::logSearch($request->input('search_term'));
 
         return view('search.results')->with([
             'results'     => $results,

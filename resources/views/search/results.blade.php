@@ -18,7 +18,7 @@
 
             @if($results->count() == 0)
 
-                @include('partials._notification-card', [
+                @include('partials.cards._notification-card', [
                     'title' => 'No results found!',
                     'content' => 'We are sorry, but your search for <strong>"' . $search_term . '"</strong> did not yield any results.'
                 ])
