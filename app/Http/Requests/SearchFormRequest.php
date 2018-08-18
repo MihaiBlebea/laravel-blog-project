@@ -14,8 +14,7 @@ class SearchFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'search_term' => 'required',
-            'model'       => 'required|in:post,user,repo'
+            'search_term' => 'required'
         ];
     }
 }

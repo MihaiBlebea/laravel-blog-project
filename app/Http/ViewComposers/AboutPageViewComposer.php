@@ -4,16 +4,15 @@ namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
 use App\Models\{
-    User
+    Post
 };
 
 class AboutPageViewComposer
 {
     public function compose(View $view)
     {
-        $user = User::find(1);
         $view->with([
-            'projects' => $user->projects
+            'related_posts' => Post::take(3)->get()
         ]);
     }
 }

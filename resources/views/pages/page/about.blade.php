@@ -18,16 +18,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col">
-                @include('partials.titles._page-subtitle', ['title' => 'Get our best work'])
-                <div class="row">
-                    @foreach($projects as $project)
+                @include('partials.titles._page-subtitle', ['title' => 'Latest articles'])
 
-                        <div class="col-md-4 mb-4 animated fadeIn delay-1">
-                            @include('partials.cards._project-card')
-                        </div>
-
-                    @endforeach
-                </div>
+                @include('partials._related-posts')
             </div>
         </div>
     </div>

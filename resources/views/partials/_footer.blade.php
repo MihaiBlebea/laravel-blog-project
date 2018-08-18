@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col">
 
-                @include('partials._footer-navigation')
+                @include('partials.navigations._footer-navigation')
 
             </div>
 

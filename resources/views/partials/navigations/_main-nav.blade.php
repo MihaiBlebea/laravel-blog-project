@@ -10,18 +10,30 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li><a class="nav-link" href="{{ route('blog.index') }}">Blog</a></li>
-                <li><a class="nav-link" href="{{ route('users') }}">Developers</a></li>
-                <li><a class="nav-link" href="{{ route('projects.index') }}">Projects</a></li>
+                <li>
+                    <a class="nav-link" href="{{ route('blog.index') }}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('page.get', ['type' => 'page', 'page' => 'about']) }}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('page.get', ['type' => 'page', 'page' => 'contact']) }}">Contact</a>
+                </li>
+                {{-- <li><a class="nav-link" href="{{ route('users') }}">Developers</a></li> --}}
+                {{-- <li><a class="nav-link" href="{{ route('projects.index') }}">Projects</a></li> --}}
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
 
+                <li class="mr-md-2 mb-5 mb-md-0">
+                    @include('partials._search-bar')
+                </li>
+
                 <!-- Authentication Links -->
                 @guest
                     <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                    {{-- <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li> --}}
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -44,10 +56,6 @@
                         </div>
                     </li>
                 @endguest
-
-                <li class="ml-md-2 mb-5 mb-md-0">
-                    @include('partials._search-bar', ['model' => 'user'])
-                </li>
             </ul>
         </div>
     </div>
