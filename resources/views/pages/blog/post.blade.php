@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8 col-12">
 
-            @include('partials._profile-short-description', ['user' => $post->author])
+            @include('partials.cards._user-card-small', ['user' => $post->author])
 
             <h1 class="mb-5 mt-5 text-center">{{ $post->title }}</h1>
 
@@ -31,12 +31,13 @@
 
                 <!-- Include end author description -->
                 <div class="mt-5">
-                    @include('partials._profile-short-description', ['user' => $post->author])
+                    @include('partials.cards._user-card-small', ['user' => $post->author])
                 </div>
                 <!-- Include end author description -->
-
-                @include('partials._related-posts')
-
+                
+                <div class="mt-5">
+                    @include('partials._related-posts')
+                </div>
             </div>
         </div>
     </div>
