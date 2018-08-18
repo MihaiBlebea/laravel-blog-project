@@ -59,6 +59,13 @@
 
 </div>
 
+<div class="form-check">
+    <input class="form-check-input" name="publish_medium" type="checkbox" value="true">
+    <label class="form-check-label">
+        Publish on Medium
+    </label>
+</div>
+
 <div class="mt-5">
     @include('partials._form-button', ['cta' => 'Save'])
 </div>

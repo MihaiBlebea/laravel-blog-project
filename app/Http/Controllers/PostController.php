@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\Category;
-use App\Models\User;
-use Auth;
+use App\Models\{
+    Post,
+    Category,
+    User
+};
 use App\Http\Requests\PostFormRequest;
 use Carbon\Carbon;
-use Storage;
+use App;
+use App\Services\MediumPublishService;
+
 
 class PostController extends Controller
 {
@@ -91,6 +94,12 @@ class PostController extends Controller
             'content'     => $request->input('content'),
             'status'      => $request->input('status')
         ]);
+
+        if($request->input('publish_medium'))
+        {
+            $medium = App::make(\JonathanTorres\LaravelMediumSdk\LaravelMediumSdk::class);
+            $result = MediumPublishService::publish($medium, $post);
+        }
 
         return redirect()->back();
     }
