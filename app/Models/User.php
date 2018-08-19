@@ -10,7 +10,7 @@ use App\Traits\{
 };
 use App\Models\{
     Post,
-    Social,
+    // Social,
     Search,
     Profile,
     Image,
@@ -60,10 +60,10 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function social()
-    {
-        return $this->hasOne(Social::class);
-    }
+    // public function social()
+    // {
+    //     return $this->hasOne(Social::class);
+    // }
 
     public function searches()
     {

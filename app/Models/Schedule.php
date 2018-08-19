@@ -5,7 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\{
     User,
-    Post
+    Post,
+    SocialToken
 };
 
 class Schedule extends Model
@@ -13,9 +14,7 @@ class Schedule extends Model
     protected $fillable = [
         'user_id',
         'post_id',
-        'date',
-        'hour',
-        'minute',
+        'publish_datetime',
         'channel',
         'posted'
     ];
@@ -28,5 +27,10 @@ class Schedule extends Model
     public function post()
     {
         return $this->belongsTo(Post::class);
+    }
+
+    public function socialTokens()
+    {
+        return $this->belongsTo(SocialToken::class, 'channel');
     }
 }

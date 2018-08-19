@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use App\Models\Schedule;
+use Carbon\Carbon;
 
 Auth::routes();
 
@@ -28,3 +30,15 @@ Route::get('/blog/{category}/{post}', 'BlogController@post')->name('blog.post')-
 Route::post('/search', 'SearchController@search')->name('search');
 
 Route::post('/message/send', 'MessageController@send')->name('message.send');
+
+// Route::get('/test', function() {
+//     $now = Carbon::now('Europe/London');
+//     // $schedules = Schedule::whereDay('publish_datetime', $now->day)
+//     //                      ->whereMonth('publish_datetime', $now->month)
+//     //                      ->whereYear('publish_datetime', $now->year)
+//     //                      ->whereTime('publish_datetime', $now->hour . ':' . $now->minute)
+//     //                      ->get();
+//     // $date = $now->day . '-' . $now->month . '-' . $now->year . ' ' . $now->hour . ':' . $now->minute;
+//     $schedules = Schedule::where('publish_datetime', $now->format('Y-m-d H:m'))->get();
+//     dd($now, $now->format('Y-m-d H:m'), $schedules);
+// });

@@ -9,6 +9,7 @@ use App\Models\{
     User
 };
 use App\Services\RelatedPostService;
+use App\Services\InsertLeadCardService;
 
 
 class BlogController extends Controller

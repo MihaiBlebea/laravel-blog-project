@@ -12,9 +12,7 @@ class CreateSchedulesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('post_id');
-            $table->date('date');
-            $table->integer('hour');
-            $table->integer('minute');
+            $table->timestamp('publish_datetime');
             $table->string('channel');
             $table->boolean('posted')->default(false);
             $table->timestamps();

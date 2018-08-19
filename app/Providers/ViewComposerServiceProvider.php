@@ -22,6 +22,7 @@ class ViewComposerServiceProvider extends ServiceProvider
             'admin.*',
             'post.*',
             'category.*',
+            'schedules.*',
             'pages.index',
             'images.image',
             'projects.store'

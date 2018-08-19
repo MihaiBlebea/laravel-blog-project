@@ -28,10 +28,9 @@ class ManagePostQueueService implements ManagePostQueueServiceInterface
 
     public static function createQueue()
     {
-        $date = Carbon::now();
-        $schedules = Schedule::where('date', $date->format('Y-m-d'))
-                             ->where('hour', $date->hour)
-                             ->where('minute', $date->minute)->get();
+        // Needs fixing compare dates //
+        $now = Carbon::now()->format('Y-m-d H:m') . ':00';
+        $schedules = Schedule::where('publish_datetime', $now)->get();
         self::$queue = $schedules;
 
         return self::getInstance();
