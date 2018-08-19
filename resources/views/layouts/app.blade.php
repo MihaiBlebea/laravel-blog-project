@@ -39,6 +39,9 @@
             @endif
 
             @yield('content')
+
+            <!-- Add the lead capture modal to every page -->
+            @include('partials._lead-capture-modal')
         </main>
 
         @include('partials._footer')
