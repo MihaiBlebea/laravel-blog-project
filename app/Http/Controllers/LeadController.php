@@ -11,7 +11,7 @@ class LeadController extends Controller
 {
     public function store(LeadRequest $request)
     {
-        $result = Newsletter::subscribe($request->input('email', '9197'));
+        $result = Newsletter::subscribe($request->input('email'));
         return redirect()->back();
     }
 }
