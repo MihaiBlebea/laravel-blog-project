@@ -4,7 +4,8 @@ require('./bootstrap')
 // Import Vue js
 window.Vue = require('vue')
 
-// import VueMasonry from 'vue-masonry-css'
+import highlight from 'highlight.js'
+highlight.initHighlightingOnLoad()
 
 import Multiselect from 'vue-multiselect'
 

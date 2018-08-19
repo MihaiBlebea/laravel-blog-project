@@ -9,6 +9,16 @@ use App\Models\User;
 
 class BlogController extends Controller
 {
+    // Display all posts based on some rules
+    public function index()
+    {
+        $posts = Post::where('status', 'published')->paginate(10);
+        return view('pages.blog.category')->with([
+            'posts' => $posts,
+            'categories' => Category::all()
+        ]);
+    }
+    
     // Display the categories from witch to select
     public function blog()
     {
@@ -43,16 +53,6 @@ class BlogController extends Controller
         return view('pages.blog.post')->with([
             'post' => $post,
             'related_posts' => Post::take(3)->get()
-        ]);
-    }
-
-    // Display all posts based on some rules
-    public function index()
-    {
-        $posts = Post::where('status', 'published')->paginate(10);
-        return view('pages.blog.category')->with([
-            'posts' => $posts,
-            'categories' => Category::all()
         ]);
     }
 }

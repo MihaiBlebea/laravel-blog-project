@@ -10,17 +10,33 @@
 
                 @include('partials.titles._page-title', ['title' => $category->name, 'subtitle' => 'Read all about ' . $category->name])
 
-                @include('partials.navigations._category-nav')
+                <!-- Display navigation for selecting categories -->
+                <div class="mb-5">
+                    @include('partials.navigations._category-nav')
+                </div>
+
+                <!-- Display description card for category -->
+                <div class="mb-5">
+                    @include('partials.cards._category-description-card')
+                </div>
 
             @elseif(isset($user))
 
                 @include('partials.titles._page-title', ['title' => $user->first_name . ' ' . $user->last_name . '\'s posts'])
 
+                <!-- Display user small description card -->
+                <div class="mb-5">
+                    @include('partials.cards._user-card-small')
+                </div>
+
             @else
 
                 @include('partials.titles._page-title', ['title' => 'Posts', 'subtitle' => 'your dev library'])
 
-                @include('partials.navigations._category-nav')
+                <!-- Display navigation for selecting categories -->
+                <div class="mb-5">
+                    @include('partials.navigations._category-nav')
+                </div>
 
             @endif
             <!-- Display different title based on if category or user models are set -->
@@ -46,5 +62,10 @@
 
         </div>
     </div>
+
+    <div class="row mt-3 justify-content-center">
+        {{ $posts->links() }}
+    </div>
+
 </div>
 @endsection
