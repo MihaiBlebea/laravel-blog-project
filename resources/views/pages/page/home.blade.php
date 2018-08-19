@@ -38,14 +38,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <a href="{{ route('blog') }}" class="btn btn-primary text-capitalize btn-block">
-                    Go to blog
-                </a>
-            </div>
-        </div>
     </div>
 </div>
 <!-- Second section -->
