@@ -3,22 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\Category;
-use App\Models\User;
+use App\Models\{
+    Post,
+    Category,
+    User
+};
+use App\Services\RelatedPostService;
+
 
 class BlogController extends Controller
 {
     // Display all posts based on some rules
     public function index()
     {
-        $posts = Post::where('status', 'published')->paginate(10);
+        $posts = Post::where('status', 'published')->latest()->paginate(10);
         return view('pages.blog.category')->with([
             'posts' => $posts,
             'categories' => Category::all()
         ]);
     }
-    
+
     // Display the categories from witch to select
     public function blog()
     {
@@ -29,7 +33,7 @@ class BlogController extends Controller
     // Display all posts from one category
     public function category(Category $category)
     {
-        $posts = $category->posts()->where('status', 'published')->paginate(10);
+        $posts = $category->posts()->where('status', 'published')->latest()->paginate(10);
         return view('pages.blog.category')->with([
             'posts'      => $posts,
             'categories' => Category::all(),
@@ -40,7 +44,7 @@ class BlogController extends Controller
     // Display all posts for a user
     public function userPosts(User $user)
     {
-        $posts = $user->posts()->where('status', 'published')->paginate(10);
+        $posts = $user->posts()->where('status', 'published')->latest()->paginate(10);
         return view('pages.blog.category')->with([
             'posts' => $posts,
             'user'  => $user
@@ -52,7 +56,7 @@ class BlogController extends Controller
     {
         return view('pages.blog.post')->with([
             'post' => $post,
-            'related_posts' => Post::take(3)->get()
+            'related_posts' => RelatedPostService::relatedPosts(3)
         ]);
     }
 }
