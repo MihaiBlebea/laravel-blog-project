@@ -33,7 +33,7 @@
             @if(Session::has('message'))
 
                 <div class="container">
-                    <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{!! Session::get('message') !!}</p>
+                    <p class="alert alert-{{ Session::get('alert_class', 'info') }}">{!! Session::get('message') !!}</p>
                 </div>
 
             @endif
