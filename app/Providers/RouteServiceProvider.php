@@ -52,6 +52,7 @@ class RouteServiceProvider extends ServiceProvider
            require base_path('routes/tracks.php');
            require base_path('routes/images.php');
            require base_path('routes/schedules.php');
+           require base_path('routes/leads.php');
            require base_path('routes/pages.php');
        });
     }
