@@ -69,4 +69,14 @@ class Post extends Model
     {
         return substr(strip_tags($this->content), 0, 200);
     }
+
+    public function getFullSlug()
+    {
+        return '/blog/' . $this->category->slug . '/' . $this->slug;
+    }
+
+    public function getUrl()
+    {
+        return config('app.url') . $this->getFullSlug();
+    }
 }

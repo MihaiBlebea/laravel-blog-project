@@ -10,9 +10,11 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Scripts, metas and styles you want to put in the head section -->
+    @stack('head')
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    @stack('script-head')
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">

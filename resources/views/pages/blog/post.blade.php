@@ -34,7 +34,7 @@
                     @include('partials.cards._user-card-small', ['user' => $post->author])
                 </div>
                 <!-- Include end author description -->
-                
+
                 <div class="mt-5">
                     @include('partials._related-posts')
                 </div>
@@ -51,3 +51,16 @@
     </div>
 </div>
 @endsection
+
+
+@push('head')
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mihaidev" />
+<meta name="twitter:creator" content="@MBlebea" />
+<meta property="og:url" content="{{ $post->getUrl() }}" />
+<meta property="og:title" content="{{ $post->title }}" />
+<meta property="og:description" content="{{ $post->except() }}" />
+<meta property="og:image" content="{{ asset($post->image->path ?? 'images/post-placeholder.png') }}" />
+
+@endpush
