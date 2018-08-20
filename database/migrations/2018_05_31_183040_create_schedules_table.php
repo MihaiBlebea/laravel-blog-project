@@ -12,8 +12,8 @@ class CreateSchedulesTable extends Migration
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('post_id');
-            $table->timestamp('publish_datetime');
-            $table->string('channel');
+            $table->integer('social_token_id');
+            $table->datetime('publish_datetime');
             $table->boolean('posted')->default(false);
             $table->timestamps();
         });

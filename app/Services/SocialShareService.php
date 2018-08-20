@@ -14,11 +14,6 @@ use Log;
 
 class SocialShareService implements SocialShareServiceInterface
 {
-    private static function urlToPost($category_slug, $post_slug)
-    {
-        return url('/blog/' . $category_slug . '/' . $post_slug);
-    }
-
     public static function shareLinkedin(Post $post, User $user = null)
     {
         if($user == null)
@@ -41,7 +36,7 @@ class SocialShareService implements SocialShareServiceInterface
                 "content" => [
                     "title" => $post->title,
                     "description" => $post->except(),
-                    "submitted-url" => self::urlToPost($post->category->slug, $post->slug),
+                    "submitted-url" => $post->getFullSlug(),
                     "submitted-image-url" => public_path($post->image->path ?? null)
                 ],
                 "visibility" => [

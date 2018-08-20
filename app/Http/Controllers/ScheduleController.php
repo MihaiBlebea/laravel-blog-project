@@ -36,8 +36,8 @@ class ScheduleController extends Controller
         $schedule = Schedule::create([
             'user_id'          => auth()->user()->id,
             'post_id'          => $request->input('post'),
-            'publish_datetime' => $request->input('datetime'),
-            'channel'          => $request->input('channel')
+            'social_token_id'  => $request->input('channel'),
+            'publish_datetime' => $request->input('datetime')
         ]);
 
         if($schedule)

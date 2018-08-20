@@ -33,12 +33,8 @@ Route::post('/message/send', 'MessageController@send')->name('message.send');
 
 // Route::get('/test', function() {
 //     $now = Carbon::now('Europe/London');
-//     // $schedules = Schedule::whereDay('publish_datetime', $now->day)
-//     //                      ->whereMonth('publish_datetime', $now->month)
-//     //                      ->whereYear('publish_datetime', $now->year)
-//     //                      ->whereTime('publish_datetime', $now->hour . ':' . $now->minute)
-//     //                      ->get();
-//     // $date = $now->day . '-' . $now->month . '-' . $now->year . ' ' . $now->hour . ':' . $now->minute;
-//     $schedules = Schedule::where('publish_datetime', $now->format('Y-m-d H:m'))->get();
-//     dd($now, $now->format('Y-m-d H:m'), $schedules);
+//
+//     $schedules = Schedule::where('publish_datetime', $now->startOfMinute())->get();
+//     $schedule = Schedule::find(1);
+//     dd($schedule->publish_datetime, $now->startOfMinute()->toDatetimeString(), $now->endOfMinute()->toDatetimeString(), $schedules);
 // });

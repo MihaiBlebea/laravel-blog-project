@@ -9,6 +9,6 @@
     <div class="card-body">
         {{-- <p class="card-title mb-2"><strong>{{ $schedule->post->title }}</strong></p> --}}
         <p class="mb-2">publish: {{ \Carbon\Carbon::parse($schedule->publish_datetime)->format('d/m/Y H:m') }}</p>
-        <p class="mb-2 text-capitalize">@ {{ $schedule->socialTokens->channel }}</p>
+        <p class="mb-2 text-capitalize">@ {{ $schedule->socialToken->channel }}</p>
     </div>
 </div>

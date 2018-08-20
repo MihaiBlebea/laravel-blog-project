@@ -14,8 +14,8 @@ class Schedule extends Model
     protected $fillable = [
         'user_id',
         'post_id',
+        'social_token_id',
         'publish_datetime',
-        'channel',
         'posted'
     ];
 
@@ -29,8 +29,8 @@ class Schedule extends Model
         return $this->belongsTo(Post::class);
     }
 
-    public function socialTokens()
+    public function socialToken()
     {
-        return $this->belongsTo(SocialToken::class, 'channel');
+        return $this->belongsTo(SocialToken::class, 'social_token_id');
     }
 }

@@ -28,9 +28,8 @@ class ManagePostQueueService implements ManagePostQueueServiceInterface
 
     public static function createQueue()
     {
-        // Needs fixing compare dates //
-        $now = Carbon::now()->format('Y-m-d H:m') . ':00';
-        $schedules = Schedule::where('publish_datetime', $now)->get();
+        $now = Carbon::now('Europe/London');
+        $schedules = Schedule::where('publish_datetime', $now->startOfMinute())->get();
         self::$queue = $schedules;
 
         return self::getInstance();
@@ -43,18 +42,18 @@ class ManagePostQueueService implements ManagePostQueueServiceInterface
             $post = $schedule->post;
             $user = $schedule->user;
 
-            if($schedule->channel === 'twitter')
+            if($schedule->socialToken->channel === 'twitter')
             {
                 SocialShareService::shareTwitter($post, $user);
             }
 
-            if($schedule->channel === 'linkedin')
+            if($schedule->socialToken->channel === 'linkedin')
             {
                 SocialShareService::shareLinkedin($post, $user);
             }
 
             // TODO Find better solution for testing
-            if($schedule->channel === 'test')
+            if($schedule->socialToken->channel === 'test')
             {
                 SocialShareService::shareFake($post, $user);
             }
