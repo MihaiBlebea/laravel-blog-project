@@ -18,6 +18,11 @@ class ScheduleController extends Controller
         ]);
     }
 
+    public function getSocialTokens()
+    {
+        return view('admin.social-tokens');
+    }
+
     public function getStore()
     {
         if(auth()->user()->socialTokens->count() > 0)

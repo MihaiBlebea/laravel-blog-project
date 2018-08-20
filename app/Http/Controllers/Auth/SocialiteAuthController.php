@@ -13,6 +13,12 @@ use Auth;
 
 class SocialiteAuthController extends Controller
 {
+    // Add token to the user without creating a new user in the database
+    public function addToken(String $driver_name)
+    {
+        dd($driver_name);
+    }
+
     public function redirectToProvider(String $driver_name)
     {
         $driver = Socialite::driver($driver_name);
@@ -20,10 +26,7 @@ class SocialiteAuthController extends Controller
         {
             $driver->scopes(['w_share']);
         }
-        // if($driver_name == 'facebook')
-        // {
-        //     $driver->scopes(['user_posts']);
-        // }
+
         return $driver->redirect();
     }
 
@@ -31,6 +34,12 @@ class SocialiteAuthController extends Controller
     {
         $social_user = Socialite::driver($driver_name)->user();
         $split_name = explode(' ', $social_user->name);
+
+        // Check if the "addToken" flag is present in the session
+        if($request->session()->has('addToken'))
+        {
+            return redirect()->action();
+        }
 
         // Get or create User model
         $user = User::firstOrCreate([

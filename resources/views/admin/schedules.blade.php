@@ -4,7 +4,8 @@
 
 @include('partials.titles._page-title', ['title' => 'Schedule', 'subtitle' => 'Manage schedule'])
 
-<a href="{{ route('schedule.store') }}" class="btn btn-primary mb-3">Add schedule</a>
+<a href="{{ route('schedule.store') }}" class="btn btn-primary mb-3 mr-2">Add schedule</a>
+<a href="{{ route('schedule.social-tokens') }}" class="btn btn-primary mb-3">Add channel</a>
 
 <div class="row">
 

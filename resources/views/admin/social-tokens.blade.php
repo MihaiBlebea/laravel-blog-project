@@ -4,6 +4,6 @@
 
 @include('partials.titles._page-title', ['title' => 'Social channels'])
 
-Manage social chanels
+@include('partials._social-login')
 
 @endsection
