@@ -1,60 +1,55 @@
-<form action="{{ route('schedule.store') }}" method="POST">
-    @csrf
+<div class="form-group">
+    <label>Schedule post</label>
+    <select name="post" class="form-control {{ $errors->has('post') ? 'is-invalid' : '' }}">
+        <option disabled {{ old('post') ? '' : 'selected' }}>Pick post</option>
+        @foreach($posts as $post)
 
-    <div class="form-group">
-        <label>Schedule post</label>
-        <select name="post" class="form-control text-capitalize">
-            @foreach($posts as $post)
+            <option value="{{ $post->id }}"
+                {{ (old('post') === $post->id || $schedule->post->id === $post->id) ? 'selected' : '' }}>
+                <span class="text-capitalize">{{ $post->title }}</span>
+            </option>
 
-                <option value="{{ $post->id }}" {{ old('post') && old('post') === $post->id ? 'selected' : '' }}>
-                    {{ $post->title }}
-                </option>
+        @endforeach
+    </select>
 
-            @endforeach
-        </select>
+    @if($errors->has('post'))
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('post') }}</strong>
+        </span>
+    @endif
+</div>
 
-        @if($errors->has('post'))
-            <span class="invalid-feedback">
-                <strong>{{ $errors->first('post') }}</strong>
-            </span>
-        @endif
-    </div>
+<div class="form-group">
+    <label>Select social channel</label>
+    <select name="channel" class="form-control {{ $errors->has('channel') ? 'is-invalid' : '' }}">
+        <option disabled {{ old('channel') ? '' : 'selected' }}>Pick channel</option>
+        @foreach($channels as $channel)
 
-    <div class="row">
-        <div class="col">
-            <label>Pick social channel</label>
-            <select name="channel" class="form-control text-capitalize {{ $errors->has('channel') ? 'is-invalid' : '' }}">
-                @foreach($channels as $channel)
+            <option value="{{ $channel->id }}"
+                {{ (old('channel') === $channel->id || $schedule->socialToken->id === $channel->id) ? 'selected' : '' }}>
+                <span class="text-capitalize">{{ $channel->channel }}</span>
+            </option>
 
-                    <option value="{{ $channel->id }}" {{ old('channel') && old('channel') === $channel->id ? 'selected' : '' }}>
-                        {{ $channel->channel }}
-                    </option>
+        @endforeach
+    </select>
 
-                @endforeach
-            </select>
+    @if($errors->has('channel'))
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('channel') }}</strong>
+        </span>
+    @endif
+</div>
 
-            @if($errors->has('channel'))
-                <span class="invalid-feedback">
-                    <strong>{{ $errors->first('channel') }}</strong>
-                </span>
-            @endif
-        </div>
+<div class="form-group">
+    <label>Pick date {{ \Carbon\Carbon::parse($schedule->publish_datetime)->format('d/m/Y H:m') }}</label>
+    <input class="form-control {{ $errors->has('datetime') ? 'is-invalid' : '' }}"
+           type="datetime-local"
+           name="datetime"
+           value="{{ \Carbon\Carbon::parse($schedule->publish_datetime)->format('d/m/y') }}">
 
-        <div class="col">
-            <div class="form-group">
-                <label>Pick date</label>
-                <input class="form-control {{ $errors->has('datetime') ? 'is-invalid' : '' }}" type="datetime-local" name="datetime">
-
-                @if($errors->has('datetime'))
-                    <span class="invalid-feedback">
-                        <strong>{{ $errors->first('datetime') }}</strong>
-                    </span>
-                @endif
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-5">
-        @include('partials._form-button', ['cta' => 'Save'])
-    </div>
-</form>
+    @if($errors->has('datetime'))
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('datetime') }}</strong>
+        </span>
+    @endif
+</div>

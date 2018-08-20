@@ -7,13 +7,13 @@
 <div class="row justify-content-center">
     <div class="card col-md-8">
         <div class="card-body">
-            <form action="{{ route('schedule.store') }}" method="POST">
+            <form action="{{ route('schedule.update', [ 'schedule' => $schedule->id ]) }}" method="POST">
                 @csrf
 
                 @include('forms._create-schedule-form')
 
                 <div class="mt-5">
-                    @include('partials._form-button', ['cta' => 'Save'])
+                    @include('partials._form-button', ['cta' => 'Update'])
                 </div>
             </form>
         </div>

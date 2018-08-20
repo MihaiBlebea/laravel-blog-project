@@ -60,11 +60,6 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    // public function social()
-    // {
-    //     return $this->hasOne(Social::class);
-    // }
-
     public function searches()
     {
         return $this->hasMany(Search::class);

@@ -20,4 +20,9 @@ class SocialToken extends Model
     {
         return $this->belongTo(User::class);
     }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

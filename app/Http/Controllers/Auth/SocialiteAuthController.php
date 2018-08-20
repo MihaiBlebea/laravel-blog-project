@@ -13,10 +13,39 @@ use Auth;
 
 class SocialiteAuthController extends Controller
 {
-    // Add token to the user without creating a new user in the database
+    // Add token to the user without creating a new user in the database //
     public function addToken(String $driver_name)
     {
-        dd($driver_name);
+        $driver = Socialite::driver($driver_name);
+        session([ 'addToken' => true ]);
+        if($driver_name == 'linkedin')
+        {
+            $driver->scopes(['w_share']);
+        }
+        return $driver->redirect();
+    }
+
+    // Remove token from sign in user account //
+    public function removeToken(String $driver_name)
+    {
+        $token = auth()->user()->socialTokens()->where('channel', $driver_name)->first();
+        if($token)
+        {
+            // Remove schedules related to this social channel
+            $schedules = $token->schedules;
+            foreach($schedules as $schedule)
+            {
+                $schedule->delete();
+            }
+            $token->delete();
+            return redirect()->back()->with([
+                'message'     => 'Your social token for ' . lcfirst($driver_name) . ' was removed',
+                'alert_class' => 'success'
+            ]);
+        }
+        return redirect()->back()->with([
+            'message' => 'Social token for ' . lcfirst($driver_name) . ' could not be found'
+        ]);
     }
 
     public function redirectToProvider(String $driver_name)
@@ -36,9 +65,19 @@ class SocialiteAuthController extends Controller
         $split_name = explode(' ', $social_user->name);
 
         // Check if the "addToken" flag is present in the session
-        if($request->session()->has('addToken'))
+        if(session()->has('addToken'))
         {
-            return redirect()->action();
+            SocialToken::updateOrCreate([
+                'user_id'      => auth()->user()->id,
+                'channel'      => $driver_name
+            ], [
+                'token'        => $social_user->token,
+                'token_secret' => isset($social_user->tokenSecret) ? $social_user->tokenSecret : null,
+            ]);
+            return redirect()->route('schedule.social-tokens')->with([
+                'message'     => 'Social channel was added to your account',
+                'alert_class' => 'success'
+            ]);
         }
 
         // Get or create User model
@@ -51,15 +90,13 @@ class SocialiteAuthController extends Controller
         ]);
 
         // Check if user already has this social_token
-        if(!$user->hasSocialToken($driver_name))
-        {
-            SocialToken::create([
-                'user_id'      => $user->id,
-                'token'        => $social_user->token,
-                'token_secret' => isset($social_user->tokenSecret) ? $social_user->tokenSecret : null,
-                'channel'      => $driver_name
-            ]);
-        }
+        SocialToken::updateOrCreate([
+            'user_id'      => $user->id,
+            'channel'      => $driver_name
+        ], [
+            'token'        => $social_user->token,
+            'token_secret' => isset($social_user->tokenSecret) ? $social_user->tokenSecret : null,
+        ]);
 
         Auth::login($user);
         return redirect(config('auth.redirect_after_login'));

@@ -20,7 +20,9 @@ class ScheduleController extends Controller
 
     public function getSocialTokens()
     {
-        return view('admin.social-tokens');
+        return view('admin.social-tokens')->with([
+            'channels' => ['twitter', 'linkedin', 'github', 'facebook']
+        ]);
     }
 
     public function getStore()
@@ -57,5 +59,32 @@ class ScheduleController extends Controller
                 'alert_class' => 'danger'
             ]);
         }
+    }
+
+    public function getUpdate(Schedule $schedule)
+    {
+        return view('schedules.update')->with([
+            'schedule' => $schedule,
+            'posts'    => Post::all(),
+            'channels' => auth()->user()->socialTokens
+        ]);
+    }
+
+    public function postUpdate(ScheduleRequest $request, Schedule $schedule)
+    {
+        dd($request->all());
+        return redirect()->route('schedule.manage')->with([
+            'message'     => 'Schedule was deleted',
+            'alert_class' => 'success'
+        ]);
+    }
+
+    public function delete(Schedule $schedule)
+    {
+        $schedule->delete();
+        return redirect()->back()->with([
+            'message'     => 'Schedule was deleted',
+            'alert_class' => 'success'
+        ]);
     }
 }
