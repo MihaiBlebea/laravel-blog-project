@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Category;
-use App\Models\Subscription;
-use App\Models\Profile;
-use Session;
-use Storage;
+use App\Http\Requests\ProfileRequest;
+use App\Models\{
+    User,
+    Category,
+    Profile
+};
+
 
 class UserController extends Controller
 {
@@ -54,7 +55,7 @@ class UserController extends Controller
         return view('admin.update')->with('user', $user);
     }
 
-    public function postUpdate(Request $request)
+    public function postUpdate(ProfileRequest $request)
     {
         $user = auth()->user();
         $user->update([
@@ -71,33 +72,9 @@ class UserController extends Controller
             'image_id'          => $request->input('profile_image'),
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with([
+            'message'     => 'Your profile was updated',
+            'alert_class' => 'success'
+        ]);
     }
-
-    // public function subscribe(User $user)
-    // {
-    //     Subscription::create([
-    //         'user_id'      => auth()->user()->id,
-    //         'subscribe_to' => $user->id
-    //     ]);
-    //
-    //     return redirect()->back();
-    // }
-
-    // public function unsubscribe(User $user)
-    // {
-    //     $subscription = auth()->user()->subscriptions()->where('subscribe_to', $user->id)->first();
-    //     $subscription->delete();
-    //     return redirect()->back();
-    // }
-    //
-    // public function getSubscriptions(User $user = null)
-    // {
-    //     if(!isset($user))
-    //     {
-    //         $user = auth()->user();
-    //     }
-    //     $subscriptions = $user->subscriptions()->paginate(10);
-    //     return view('admin.subscriptions')->with('subscriptions', $subscriptions);
-    // }
 }

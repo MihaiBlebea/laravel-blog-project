@@ -13777,48 +13777,49 @@ a:hover {
   margin-left: 30px;
 }
 
-.profile-image-wrapper {
-  height: 200px;
-  width: 200px;
-  background-repeat: no-repeat;
-  background-position: top;
-  background-size: cover;
-}
-
-.profile-image-wrapper.small {
-  width: 64px;
-  height: 64px;
-}
-
-img.profile-img {
-  display: block;
-  width: 100px;
-  height: 100px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-img.profile-img.lg {
-  width: 200px;
-  height: 200px;
-}
-
-img.profile-img.xl {
-  width: 100%;
-  height: 300px;
-}
-
-.bg-img {
-  width: 100%;
+.bg-image {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 }
 
-.selected-img {
+.bg-image--square {
+  height: 200px;
+  width: 200px;
+}
+
+.bg-image--square__small {
+  height: 100px;
+  width: 100px;
+}
+
+.bg-image--square__large {
+  height: 300px;
+  width: 300px;
+}
+
+.bg-image--rectangle {
+  height: 300px;
+  width: 100%;
+}
+
+.bg-image--rectangle__small {
+  height: 150px;
+  width: 100%;
+}
+
+.bg-image--rectangle__large {
+  height: 400px;
+  width: 100%;
+}
+
+.bg-image--highlight {
+  opacity: 0.5;
+}
+
+.bg-image--highlight__shadow {
   -webkit-box-shadow: 1px 1px 3px #3b3b3b;
           box-shadow: 1px 1px 3px #3b3b3b;
-  opacity: 0.5;
 }
 
 .bg-img {
