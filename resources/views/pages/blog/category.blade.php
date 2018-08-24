@@ -45,6 +45,14 @@
 
                 @foreach($posts as $post)
 
+                    @if($loop->index == 1)
+
+                        <div class="mb-4 animated fadeIn delay-1">
+                            @include('partials.cards._lead-in-content-card')
+                        </div>
+
+                    @endif
+
                     <div class="mb-4 animated fadeIn delay-1">
                         @include('partials.cards._post-card')
                     </div>
