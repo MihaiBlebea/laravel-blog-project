@@ -97719,7 +97719,8 @@ var render = function() {
                       },
                       [
                         _c("div", {
-                          staticClass: "bg-img small pointer",
+                          staticClass:
+                            "image--bg image--bg__medium w-100 pointer",
                           style: {
                             "background-image": "url(" + _vm.path(image) + ")"
                           },

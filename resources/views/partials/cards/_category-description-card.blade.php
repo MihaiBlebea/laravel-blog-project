@@ -1,12 +1,12 @@
-<div class="row">
-    {{-- <img class="profile-image-wrapper mr-2 ml-3" src="{{ asset($category->image->path ?? 'images/profile-placeholder.jpg') }}"> --}}
-    <div class="col-md-4 col-12 mb-3">
-        @include('partials._image-responsive', ['image_path' => $category->image->path ?? null])
+<div class="position-relative">
+    <div class="image--bg image--bg__medium w-100 mb-3"
+         style="background-image: url('{{ asset($category->image->path ?? 'images/post-placeholder.png') }}');">
     </div>
 
-    <div class="col">
-        <strong>{{ $category->name }}</strong>
-        <p>{{ $category->description }}</p>
-    </div>
+    <h3 class="card-title card-title--overlay card-title--overlay__white p-2 mb-0">
+        {{ $category->name }}
+    </h3>
 </div>
+
+<p>{{ $category->description }}</p>
 <hr>

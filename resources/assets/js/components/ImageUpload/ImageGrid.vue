@@ -18,7 +18,7 @@
                          v-on:click="triggerDetails(index)"
                          data-toggle="modal"
                          data-target="#image-details-modal"
-                         class="bg-img small pointer"></div>
+                         class="image--bg image--bg__medium w-100 pointer"></div>
                 </image-card>
 
             </div>
