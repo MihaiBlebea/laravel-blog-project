@@ -14,7 +14,7 @@ class ScheduleController extends Controller
     public function index()
     {
         return view('admin.schedules')->with([
-            'schedules' => auth()->user()->schedules()->oldest('publish_datetime')->paginate(20)
+            'schedules' => auth()->user()->schedules()->oldest('publish_datetime')->paginate(20),
         ]);
     }
 

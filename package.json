@@ -18,7 +18,6 @@
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
         "chart.js": "^2.7.2",
-        "create-ssl-certificate": "^2.0.4",
         "font-awesome": "^4.7.0",
         "highlight.js": "^9.12.0",
         "jquery": "^3.2",
@@ -27,8 +26,6 @@
         "moment": "^2.22.2",
         "popper.js": "^1.12",
         "vue": "^2.5.7",
-        "vue-chartjs": "^3.3.1",
-        "vue-multiselect": "^2.1.0",
-        "vue2-editor": "^2.4.4"
+        "vue-chartjs": "^3.3.1"
     }
 }

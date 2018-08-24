@@ -5,7 +5,7 @@
         @foreach($posts as $post)
 
             <option value="{{ $post->id }}"
-                {{ (old('post') === $post->id || $schedule->post->id === $post->id) ? 'selected' : '' }}>
+                {{ (old('post') === $post->id) ? 'selected' : '' }}>
                 <span class="text-capitalize">{{ $post->title }}</span>
             </option>
 
@@ -26,7 +26,7 @@
         @foreach($channels as $channel)
 
             <option value="{{ $channel->id }}"
-                {{ (old('channel') === $channel->id || $schedule->socialToken->id === $channel->id) ? 'selected' : '' }}>
+                {{ (old('channel') === $channel->id) ? 'selected' : '' }}>
                 <span class="text-capitalize">{{ $channel->channel }}</span>
             </option>
 
@@ -41,11 +41,10 @@
 </div>
 
 <div class="form-group">
-    <label>Pick date {{ \Carbon\Carbon::parse($schedule->publish_datetime)->format('d/m/Y H:m') }}</label>
+    <label>Pick date</label>
     <input class="form-control {{ $errors->has('datetime') ? 'is-invalid' : '' }}"
            type="datetime-local"
-           name="datetime"
-           value="{{ \Carbon\Carbon::parse($schedule->publish_datetime)->format('d/m/y') }}">
+           name="datetime">
 
     @if($errors->has('datetime'))
         <span class="invalid-feedback">

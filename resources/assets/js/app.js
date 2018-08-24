@@ -7,7 +7,6 @@ window.Vue = require('vue')
 import highlight from 'highlight.js'
 highlight.initHighlightingOnLoad()
 
-import Multiselect from 'vue-multiselect'
 
 // Init Vue js components
 Vue.component('vue-chart', require('./components/Chart.vue'))
@@ -20,15 +19,6 @@ Vue.component('image-details', require('./components/ImageUpload/ImageDetails.vu
 
 Vue.component('markdown-editor', require('./components/MarkdownEditor/Editor.vue'))
 
-Vue.component('vue-schedule', require('./components/Schedule/VueSchedule.vue'))
-
-Vue.component('vue-calendar', require('./components/Schedule/VueCalendar.vue'))
-
-Vue.component('vue-modal', require('./components/Schedule/VueModal.vue'))
-
-Vue.component('v-multiselect', Multiselect)
-
-Vue.component('search-box', require('./components/SearchBox/SearchBox.vue'))
 
 // Setup global variables
 Vue.prototype.api = '/api/v1/'
