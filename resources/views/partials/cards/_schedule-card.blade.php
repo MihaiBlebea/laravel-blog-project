@@ -12,7 +12,6 @@
             {{ \Carbon\Carbon::parse($schedule->publish_datetime)->format('d/m/Y H:m') }}
         </p>
         <p class="mb-2 text-center">
-            <a href="{{ route('schedule.update', [ 'schedule' => $schedule->id ]) }}" class="mr-2">Edit</a>
             <a href="{{ route('schedule.delete', [ 'schedule' => $schedule->id ]) }}" class="text-danger">Delete</a>
         </p>
     </div>

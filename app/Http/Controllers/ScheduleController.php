@@ -61,24 +61,6 @@ class ScheduleController extends Controller
         }
     }
 
-    public function getUpdate(Schedule $schedule)
-    {
-        return view('schedules.update')->with([
-            'schedule' => $schedule,
-            'posts'    => Post::all(),
-            'channels' => auth()->user()->socialTokens
-        ]);
-    }
-
-    public function postUpdate(ScheduleRequest $request, Schedule $schedule)
-    {
-        dd($request->all());
-        return redirect()->route('schedule.manage')->with([
-            'message'     => 'Schedule was deleted',
-            'alert_class' => 'success'
-        ]);
-    }
-
     public function delete(Schedule $schedule)
     {
         $schedule->delete();

@@ -6,7 +6,7 @@ Route::group([
     'middleware' => 'role:user,admin'
 ], function() {
 
-    Route::get('/manage/{user?}', 'PostController@index')->name('index');
+    Route::get('/manage', 'PostController@index')->name('index');
 
     Route::get('/store', 'PostController@getStore')->name('store');
     Route::post('/store', 'PostController@postStore')->name('store');
@@ -19,5 +19,5 @@ Route::group([
     Route::get('/delete/{post}', 'PostController@delete')->name('delete');
 
     Route::get('/toggle/{post}', 'PostController@togglePublish')->name('publish');
-    
+
 });

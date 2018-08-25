@@ -11,23 +11,23 @@ class AdminSidebareMenuViewComposer
         $menu = [
             [
                 'name'   => 'Dashboard',
-                'slug'   => 'post/store',
+                'slug'   => 'admin/users/dashboard',
                 'route'  => 'user.dashboard',
                 'params' => [],
                 'roles'  => []
             ],
             [
                 'name'   => 'write post',
-                'slug'   => 'post/store',
+                'slug'   => 'admin/post/store',
                 'route'  => 'post.store',
                 'params' => [],
                 'roles'  => []
             ],
             [
                 'name'   => 'manage posts',
-                'slug'   => 'posts/' . auth()->user()->slug,
+                'slug'   => 'admin/post/manage',
                 'route'  => 'post.index',
-                'params' => ['user' => auth()->user()->slug],
+                'params' => [],
                 'roles'  => []
             ],
             [
@@ -39,28 +39,28 @@ class AdminSidebareMenuViewComposer
             ],
             [
                 'name'   => 'pages',
-                'slug'   => 'pages',
+                'slug'   => 'admin/pages/manage',
                 'route'  => 'page.manage',
                 'params' => [],
                 'roles'  => ['admin']
             ],
             [
                 'name'   => 'users',
-                'slug'   => 'admin/users',
+                'slug'   => 'admin/users/manage',
                 'route'  => 'user.manage',
                 'params' => [],
                 'roles'  => ['admin']
             ],
             [
                 'name'   => 'images',
-                'slug'   => 'admin/image/manage',
+                'slug'   => 'admin/images/manage',
                 'route'  => 'image.manage',
                 'params' => [],
                 'roles'  => ['admin', 'user']
             ],
             [
                 'name'   => 'categories',
-                'slug'   => 'categories',
+                'slug'   => 'admin/categories/manage',
                 'route'  => 'category.manage',
                 'params' => [],
                 'roles'  => ['admin']

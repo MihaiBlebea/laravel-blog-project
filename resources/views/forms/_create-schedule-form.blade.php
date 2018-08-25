@@ -1,23 +1,5 @@
-<div class="form-group">
-    <label>Schedule post</label>
-    <select name="post" class="form-control {{ $errors->has('post') ? 'is-invalid' : '' }}">
-        <option disabled {{ old('post') ? '' : 'selected' }}>Pick post</option>
-        @foreach($posts as $post)
 
-            <option value="{{ $post->id }}"
-                {{ (old('post') === $post->id) ? 'selected' : '' }}>
-                <span class="text-capitalize">{{ $post->title }}</span>
-            </option>
-
-        @endforeach
-    </select>
-
-    @if($errors->has('post'))
-        <span class="invalid-feedback">
-            <strong>{{ $errors->first('post') }}</strong>
-        </span>
-    @endif
-</div>
+<schedule-post-selector></schedule-post-selector>
 
 <div class="form-group">
     <label>Select social channel</label>

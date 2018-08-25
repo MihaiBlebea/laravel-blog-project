@@ -20,20 +20,15 @@ Route::group(['prefix' => 'v1', 'middleware' => []], function() {
 
     Route::get('/image/delete/{image}', 'Api\ImageController@delete');
 
-    // Project imagesy
+    // Project image
     Route::get('/images/project/{project}', 'Api\ProjectController@getProjectImages');
 
-    // Get posts by user
-    Route::get('/posts/user/{user}', 'Api\PostController@getUserPosts');
+    // Category
+    Route::get('/category/all', 'Api\CategoryController@getAll');
 
-    Route::post('/schedule/user/{user}', 'Api\ScheduleController@storeSchedule');
+    Route::get('/category/posts/{category}', 'Api\CategoryController@getPosts');
 
-    Route::get('/schedule/user/{user}', 'Api\ScheduleController@getUserSchedule');
-
-    // Remove schedule from database
-    Route::get('/schedule/remove/{schedule}', 'Api\ScheduleController@removeSchedule');
-
-    // Get user social channels
-    Route::get('/schedule/social-channels/user/{user}', 'Api\ScheduleController@getUserSocialChannels');
+    // Posts
+    Route::get('/posts', 'Api\PostController@getAll');
 
 });

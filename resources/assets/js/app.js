@@ -19,6 +19,8 @@ Vue.component('image-details', require('./components/ImageUpload/ImageDetails.vu
 
 Vue.component('markdown-editor', require('./components/MarkdownEditor/Editor.vue'))
 
+Vue.component('schedule-post-selector', require('./components/SchedulePostSelector/SchedulePostSelector.vue'))
+Vue.component('select-input', require('./components/SchedulePostSelector/SelectInput.vue'))
 
 // Setup global variables
 Vue.prototype.api = '/api/v1/'

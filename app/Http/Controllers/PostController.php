@@ -17,19 +17,13 @@ use App\Services\MediumPublishService;
 class PostController extends Controller
 {
     // Get all user's post for admin panel
-    public function index(Request $request, User $user = null)
+    public function index(Request $request)
     {
         // Check if the user is set or not
         // If user is set display user's posts if not, display all posts
         // dd($request->all());
         $response = [];
-        if($user == null)
-        {
-            $schema = Post::query();
-        } else {
-            $schema = $user->posts();
-            $response['user'] = $user;
-        }
+        $schema = Post::query();
 
         if($request->input('category'))
         {

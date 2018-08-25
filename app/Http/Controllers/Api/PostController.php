@@ -5,13 +5,13 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\{
-    User
+    Post
 };
 
 class PostController extends Controller
 {
-    public function getUserPosts(User $user)
+    public function getAll()
     {
-        return $user->posts()->where('status', 'published')->get();
+        return Post::where('status', 'published')->get();
     }
 }
