@@ -12,7 +12,7 @@ class ProjectTableSeeder extends Seeder
             'name' => 'SlabesteCuSerban',
             'short_description' => 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remai',
             'description' => 's simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remais simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when  an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remais simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remai',
-            'language' => 'javascript',
+            'languages' => ['javascript', 'php', 'python'],
             'link' => 'http://www.slabestecuserban.ro'
         ],
         [
@@ -20,7 +20,7 @@ class ProjectTableSeeder extends Seeder
             'name' => 'Framework X',
             'short_description' => 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remai',
             'description' => 's simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remais simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when  an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remais simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remai',
-            'language' => 'javascript',
+            'languages' => ['javascript', 'php', 'python'],
             'link' => 'http://fengshuiarmonie.ro'
         ],
         [
@@ -28,7 +28,7 @@ class ProjectTableSeeder extends Seeder
             'name' => 'Url Shortener',
             'short_description' => 'is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remai',
             'description' => 's simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remais simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when  an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remais simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remai',
-            'language' => 'PHP',
+            'languages' => ['javascript', 'php', 'python'],
             'link' => 'http://www.antrenorulmeupersonal.ro'
         ],
     ];
@@ -42,7 +42,7 @@ class ProjectTableSeeder extends Seeder
                 'name'              => $project['name'],
                 'short_description' => $project['short_description'],
                 'description'       => $project['description'],
-                'language'          => $project['language'],
+                'languages'         => $project['languages'],
                 'link'              => $project['link']
             ]);
         }

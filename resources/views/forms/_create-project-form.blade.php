@@ -1,95 +1,101 @@
 <div class="form-group">
-    <label for="name">Name:</label>
+    <label>Name:</label>
     <input type="text"
            name="name"
-           class="form-control"
-           id="name"
-           aria-describedby="name"
+           class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}"
            placeholder="Project name"
-           value="{{ $project->name or old('name') }}">
+           value="{{ $project->name ?? old('name') }}">
 
-    @if($errors->has('name'))
-        <span class="invalid-feedback">
-            <strong>{{ $errors->first('name') }}</strong>
-        </span>
-    @endif
+    <span class="invalid-feedback">
+        <strong>{{ $errors->first('name') }}</strong>
+    </span>
 </div>
 
 <div class="form-group">
     <label for="short_description">Short description:</label>
-    <textarea class="form-control"
+    <textarea class="form-control {{ $errors->has('short_description') ? ' is-invalid' : '' }}"
               name="short_description"
-              id="short_description"
-              rows="5">{{ $project->short_description or old('short_description') }}</textarea>
+              rows="5">{{ $project->short_description ?? old('short_description') }}</textarea>
 
-    @if($errors->has('short_description'))
-        <span class="invalid-feedback">
-            <strong>{{ $errors->first('short_description') }}</strong>
-        </span>
-    @endif
+    <span class="invalid-feedback">
+        <strong>{{ $errors->first('short_description') }}</strong>
+    </span>
 </div>
 
 <div class="form-group">
 
-    <label for="short_description">Project description:</label>
-    <!-- Rich text editor -->
-    <vue-editor-wrapper :draft-id="'{{ json_encode($project->id) }}'"
-                        :init-content="'{{ isset($project->description) ? $project->description : '' }}'"
-                        :api="'/api/v1/upload/project'"
-                        :name="'description'">
-    </vue-editor-wrapper>
-    <!-- Rich text editor -->
+    <label>Project description:</label>
+    <!-- Markdown editor -->
+    <markdown-editor input-name="description"
+                     input-content="{{ isset($project) ? $project->description : null }}">
+    </markdown-editor>
+    <!-- Markdown editor -->
 
 </div>
 
-<div class="row form-group">
-    <div class="col">
+<div class="row">
+    <div class="col-md-6">
 
-        <label for="link">Project link:</label>
-        <input type="text"
-               name="link"
-               class="form-control"
-               id="link"
-               aria-describedby="link"
-               placeholder="Project link"
-               value="{{ $project->link or old('link') }}">
+        <div class="form-group">
+            <label for="link">Project link:</label>
+            <input type="text"
+                   name="link"
+                   class="form-control {{ $errors->has('link') ? ' is-invalid' : '' }}"
+                   placeholder="Project link"
+                   value="{{ $project->link ?? old('link') }}">
 
-        @if($errors->has('link'))
             <span class="invalid-feedback">
                 <strong>{{ $errors->first('link') }}</strong>
             </span>
-        @endif
+        </div>
 
-    </div>
-    <div class="col">
+        <div class="form-group">
+            <label>Status:</label>
+            <select name="status"
+                    class="form-control {{ $errors->has('status') ? ' is-invalid' : '' }}">
+                @foreach($statuses as $index => $status)
+                    <option value="{{ $index }}" {{ (isset($project) && $project->hasStatus($index)) ? 'selected' : ''}}>{{ $status }}</option>
+                @endforeach
+            </select>
 
-        <label for="status">Status:</label>
-        <select name="status" class="form-control" id="status">
-            @foreach($statuses as $index => $status)
-                <option value="{{ $index }}" {{ ($project->hasStatus($index)) ? 'selected' : ''}}>{{ $status }}</option>
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('status') }}</strong>
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label>Languages used:</label><br>
+            @foreach($languages as $language)
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input pointer"
+                           name="languages[]"
+                           type="checkbox"
+                           value="{{ $language }}">
+                    <label class="form-check-label">{{ $language }}</label>
+                </div>
             @endforeach
-        </select>
 
+
+            {{-- <select name="language"
+                    class="form-control {{ $errors->has('language') ? ' is-invalid' : '' }}">
+
+                @foreach($languages as $language)
+                    <option value="{{ $language }}"
+                            class="text-uppercase" {{ (isset($project) && $project->hasLanguage($language)) ? 'selected' : ''}}>{{ $language }}</option>
+                @endforeach
+
+            </select> --}}
+
+            <span class="invalid-feedback">
+                <strong>{{ $errors->first('short_description') }}</strong>
+            </span>
+        </div>
     </div>
 </div>
 
-<div class="form-group">
-    <label for="language">Main language used:</label>
-    <select name="language" class="form-control" id="language">
-        @foreach($languages as $language)
-            <option value="{{ $language }}" class="text-uppercase" {{ ($project->hasLanguage($language)) ? 'selected' : ''}}>{{ $language }}</option>
-        @endforeach
-    </select>
-
-    @if($errors->has('short_description'))
-        <span class="invalid-feedback">
-            <strong>{{ $errors->first('short_description') }}</strong>
-        </span>
-    @endif
-</div>
 
 <div class="form-group">
-    <label for="feature_image">Upload feature image:</label>
+    <label>Upload feature image:</label>
 
     <image-modal multiple-img="true"
                  default-image="{{ $project->images ?? '' }}"
@@ -97,8 +103,4 @@
                  user="{{ auth()->user()->slug }}">
     </image-modal>
 
-</div>
-
-<div class="mt-5">
-    @include('partials._form-button', ['cta' => 'Save'])
 </div>

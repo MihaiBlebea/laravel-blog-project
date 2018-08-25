@@ -13,6 +13,9 @@
                 <li>
                     <a class="nav-link" href="{{ route('blog.index') }}">Blog</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="{{ route('projects.index') }}">Portfolio</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('page.get', ['page' => 'about']) }}">About</a>
                 </li>
@@ -20,7 +23,6 @@
                     <a class="nav-link" href="{{ route('page.get', ['page' => 'contact']) }}">Contact</a>
                 </li>
                 {{-- <li><a class="nav-link" href="{{ route('users') }}">Developers</a></li> --}}
-                {{-- <li><a class="nav-link" href="{{ route('projects.index') }}">Projects</a></li> --}}
             </ul>
 
             <!-- Right Side Of Navbar -->

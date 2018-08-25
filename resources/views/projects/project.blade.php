@@ -8,7 +8,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @include('partials._profile-short-description', ['user' => $project->user])
+            @include('partials.cards._user-card-small', [ 'user' => $project->user ])
 
             <p class="font-article">
                 <strong>{{ $project->short_description }}</strong>
@@ -16,18 +16,20 @@
         </div>
     </div>
 
-    @if($project->hasGallery())
+    {{-- @if($project->hasGallery())
         <div class="mb-5 mt-5">
             <masonry-wrapper project-slug="{{ $project->slug ?? null }}"></masonry-wrapper>
         </div>
-    @endif
+    @endif --}}
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="font-article">{!! $project->description !!}</div>
+            <div class="font-article">
+                @toHtml($project->description)
+            </div>
 
             <div class="mt-5">
-                @include('partials._profile-short-description', ['user' => $project->user])
+                @include('partials.cards._user-card-small', ['user' => $project->user])
             </div>
         </div>
     </div>
@@ -44,3 +46,19 @@
 
 </div>
 @endsection
+
+
+@push('head')
+
+<!-- Include meta for making the content appear in Twitter and Linkedin -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@mihaidev" />
+<meta name="twitter:creator" content="@MBlebea" />
+<meta property="og:url" content="" />
+<meta property="og:title" content="{{ $project->name }}" />
+<meta property="og:description" content="{{ $project->short_description }}" />
+<meta property="og:image" content="{{ asset($project->images[0]->path ?? 'images/post-placeholder.png') }}" />
+
+<!-- Include styles for code highlighting -->
+<link href="{{ asset('css/highlight.css') }}" rel="stylesheet">
+@endpush

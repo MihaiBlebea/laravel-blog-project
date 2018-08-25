@@ -16,9 +16,28 @@ class Project extends Model
         'slug',
         'short_description',
         'description',
-        'language',
+        'languages',
         'link',
         'status'
+    ];
+
+    private static $languages = [
+        'php',
+        'javascript',
+        'python',
+        'go',
+        'swift',
+        'bash',
+        'css'
+    ];
+
+    private static $statuses = [
+        'published' => 'Publish',
+        'draft'     => 'Save for later'
+    ];
+
+    protected $casts = [
+        'languages' => 'array',
     ];
 
     public function getRouteKeyName()
@@ -42,10 +61,10 @@ class Project extends Model
         $this->attributes['slug'] = str_slug($value, '-');
     }
 
-    public function hasGallery()
-    {
-        return (count($this->images) > 0) ? true : false;
-    }
+    // public function hasGallery()
+    // {
+    //     return (count($this->images) > 0) ? true : false;
+    // }
 
     public function hasStatus(String $status)
     {
@@ -55,5 +74,15 @@ class Project extends Model
     public function hasLanguage(String $language)
     {
         return ($this->language === $language) ? true : false;
+    }
+
+    public static function getLanguages()
+    {
+        return self::$languages;
+    }
+
+    public static function getStatuses()
+    {
+        return self::$statuses;
     }
 }

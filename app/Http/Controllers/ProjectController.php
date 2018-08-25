@@ -11,14 +11,9 @@ use App\Models\{
 
 class ProjectController extends Controller
 {
-    public function index(Request $request, User $user = null)
+    public function index(Request $request)
     {
-        if($user == null)
-        {
-            $schema = Project::query();
-        } else {
-            $schema = $user->projects();
-        }
+        $schema = Project::query();
 
         if($request->input('status') !== null && collect(['draft', 'published'])->contains($request->input('status')))
         {
@@ -57,41 +52,58 @@ class ProjectController extends Controller
         if($request->input('status') !== null && collect(['draft', 'published'])->contains($request->input('status')))
         {
             $project->update([ 'status' => $request->input('status') ]);
+            return redirect()->back()->with([
+                'message'     => 'Your project status has been updated',
+                'alert_class' => 'success'
+            ]);
         }
-        return redirect()->back();
+        return redirect()->back()->with([
+            'message'     => 'Your project has not been updated',
+            'alert_class' => 'danger'
+        ]);
     }
 
     public function getStore()
     {
-        $project = Project::create([
-            'user_id' => auth()->user()->id,
-            'name'    => 'Project ' . str_random(10)
+        return view('projects.create')->with([
+            'statuses'  => Project::getStatuses(),
+            'languages' => Project::getLanguages()
         ]);
+    }
+
+    public function postStore(Request $request)
+    {
+        $project = Project::create([
+            'user_id'           => auth()->user()->id,
+            'name'              => $request->input('name'),
+            'short_description' => $request->input('short_description'),
+            'description'       => $request->input('description'),
+            'language'          => $request->input('language'),
+            'link'              => $request->input('link'),
+            'status'            => $request->input('status'),
+        ]);
+
         if($project)
         {
-            return redirect()->route('project.draft', ['project' => $project]);
+            $notification = [
+                'message'     => 'Your project has been saved',
+                'alert_class' => 'success'
+            ];
+        } else {
+            $notification = [
+                'message'     => 'Your project could not be saved',
+                'alert_class' => 'danger'
+            ];
         }
+        return redirect()->back()->with($notification);
     }
 
     public function getUpdate(Project $project)
     {
-        $statuses = [
-            'published' => 'Publish',
-            'draft'     => 'Save for later'
-        ];
-        $languages = [
-            'php',
-            'javascript',
-            'python',
-            'go',
-            'swift',
-            'bash',
-            'css'
-        ];
         return view('projects.store')->with([
             'project'   => $project,
-            'statuses'  => $statuses,
-            'languages' => $languages
+            'statuses'  => Project::getStatuses(),
+            'languages' => Project::getLanguages()
         ]);
     }
 

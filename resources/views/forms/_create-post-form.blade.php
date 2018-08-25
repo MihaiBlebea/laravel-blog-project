@@ -16,11 +16,11 @@
 
 <div class="form-group">
     <label for="intro">Main content:</label>
-    <!-- Rich text editor -->
+    <!-- Markdown editor -->
     <markdown-editor input-name="content"
                      input-content="{{ isset($post) ? $post->content : "**bold intro - Write a short lead intro**" }}">
     </markdown-editor>
-    <!-- Rich text editor -->
+    <!-- Markdown editor -->
 
 </div>
 

@@ -4,10 +4,14 @@
 
     @include('partials.titles._page-title', ['title' => 'Project'])
 
-    <form action="{{ route('project.update', [ 'project' => $project->slug ]) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('project.store') }}" method="POST">
         @csrf
 
         @include('forms._create-project-form')
 
+        <div class="mt-5">
+            @include('partials._form-button', ['cta' => 'Save'])
+        </div>
+        
     </form>
 @endsection

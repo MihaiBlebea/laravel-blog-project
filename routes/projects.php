@@ -15,7 +15,7 @@ Route::group([
     Route::get('/status/{project}', 'ProjectController@status')->name('status');
 
     Route::get('/store', 'ProjectController@getStore')->name('store');
-    Route::get('/store/{project}', 'ProjectController@getUpdate')->name('draft');
+    Route::post('/store', 'ProjectController@postStore')->name('store');
 
     Route::get('/update/{project}', 'ProjectController@getUpdate')->name('update');
     Route::post('/update/{project}', 'ProjectController@postUpdate')->name('update');
