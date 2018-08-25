@@ -4,19 +4,19 @@
     border: 0;
 }
 
-.bg {
-    background-size: cover;
-    background-position: center;
-    transition: all 0.5s ease-in-out;
-
-    &.small {
-        min-height: 150px;
-    }
-}
-
-.bg:hover {
-    opacity: 0.2;
-}
+// .bg {
+//     background-size: cover;
+//     background-position: center;
+//     transition: all 0.5s ease-in-out;
+//
+//     &.small {
+//         min-height: 150px;
+//     }
+// }
+//
+// .bg:hover {
+//     opacity: 0.2;
+// }
 
 .card-title {
     color: $primary;
@@ -38,7 +38,7 @@
     background-color: $primary;
 }
 
-.img-overlay {
+.card-image--overlay {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -47,27 +47,27 @@
     transition: all 0.5s ease-in-out;
 }
 
-.img-overlay:hover {
+.card-image--overlay:hover {
     background-color: rgba(28, 177, 178, 0.5);
 }
 
 
 @include media-breakpoint-up(xs) {
-    .bg {
-        min-height: 150px;
-    }
+    // .bg {
+    //     min-height: 150px;
+    // }
 }
 
 @include media-breakpoint-up(sm) {
-    .bg {
-        min-height: 250px;
-    }
+    // .bg {
+    //     min-height: 250px;
+    // }
 }
 
 @include media-breakpoint-up(md) {
-    .bg {
-        min-height: 350px;
-    }
+    // .bg {
+    //     min-height: 350px;
+    // }
 }
 
 @include media-breakpoint-up(lg) {

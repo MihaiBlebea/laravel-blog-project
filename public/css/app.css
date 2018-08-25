@@ -13684,21 +13684,6 @@ a:hover {
   border: 0;
 }
 
-.bg {
-  background-size: cover;
-  background-position: center;
-  -webkit-transition: all 0.5s ease-in-out;
-  transition: all 0.5s ease-in-out;
-}
-
-.bg.small {
-  min-height: 150px;
-}
-
-.bg:hover {
-  opacity: 0.2;
-}
-
 .card-title {
   color: #00b1b3;
 }
@@ -13720,7 +13705,7 @@ a:hover {
   background-color: #00b1b3;
 }
 
-.img-overlay {
+.card-image--overlay {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -13730,24 +13715,8 @@ a:hover {
   transition: all 0.5s ease-in-out;
 }
 
-.img-overlay:hover {
+.card-image--overlay:hover {
   background-color: rgba(28, 177, 178, 0.5);
-}
-
-.bg {
-  min-height: 150px;
-}
-
-@media (min-width: 576px) {
-  .bg {
-    min-height: 250px;
-  }
-}
-
-@media (min-width: 768px) {
-  .bg {
-    min-height: 350px;
-  }
 }
 
 .navbar-laravel {
