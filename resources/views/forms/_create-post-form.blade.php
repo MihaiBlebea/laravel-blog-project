@@ -18,7 +18,7 @@
     <label for="intro">Main content:</label>
     <!-- Rich text editor -->
     <markdown-editor input-name="content"
-                     input-content="{{ isset($post) ? $post->content : null }}">
+                     input-content="{{ isset($post) ? $post->content : "**bold intro - Write a short lead intro**" }}">
     </markdown-editor>
     <!-- Rich text editor -->
 
