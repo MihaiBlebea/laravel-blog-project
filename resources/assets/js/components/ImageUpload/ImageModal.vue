@@ -32,7 +32,7 @@
                                 <image-card v-on:delete="onImageDelete(image.id)"
                                             :image="image">
                                     <div v-bind:style="{ 'background-image': 'url(' + path(image) + ')' }"
-                                         class="bg-img small pointer"
+                                         class="image--bg image--bg__medium w-100 pointer"
                                          v-on:click="selectImage(index)"
                                          v-bind:class="{ 'selected-img': isSelected(image) }"></div>
                                 </image-card>

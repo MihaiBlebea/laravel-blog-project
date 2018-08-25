@@ -97104,7 +97104,8 @@ var render = function() {
                                 },
                                 [
                                   _c("div", {
-                                    staticClass: "bg-img small pointer",
+                                    staticClass:
+                                      "image--bg image--bg__medium w-100 pointer",
                                     class: {
                                       "selected-img": _vm.isSelected(image)
                                     },
