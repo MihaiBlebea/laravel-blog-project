@@ -157,6 +157,7 @@ return [
         JonathanTorres\LaravelMediumSdk\LaravelMediumSdkServiceProvider::class,
         Thujohn\Twitter\TwitterServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -223,6 +224,7 @@ return [
         'Twitter' => Thujohn\Twitter\Facades\Twitter::class,
         'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
     ],
 
 ];

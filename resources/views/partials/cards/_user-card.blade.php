@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="media">
 
-            <img class="profile-img mr-3" src="{{ asset($user->profile->image->path ?? 'images/profile-placeholder.jpg') }}">
+            <img class="profile-img mr-3" src="{{ Gravatar::src(auth()->user()->email, 640) }}">
 
             <div class="media-body">
                 <h5 class="mt-0">{{ $user->first_name }} {{ $user->last_name }}</h5>

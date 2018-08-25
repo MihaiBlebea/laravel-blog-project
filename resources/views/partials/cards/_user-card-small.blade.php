@@ -1,6 +1,6 @@
 <div class="row">
     <a href="{{ route('user.profile', ['user' => $user->slug]) }}">
-        <img class="profile-img mr-2 ml-3" src="{{ asset($user->profile->image->path ?? 'images/profile-placeholder.jpg') }}">
+        <img class="profile-img mr-2 ml-3" src="{{ Gravatar::src(auth()->user()->email, 640) }}">
     </a>
     <div class="col">
         <a href="{{ route('user.profile', ['user' => $user->slug]) }}">

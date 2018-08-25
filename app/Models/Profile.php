@@ -27,6 +27,12 @@ class Profile extends Model
         return $this->belongsTo(Image::class);
     }
 
+    function defaultImage(){
+        return $this->belongsTo(Image::class)->withDefault([
+            'path' => 21
+        ]);
+    }
+
     public function except()
     {
         return substr(strip_tags($this->short_description), 0, 200);
