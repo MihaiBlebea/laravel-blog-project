@@ -61,10 +61,16 @@
 
             @else
 
-                @include('partials.cards._notification-card', [
-                    'title' => 'Sorry!',
-                    'content' => 'There are no published posts in this category, yet. Come back later!'
-                ])
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+
+                        @include('partials.cards._notification-card', [
+                            'title' => 'Sorry!',
+                            'content' => 'There are no published posts in this category, yet. Come back later!'
+                        ])
+                        
+                    </div>
+                </div>
 
             @endif
 
