@@ -2,7 +2,7 @@
     <ol class="breadcrumb">
         @if(isset($breadcrumbs))
             @foreach($breadcrumbs as $breadcrumb)
-                <li class="breadcrumb-item text-capitalize">
+                <li class="breadcrumb-item">
                     @if($loop->last == false)
                         <a href="{{ url($breadcrumb['url']) }}">{{ $breadcrumb['name'] }}</a>
                     @else

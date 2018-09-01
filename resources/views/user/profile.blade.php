@@ -46,9 +46,12 @@
                 </div>
             @endif
             <!-- Projects section -->
+        </div>
+    </div>
 
-
-            <!-- Content section -->
+    <!-- Content section -->
+    <div class="row">
+        <div class="col">
             @if($user->hasPosts())
                 @include('partials.titles._page-subtitle', ['title' => 'Checkout my awesome posts'])
 
@@ -60,10 +63,14 @@
                     @endforeach
                 </div>
             @endif
-            <!-- Content section -->
+        </div>
+    </div>
+    <!-- Content section -->
 
+    <!-- Contact section -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
 
-            <!-- Contact section -->
             @include('partials.titles._page-subtitle', ['title' => 'Contact me'])
 
             <div class="row justify-content-center">
@@ -73,10 +80,10 @@
 
                 </div>
             </div>
-            <!-- Contact section -->
 
         </div>
     </div>
+    <!-- Contact section -->
 
 </div>
 @endsection
