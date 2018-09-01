@@ -62,7 +62,7 @@
 @push('head')
 
 <!-- Include meta for making the content appear in Twitter and Linkedin -->
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image”" />
 <meta name="twitter:site" content="@mihaidev" />
 <meta name="twitter:creator" content="@MBlebea" />
 <meta property="og:url" content="{{ $post->getUrl() }}" />
