@@ -2,45 +2,51 @@
     @include('partials.titles._chapter-title', ['title' => 'Contact details'])
 </div>
 
-<div class="form-group">
-    <label>First name:</label>
+<div class="row form-group">
+    <div class="col-md-6">
+        <label>First name:</label>
 
-    <input type="text"
-           class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}"
-           name="first_name"
-           value="{{ $user->first_name or old('first_name') }}" required>
+        <input type="text"
+               class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}"
+               name="first_name"
+               value="{{ $user->first_name or old('first_name') }}" required>
 
-    <span class="invalid-feedback">
-        <strong>{{ $errors->first('first_name') }}</strong>
-    </span>
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('first_name') }}</strong>
+        </span>
+    </div>
 </div>
 
-<div class="form-group">
-    <label for="last_name">Last name:</label>
+<div class="row form-group">
+    <div class="col-md-6">
+        <label for="last_name">Last name:</label>
 
-    <input type="text"
-           class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}"
-           name="last_name"
-           value="{{ $user->last_name or old('last_name') }}"
-           required>
+        <input type="text"
+               class="form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}"
+               name="last_name"
+               value="{{ $user->last_name or old('last_name') }}"
+               required>
 
-    <span class="invalid-feedback">
-        <strong>{{ $errors->first('last_name') }}</strong>
-    </span>
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('last_name') }}</strong>
+        </span>
+    </div>
 </div>
 
-<div class="form-group">
-    <label>Email:</label>
+<div class="row form-group">
+    <div class="col-md-6">
+        <label>Email:</label>
 
-    <input type="email"
-           class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
-           name="email"
-           value="{{ $user->email or old('email') }}"
-           required>
+        <input type="email"
+               class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}"
+               name="email"
+               value="{{ $user->email or old('email') }}"
+               required>
 
-    <span class="invalid-feedback">
-        <strong>{{ $errors->first('email') }}</strong>
-    </span>
+        <span class="invalid-feedback">
+            <strong>{{ $errors->first('email') }}</strong>
+        </span>
+    </div>
 </div>
 
 <div class="form-group">
@@ -73,7 +79,7 @@
 
 <div class="form-group">
     <label>Detailed description:</label>
-    
+
     <markdown-editor input-name="description"
                      input-content="{{ isset($user->profile) ? $user->profile->description : null }}">
     </markdown-editor>

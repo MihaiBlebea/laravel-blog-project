@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ScheduleRequest;
 use App\Models\{
     Post,
-    Schedule
+    Schedule,
+    SocialToken
 };
 
 class ScheduleController extends Controller
@@ -21,7 +22,7 @@ class ScheduleController extends Controller
     public function getSocialTokens()
     {
         return view('admin.social-tokens')->with([
-            'channels' => ['twitter', 'linkedin', 'github', 'facebook']
+            'channels' => SocialToken::getDefaultChannels()
         ]);
     }
 
@@ -29,12 +30,16 @@ class ScheduleController extends Controller
     {
         if(auth()->user()->socialTokens->count() > 0)
         {
+            // If user has social tokens then go to schedule create page //
             return view('schedules.create')->with([
                 'posts'    => Post::all(),
                 'channels' => auth()->user()->socialTokens
             ]);
         } else {
-            return view('admin.social-tokens');
+            // If user doesn't have social tokens then send to manage tokens page //
+            return view('admin.social-tokens')->with([
+                'channels' => SocialToken::getDefaultChannels()
+            ]);
         }
     }
 

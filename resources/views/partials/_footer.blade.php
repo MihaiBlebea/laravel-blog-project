@@ -1,4 +1,4 @@
-<footer class="first-footer pt-4 pb-4 mt-5">
+<footer class="footer footer__top pt-4 pb-4 mt-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col">
@@ -17,7 +17,8 @@
         </div>
     </div>
 </footer>
-<footer class="second-footer">
+
+<footer class="footer footer__bottom">
     <div class="container">
         <div class="row align-items-center">
             <p class="col text-center mt-3">2018 {{ config('app.name', 'Laravel') }}</p>

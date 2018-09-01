@@ -25,9 +25,9 @@
 </div>
 
 <div class="row form-group">
-    <div class="col">
-
+    <div class="col-md-6">
         <label>Select category:</label>
+
         <select name="category_id" class="form-control">
             @foreach($categories as $category)
 
@@ -35,16 +35,17 @@
 
             @endforeach
         </select>
-
     </div>
-    <div class="col">
+</div>
 
+<div class="row form-group">
+    <div class="col-md-6">
         <label>Save or publish:</label>
+
         <select name="status" class="form-control">
             <option value="draft" selected>Save draft</option>
             <option value="published">Publish</option>
         </select>
-
     </div>
 </div>
 

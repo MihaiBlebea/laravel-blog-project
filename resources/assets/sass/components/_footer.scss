@@ -1,10 +1,13 @@
-.first-footer {
-    background-color: $first_footer;
+.footer {
     color: $black;
-    border-bottom: 1px solid $crem; 
+    border-bottom: 1px solid $crem;
 }
 
-.second-footer {
+.footer__top {
+    background-color: $first_footer;
+    border-bottom: 1px solid $crem;
+}
+
+.footer__bottom {
     background-color: $second_footer;
-    color: $black;
 }

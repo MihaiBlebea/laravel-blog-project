@@ -16,6 +16,13 @@ class SocialToken extends Model
         'channel'
     ];
 
+    private static $channels = ['twitter', 'linkedin', 'github', 'facebook'];
+
+    public static function getDefaultChannels()
+    {
+        return self::$channels;
+    }
+
     public function user()
     {
         return $this->belongTo(User::class);
