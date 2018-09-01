@@ -5,7 +5,8 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 use App\Models\{
     User,
-    Category
+    Category,
+    Post
 };
 
 class HomePageViewComposer
@@ -14,10 +15,12 @@ class HomePageViewComposer
     {
         $user = User::find(1);
         $categories = Category::all();
+        $posts = Post::where('status', 'published')->take(6)->get();
         $view->with([
             'categories' => $categories,
             'user'       => $user,
-            'projects'   => $user->projects
+            'projects'   => $user->projects,
+            'posts'      => $posts
         ]);
     }
 }

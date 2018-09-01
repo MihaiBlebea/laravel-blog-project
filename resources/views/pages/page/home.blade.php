@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- First section -->
+<!-- Main hero section -->
 <div class="section bg-primary" style="margin-top: -24px;">
     <div class="container">
         <div class="row justify-content-center">
@@ -19,13 +19,12 @@
         </div>
     </div>
 </div>
-<!-- First section -->
+<!-- Main hero section -->
 
-
-<!-- Second section -->
-<div class="section">
+<!-- Categories section -->
+<div class="section border-bottom">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
             <div class="col-md-8">
 
                 @include('partials.titles._page-subtitle', ['title' => 'Choose your journey'])
@@ -52,13 +51,26 @@
         </div>
     </div>
 </div>
-<!-- Second section -->
+<!-- Categories section -->
 
+<!-- Latest articles section -->
+<div class="section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col">
+                @include('partials.titles._page-subtitle', ['title' => 'Latest articles'])
 
-<!-- Third section -->
+                @include('partials._related-posts', [ 'related_posts' => $posts ])
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Latest articles section -->
+
+<!-- About me section -->
 <div class="section bg-white">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-5">
             <div class="col-md-8">
                 @include('partials.titles._page-subtitle', ['title' => 'About me'])
                 <div class="row">
@@ -78,13 +90,13 @@
         </div>
     </div>
 </div>
-<!-- Third section -->
+<!-- About me section -->
 
-<!-- Third section -->
+<!-- Contact form section -->
 <div class="section">
     <div class="container">
 
-        @include('partials.titles._page-subtitle', ['title' => 'Contact us'])
+        @include('partials.titles._page-subtitle', ['title' => 'Contact'])
         <div class="row justify-content-center">
             <div class="col-md-8">
 
@@ -94,6 +106,6 @@
         </div>
     </div>
 </div>
-<!-- Third section -->
+<!-- Contact form section -->
 
 @endsection
