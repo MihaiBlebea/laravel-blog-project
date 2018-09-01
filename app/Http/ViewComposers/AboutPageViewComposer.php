@@ -10,7 +10,7 @@ class AboutPageViewComposer
     public function compose(View $view)
     {
         $view->with([
-            'related_posts' => RelatedPostService::relatedPosts(3)
+            'related_posts' => RelatedPostService::relatedPosts([ 'number' => 3 ])
         ]);
     }
 }

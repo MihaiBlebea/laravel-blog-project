@@ -55,9 +55,13 @@ class BlogController extends Controller
     // Display one specific post
     public function post(Category $category, Post $post)
     {
+        $related_posts = RelatedPostService::relatedPosts([
+            'number'  => 3,
+            'exclude' => $post->id
+        ]);
         return view('pages.blog.post')->with([
             'post' => $post,
-            'related_posts' => RelatedPostService::relatedPosts(3)
+            'related_posts' => $related_posts
         ]);
     }
 }

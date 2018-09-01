@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface RelatedPostServiceInterface
 {
-    public static function relatedPosts(Int $number = null);
+    public static function relatedPosts(Array $options);
 }

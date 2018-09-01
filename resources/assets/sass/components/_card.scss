@@ -21,6 +21,16 @@
     background-color: $primary;
 }
 
+.card__image--cover {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.card__image--small {
+    height: 300px;
+}
+
 .card__image--overlay {
     position: absolute;
     top: 0;

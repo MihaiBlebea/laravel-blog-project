@@ -13702,6 +13702,17 @@ a:hover {
   background-color: #00b1b3;
 }
 
+.card__image--cover {
+  width: 100%;
+  height: 400px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.card__image--small {
+  height: 300px;
+}
+
 .card__image--overlay {
   position: absolute;
   top: 0;

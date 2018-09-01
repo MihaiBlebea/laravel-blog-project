@@ -8,12 +8,18 @@ use App\Interfaces\RelatedPostServiceInterface;
 
 class RelatedPostService implements RelatedPostServiceInterface
 {
-    public static function relatedPosts(Int $number = null)
+    public static $default_number = 3;
+
+    public static function relatedPosts(Array $options)
     {
-        if($number === null)
+        $number = array_key_exists('number', $options) ? $options['number'] : self::$default_number;
+        $posts = Post::query();
+
+        if(array_key_exists('exclude', $options))
         {
-            $number = 3;
+            $posts->where('id', '!=', $options['exclude']);
         }
-        return Post::inRandomOrder()->take($number)->get();
+
+        return $posts->inRandomOrder()->take($number)->get();
     }
 }
