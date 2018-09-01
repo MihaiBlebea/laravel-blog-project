@@ -6,7 +6,7 @@
     </a>
     <div class="card-body">
         <h2 class="card-title">{{ $post->title }}</h2>
-        <p class="card-text">{!! $post->except() !!}</p>
+        <p class="card-text">{{ $post->except() }}</p>
         <a href="{{ route('blog.post', [ 'category' => $post->category->slug, 'post' => $post->slug ]) }}"
            class="btn btn-primary">Read article</a>
     </div>

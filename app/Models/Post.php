@@ -9,6 +9,7 @@ use App\Models\{
     Category,
     Image
 };
+use Markdown;
 use App\Traits\SearchableTrait;
 
 class Post extends Model
@@ -67,7 +68,7 @@ class Post extends Model
     // Custom methods
     public function except()
     {
-        return substr(strip_tags($this->content), 0, 200);
+        return substr(strip_tags(Markdown::convertToHtml($this->content)), 0, 200);
     }
 
     public function getFullSlug()
