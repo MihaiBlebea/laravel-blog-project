@@ -31,10 +31,8 @@ Route::post('/search', 'SearchController@search')->name('search');
 
 Route::post('/message/send', 'MessageController@send')->name('message.send');
 
-// Route::get('/test', function() {
-//     $now = Carbon::now('Europe/London');
-//
-//     $schedules = Schedule::where('publish_datetime', $now->startOfMinute())->get();
-//     $schedule = Schedule::find(1);
-//     dd($schedule->publish_datetime, $now->startOfMinute()->toDatetimeString(), $now->endOfMinute()->toDatetimeString(), $schedules);
-// });
+Route::get('/admin/messages/manage', 'MessageController@manage')->name('message.manage');
+
+Route::get('/message/{message}', 'MessageController@read')->name('message.read');
+
+Route::delete('/message/{message}', 'MessageController@delete')->name('message.delete');

@@ -25,7 +25,8 @@ class ViewComposerServiceProvider extends ServiceProvider
             'schedules.*',
             'pages.index',
             'images.image',
-            'projects.create'
+            'projects.create',
+            'messages.index'
         ], \App\Http\ViewComposers\AdminSidebareMenuViewComposer::class);
 
         // Blog / Category / Post breadcrumbs

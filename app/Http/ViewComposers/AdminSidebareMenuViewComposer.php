@@ -80,6 +80,13 @@ class AdminSidebareMenuViewComposer
                 'roles'  => ['admin']
             ],
             [
+                'name'   => 'messages',
+                'slug'   => 'admin/messages/manage',
+                'route'  => 'message.manage',
+                'params' => [],
+                'roles'  => ['admin']
+            ],
+            [
                 'name'   => 'schedule',
                 'slug'   => 'admin/schedule/manage',
                 'route'  => 'schedule.manage',

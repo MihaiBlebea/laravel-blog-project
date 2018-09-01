@@ -13,6 +13,7 @@ class CreateMessagesTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->mediumText('content');
+            $table->boolean('read')->default(false);
             $table->timestamps();
         });
     }
