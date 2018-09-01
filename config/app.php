@@ -158,6 +158,8 @@ return [
         Thujohn\Twitter\TwitterServiceProvider::class,
         GrahamCampbell\Markdown\MarkdownServiceProvider::class,
         Thomaswelton\LaravelGravatar\LaravelGravatarServiceProvider::class,
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+        Spatie\Analytics\AnalyticsServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -225,6 +227,8 @@ return [
         'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
         'Markdown' => GrahamCampbell\Markdown\Facades\Markdown::class,
         'Gravatar' => Thomaswelton\LaravelGravatar\Facades\Gravatar::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
+        'Analytics' => Spatie\Analytics\AnalyticsFacade::class,
     ],
 
 ];
