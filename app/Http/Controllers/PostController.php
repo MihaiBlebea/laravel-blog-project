@@ -89,13 +89,24 @@ class PostController extends Controller
             'status'      => $request->input('status')
         ]);
 
-        if($request->input('publish_medium'))
+        if($post)
         {
-            $medium = App::make(\JonathanTorres\LaravelMediumSdk\LaravelMediumSdk::class);
-            $result = MediumPublishService::publish($medium, $post);
+            if($request->input('publish_medium'))
+            {
+                $medium = App::make(\JonathanTorres\LaravelMediumSdk\LaravelMediumSdk::class);
+                $result = MediumPublishService::publish($medium, $post);
+            }
+
+            return redirect()->back()->with([
+                'message'     => 'Post was saved',
+                'alert_class' => 'success'
+            ]);
         }
 
-        return redirect()->back();
+        return redirect()->back()->with([
+            'message'     => 'Post was not saved',
+            'alert_class' => 'danger'
+        ]);
     }
 
     // Send the payload to upload a post
@@ -121,6 +132,9 @@ class PostController extends Controller
         }
         $post->delete();
 
-        return redirect()->back();
+        return redirect()->back()->with([
+            'message'     => 'Post was deleted',
+            'alert_class' => 'success'
+        ]);
     }
 }
