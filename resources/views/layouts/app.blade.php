@@ -8,6 +8,9 @@
     <!-- SEO stuff will be injected here -->
     {!! SEO::generate(true) !!}
 
+    <!-- Scripts and tags for tracking -->
+    @include('partials._cookie-scripts')
+    
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
