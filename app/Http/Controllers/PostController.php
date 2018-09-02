@@ -120,6 +120,12 @@ class PostController extends Controller
             'status'      => $request->input('status')
         ]);
 
+        if($request->input('publish_medium'))
+        {
+            $medium = App::make(\JonathanTorres\LaravelMediumSdk\LaravelMediumSdk::class);
+            $result = MediumPublishService::publish($medium, $post);
+        }
+
         return redirect()->route('post.index', ['user' => auth()->user()->slug]);
     }
 
