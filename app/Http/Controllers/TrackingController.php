@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Track;
 use Carbon\Carbon;
 use Analytics;
+use Spatie\Analytics\Period;
 
 
 class TrackingController extends Controller
@@ -14,7 +15,7 @@ class TrackingController extends Controller
     {
         $data = Analytics::fetchVisitorsAndPageViews(Period::days(7));
         dd($data);
-        
+
         if($request->input('sort') !== null && Track::getSortParams()->contains($request->input('sort')))
         {
             $sort = $request->input('sort');
