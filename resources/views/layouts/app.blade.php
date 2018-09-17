@@ -10,7 +10,7 @@
 
     <!-- Scripts and tags for tracking -->
     @include('partials._cookie-scripts')
-    
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -34,7 +34,7 @@
 
         @include('partials.navigations._main-nav')
 
-        <main class="py-4 min-h-80">
+        <main class="pb-5 min-h-80" style="padding-top: 80px;">
 
             @if(Session::has('message'))
 

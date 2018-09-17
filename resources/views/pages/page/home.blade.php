@@ -22,7 +22,7 @@
 <!-- Main hero section -->
 
 <!-- Categories section -->
-<div class="section border-bottom">
+{{-- <div class="section border-bottom">
     <div class="container">
         <div class="row justify-content-center mb-5">
             <div class="col-md-8">
@@ -50,7 +50,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Categories section -->
 
 <!-- Latest articles section -->
