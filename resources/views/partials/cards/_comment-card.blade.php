@@ -1,19 +1,17 @@
 <div class="card">
     <div class="card-body">
         <div class="media">
-            <img class="profile-img mr-3" src="{{ asset($user->profile->image->path ?? 'images/profile-placeholder.jpg') }}">
+            <img class="profile-img mr-3" src="{{ Gravatar::src('') }}">
             <div class="media-body">
-                <h5 class="mt-0">{{ $comment->author->first_name }} {{ $comment->author->last_name }} says:</h5>
+                {{-- <h5 class="mt-0">{{ $comment->author->first_name }} {{ $comment->author->last_name }} says:</h5> --}}
                 {{ $comment->content }}
 
                 @if($comment->parent_id === null)
                     <div class="mt-2">
 
-                        @auth
-                            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                Reply
-                            </a>
-                        @endauth
+                        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Reply
+                        </a>
 
                         <div class="collapse mt-2" id="collapseExample">
                             <form action="{{ route('comment.store') }}" method="POST">

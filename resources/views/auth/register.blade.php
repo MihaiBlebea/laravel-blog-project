@@ -8,13 +8,13 @@
             @include('partials.titles._page-title', ['title' => 'Register'])
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body my-5">
 
-                    <div class="row mb-5 justify-content-center">
+                    {{-- <div class="row mb-5 justify-content-center">
                         <div class="col">
                             @include('partials._social-login')
                         </div>
-                    </div>
+                    </div> --}}
 
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

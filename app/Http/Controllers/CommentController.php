@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Comment;
-use App\Models\Post;
-use Auth;
+use App\Models\{
+    Comment,
+    Post
+};
 use App\Http\Requests\CommentFormRequest;
+
 
 class CommentController extends Controller
 {
@@ -32,9 +34,8 @@ class CommentController extends Controller
 
     public function store(CommentFormRequest $request)
     {
-        $parent_id = $request->input('parent_id');
+        $parent_id = $request->input('parent_id') ?? null;
         $comment = Comment::create([
-            'user_id'   => Auth::user()->id,
             'post_id'   => $request->input('post_id'),
             'parent_id' => $parent_id,
             'subject'   => $request->input('subject'),
@@ -43,7 +44,10 @@ class CommentController extends Controller
         ]);
         if($comment)
         {
-            return redirect()->back();
+            return redirect()->back()->with([
+                'message'     => 'Your comment was sent for approval',
+                'alert_class' => 'success'
+            ]);
         }
     }
 

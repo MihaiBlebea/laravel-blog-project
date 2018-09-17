@@ -1,6 +1,5 @@
 <h3 class="mb-5 text-center">Let me know what you think about this</h3>
 
-@auth
 <div class="card mb-3">
     <div class="card-body">
         <form action="{{ route('comment.store') }}" method="POST">
@@ -10,18 +9,6 @@
         </form>
     </div>
 </div>
-@endauth
-
-@guest
-
-    <div class="mb-3">
-        @include('partials.cards._notification-card', [
-            'title' => 'You are not logged in',
-            'content' => 'Please make an account or login before leaving a comment!'
-        ])
-    </div>
-
-@endguest
 
 @if($post->comments->count() > 0)
 
