@@ -15,26 +15,27 @@
             <img class="w-100" src="{{ asset($post->image->path ?? 'images/post-placeholder.png') }}">
             @include('partials._breadcrumbs')
 
-            <div class="my-5">
+            <div class="my-5 text__article--big">
 
                 <!-- include intro section -->
                 @if(isset($post->intro))
-                    <p class="card-text font-article"><strong>{{ $post->intro }}</strong></p>
+                    <p class="card-text"><strong>{{ $post->intro }}</strong></p>
                 @endif
                 <!-- include intro section -->
 
                 <!-- include main content section -->
-                <p class="card-text font-article">
+                <p class="card-text">
                     @toHtml($post->content)
                 </p>
                 <!-- include main content section -->
-
-                <!-- Include end author description -->
-                <div class="mt-5">
-                    @include('partials.cards._user-card-small', ['user' => $post->author])
-                </div>
-                <!-- Include end author description -->
             </div>
+
+            <!-- Include end author description -->
+            <div class="mt-5">
+                @include('partials.cards._user-card-small', ['user' => $post->author])
+            </div>
+            <!-- Include end author description -->
+            
         </div>
     </div>
 

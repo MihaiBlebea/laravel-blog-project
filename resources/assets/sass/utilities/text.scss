@@ -27,6 +27,10 @@ a:hover {
     max-width: 100%;
 }
 
+.text__article--big {
+    font-size: 18px;
+}
+
 @include media-breakpoint-up(xs) {
     .bg {
         min-height: 150px;
