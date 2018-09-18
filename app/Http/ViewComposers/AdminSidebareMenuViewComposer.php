@@ -93,6 +93,13 @@ class AdminSidebareMenuViewComposer
                 'params' => [],
                 'roles'  => ['admin', 'user']
             ],
+            [
+                'name'   => 'career',
+                'slug'   => 'admin/jobs/manage',
+                'route'  => 'job.manage',
+                'params' => [],
+                'roles'  => ['admin', 'user']
+            ],
         ];
         $view->with([
             'sidebar_nav' => $menu,

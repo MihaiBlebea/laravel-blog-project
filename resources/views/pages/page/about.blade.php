@@ -13,7 +13,10 @@
 
             <!-- Include the career timeline -->
             <div class="mt-5">
-                @include('partials._timeline')
+                @include('partials.timeline._career-timeline', [
+                    'jobs'     => $jobs,
+                    'editable' => false
+                ])
             </div>
             <!-- Include the career timeline -->
 

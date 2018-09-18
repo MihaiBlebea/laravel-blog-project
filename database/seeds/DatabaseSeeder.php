@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     public function run()
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(RolePermissionSeeder::class);
         $this->call(PageTableSeeder::class);
         $this->call(ProjectTableSeeder::class);
+        $this->call(JobTableSeeder::class);
     }
 }

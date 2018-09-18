@@ -26,11 +26,18 @@ class ViewComposerServiceProvider extends ServiceProvider
             'pages.index',
             'images.image',
             'projects.create',
-            'messages.index'
+            'messages.index',
+            'jobs.*'
         ], \App\Http\ViewComposers\AdminSidebareMenuViewComposer::class);
 
         // Blog / Category / Post breadcrumbs
         View::composer(['pages.blog.*'], \App\Http\ViewComposers\BreadcrumbsViewComposer::class);
+
+        // Career Timeline View Composer
+        View::composer([
+            'pages.page.about'
+        ], \App\Http\ViewComposers\CareerTimelineViewComposer::class);
+
     }
 
     public function register()
