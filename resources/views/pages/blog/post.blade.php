@@ -35,7 +35,7 @@
                 @include('partials.cards._user-card-small', ['user' => $post->author])
             </div>
             <!-- Include end author description -->
-            
+
         </div>
     </div>
 
@@ -60,7 +60,7 @@
 @endsection
 
 
-@push('head')
+{{-- @push('head')
 
 <!-- Include meta for making the content appear in Twitter and Linkedin -->
 <meta name="twitter:card" content="summary_large_image”" />
@@ -73,4 +73,4 @@
 
 <!-- Include styles for code highlighting -->
 <link href="{{ asset('css/highlight.css') }}" rel="stylesheet">
-@endpush
+@endpush --}}

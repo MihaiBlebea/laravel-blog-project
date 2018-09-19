@@ -10,6 +10,7 @@ use App\Models\{
 };
 use App\Services\RelatedPostService;
 use App\Services\InsertLeadCardService;
+use SEO;
 
 
 class BlogController extends Controller
@@ -55,6 +56,13 @@ class BlogController extends Controller
     // Display one specific post
     public function post(Category $category, Post $post)
     {
+        SEO::setTitle($post->title);
+        SEO::setDescription($post->except());
+        SEO::opengraph()->setUrl($post->getUrl());
+        SEO::setCanonical($post->getUrl());
+        SEO::opengraph()->addProperty('type', 'articles');
+        SEO::twitter()->setSite('@MBlebea');
+
         $related_posts = RelatedPostService::relatedPosts([
             'number'  => 3,
             'exclude' => $post->id
