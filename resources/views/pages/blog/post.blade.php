@@ -60,17 +60,17 @@
 @endsection
 
 
-{{-- @push('head')
+@push('head')
 
 <!-- Include meta for making the content appear in Twitter and Linkedin -->
-<meta name="twitter:card" content="summary_large_image”" />
+{{-- <meta name="twitter:card" content="summary_large_image”" />
 <meta name="twitter:site" content="@mihaidev" />
 <meta name="twitter:creator" content="@MBlebea" />
 <meta property="og:url" content="{{ $post->getUrl() }}" />
 <meta property="og:title" content="{{ $post->title }}" />
 <meta property="og:description" content="{{ $post->except() }}" />
-<meta property="og:image" content="{{ asset($post->image->path ?? 'images/post-placeholder.png') }}" />
+<meta property="og:image" content="{{ asset($post->image->path ?? 'images/post-placeholder.png') }}" /> --}}
 
 <!-- Include styles for code highlighting -->
 <link href="{{ asset('css/highlight.css') }}" rel="stylesheet">
-@endpush --}}
+@endpush
