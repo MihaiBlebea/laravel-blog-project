@@ -100,6 +100,13 @@ class AdminSidebareMenuViewComposer
                 'params' => [],
                 'roles'  => ['admin', 'user']
             ],
+            [
+                'name'   => 'languages',
+                'slug'   => 'admin/languages/manage',
+                'route'  => 'language.manage',
+                'params' => [],
+                'roles'  => ['admin', 'user']
+            ],
         ];
         $view->with([
             'sidebar_nav' => $menu,

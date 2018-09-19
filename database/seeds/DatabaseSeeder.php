@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PageTableSeeder::class);
         $this->call(ProjectTableSeeder::class);
         $this->call(JobTableSeeder::class);
+        $this->call(LanguageTableSeeder::class);
     }
 }

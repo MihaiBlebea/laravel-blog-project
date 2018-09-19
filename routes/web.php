@@ -28,6 +28,13 @@ Route::get('/auth/{driver_name}', 'Auth\SocialiteAuthController@redirectToProvid
 
 Route::get('/auth/redirect/{driver_name}', 'Auth\SocialiteAuthController@handleProviderCallback')->name('socialite.redirect');
 
+// Downlaod the CV
+Route::get('/download/cv', function() {
+    $file = public_path() . '/pdf/MihaiBlebea-CV.pdf';
+    $headers = ['Content-Type: application/pdf'];
+    return \Response::download($file, 'MihaiBlebea-CV.pdf', $headers);
+})->name('download.cv');
+
 // Display the categories from witch to select
 Route::get('/blog', 'BlogController@blog')->name('blog');
 

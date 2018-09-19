@@ -27,7 +27,8 @@ class ViewComposerServiceProvider extends ServiceProvider
             'images.image',
             'projects.create',
             'messages.index',
-            'jobs.*'
+            'jobs.*',
+            'languages.*'
         ], \App\Http\ViewComposers\AdminSidebareMenuViewComposer::class);
 
         // Blog / Category / Post breadcrumbs
@@ -35,8 +36,14 @@ class ViewComposerServiceProvider extends ServiceProvider
 
         // Career Timeline View Composer
         View::composer([
-            'pages.page.about'
+            'pages.page.about',
+            'pages.page.home'
         ], \App\Http\ViewComposers\CareerTimelineViewComposer::class);
+
+        // Language progress bars
+        View::composer([
+            'pages.page.about'
+        ], \App\Http\ViewComposers\LanguageSkillViewComposer::class);
 
     }
 

@@ -1,3 +1,14 @@
 .jumbotron {
     background-color: initial;
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
+
+@include media-breakpoint-down(xs) {
+    .jumbotron {
+        background-color: initial;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
 }

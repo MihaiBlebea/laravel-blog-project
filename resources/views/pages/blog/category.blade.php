@@ -47,13 +47,13 @@
 
                     @if($loop->index == 1)
 
-                        <div class="mb-4 animated fadeIn delay-1">
+                        <div class="mb-4 animated fadeIn">
                             @include('partials.cards._lead-in-content-card')
                         </div>
 
                     @endif
 
-                    <div class="mb-4 animated fadeIn delay-1">
+                    <div class="mb-4 animated fadeIn">
                         @include('partials.cards._post-card')
                     </div>
 
@@ -68,7 +68,7 @@
                             'title' => 'Sorry!',
                             'content' => 'There are no published posts in this category, yet. Come back later!'
                         ])
-                        
+
                     </div>
                 </div>
 

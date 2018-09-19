@@ -5,33 +5,12 @@
     background-size: cover;
 }
 
-// .image--bg__small {
-//     width: 64px;
-//     height: 64px;
-// }
-//
-// .image--bg__medium {
-//     width: 250px;
-//     height: 250px;
-// }
-//
-// .image--bg__large {
-//     width: 350px;
-//     height: 350px;
-// }
-
-// .profile-image-wrapper {
-//     height:200px;
-//     width:200px;
-//     background-repeat: no-repeat;
-//     background-position: top;
-//     background-size: cover;
-//
-//     &.small {
-//         width: 64px;
-//         height: 64px;
-//     }
-// }
+.image__background-main {
+    background-repeat: no-repeat;
+    background-position: 70% bottom;
+    background-blend-mode: soft-light;
+    background-size: contain;
+}
 
 img.profile-img {
     display: block;

@@ -13,7 +13,7 @@
 
                     @foreach($categories as $category)
 
-                        <div class="col-md-6 mb-3 animated fadeIn delay-1">
+                        <div class="col-md-6 mb-3 animated fadeIn">
                             @include('partials.cards._category-card')
                         </div>
 
