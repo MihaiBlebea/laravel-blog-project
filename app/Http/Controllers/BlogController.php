@@ -63,7 +63,6 @@ class BlogController extends Controller
         SEO::opengraph()->addProperty('type', 'articles');
         SEO::twitter()->setSite('@MBlebea');
         SEO::twitter()->addImage(config('app.url') . '/' . $post->image->path);
-        // SEO::addImages([config('app.url') . '/' . $post->image->path]);
 
         $related_posts = RelatedPostService::relatedPosts([
             'number'  => 3,

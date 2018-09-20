@@ -12,7 +12,7 @@
 
 @if($post->comments->count() > 0)
 
-    @foreach($post->comments->where('parent_id', null) as $index => $comment)
+    @foreach($post->comments->where('approved', true)->where('parent_id', null) as $index => $comment)
 
         <div class="mb-3">
             @include('partials.cards._comment-card')
@@ -27,10 +27,6 @@
 
             @endforeach
         </div>
-
-        @if($loop->last == false)
-            <hr>
-        @endif
 
     @endforeach
 
